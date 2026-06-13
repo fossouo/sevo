@@ -1,0 +1,21 @@
+{
+  "math.CM1.multiply_table": {
+    "node_id": "math.CM1.multiply_table",
+    "teaching": {
+      "n": 35,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 29,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "clean": true
+  }
+}

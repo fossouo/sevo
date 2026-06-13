@@ -1,0 +1,39 @@
+{
+  "per_node": {
+    "math.CM1.multiply_table": {
+      "node_id": "math.CM1.multiply_table",
+      "n": 29,
+      "accuracy": 0.931,
+      "calibration_error": 0.077
+    }
+  },
+  "verdict": {
+    "verdict": "GENUINE",
+    "passed": true,
+    "checks": {
+      "post_test_gain": true,
+      "held_out_gain_substantial": true,
+      "transfer_nonzero": true,
+      "beats_memoriser": true,
+      "retention_measurable": true
+    },
+    "reasons": [],
+    "details": {
+      "heldout_before": 0.0,
+      "heldout_after": 0.9655,
+      "best_transfer_after": 0.9655,
+      "memoriser_heldout": 0.0,
+      "memoriser_transfer": 0.0,
+      "retention_ratio_t2_over_t1": 1.0
+    }
+  },
+  "reload_exact": true,
+  "reassessment_after_reload": {
+    "math.CM1.multiply_table": {
+      "node_id": "math.CM1.multiply_table",
+      "n": 29,
+      "accuracy": 0.931,
+      "calibration_error": 0.077
+    }
+  }
+}

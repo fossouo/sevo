@@ -17,6 +17,7 @@ import uuid
 from .bus import Event, EventBus
 from .curriculum.base import Task
 from .curriculum.cp_ce1_math import SKILLS
+from .curriculum.cm1_maths import SKILLS_CM1
 from .curriculum.cp_maths_numeration import SKILLS_NUM
 from .curriculum.fr_conjugation import SKILLS_CONJ
 from .curriculum.fr_cp_ce1 import SKILLS_FR
@@ -52,7 +53,8 @@ class StateSchemaError(ValueError):
 # all known procedural skills (unused skills stay inert at baseline
 # automaticity). ``grapheme_recognition`` is shared between French domains, so
 # we de-duplicate while preserving order.
-ALL_SKILLS = list(dict.fromkeys(SKILLS + SKILLS_FR + SKILLS_CONJ + SKILLS_LECTURE + SKILLS_NUM))
+ALL_SKILLS = list(dict.fromkeys(
+    SKILLS + SKILLS_FR + SKILLS_CONJ + SKILLS_LECTURE + SKILLS_NUM + SKILLS_CM1))
 
 
 class Brain:

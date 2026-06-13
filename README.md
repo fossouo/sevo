@@ -165,15 +165,18 @@ réutilise valeur de position + faits **+ retenue/emprunt**. Cela répond à la
 question : *un cerveau CE1-appris accélère-t-il CE2 davantage que CP n'accélérait
 CE1 ?* — **oui, et de façon explicable** :
 
-| Étape | Nœud arithmétique | Transfert (Δ pré-test) | Essais (dev vs naïf) |
-|---|---|---|---|
-| CP → CE1 | `add_within_100_carry` | **+0,00** (`carry` nouveau = goulot) | 16 vs 24 |
-| CE1 → CE2 | `add_within_1000` | **+0,88** (`carry` acquis au CE1) | **8 vs 56** |
+| Étape | Nœud-clé | Goulot | Transfert (Δ pré-test) | Essais (dev vs naïf) |
+|---|---|---|---|---|
+| CP → CE1 | `add_within_100_carry` | `carry` (nouveau) | **+0,00** | 16 vs 24 |
+| CE1 → CE2 | `add_within_1000` | `carry` (acquis) | **+0,88** | **8 vs 56** |
+| CE2 → CM1 | `multiply_table` | `multiply` (nouveau) | **+0,00** | 16 vs 16 |
 
 **La compétence qui *bloquait* la transition précédente (`carry`) est celle qui
-*débloque* la suivante.** Chaque classe **débloque la suivante en comblant la
-compétence-goulot** — une vraie trajectoire développementale cumulative, le
-transfert restant localisé à la structure partagée.
+*débloque* la suivante** ; et un **nouveau goulot (`multiply` au CM1) re-bloque**
+le transfert — le **même motif récurrent**. Chaque classe **débloque la suivante
+en comblant sa compétence-goulot** : trajectoire développementale cumulative et
+explicable (naïf→CP→CE1→CE2→CM1), le transfert restant localisé à la structure
+partagée (`make demo-developmental-curve`, `make demo-cm1`).
 
 **Intelligence_delta (CP) = 0,749** (`reports/CP_GRADE_REPORT.md`) — et ce delta
 n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**
@@ -374,7 +377,7 @@ Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
 scripts/demo_cp.py · Makefile (make demo-cp)              # preuve fondatrice reproductible
 docs/CP_PROTOCOL.md · demo/artifacts/ · demo/artifacts_ce1/  # protocole gelé + preuves CP & CE1
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 165 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
+tests/         # 169 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
 scripts/developmental.py · reports/DEVELOPMENTAL_REPORT.md · demo/developmental/  # étude CP→CE1
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```

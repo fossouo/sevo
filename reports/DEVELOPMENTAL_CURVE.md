@@ -1,15 +1,20 @@
-# Developmental curve — naïf → CP → CE1 → CE2
+# Developmental curve — naïf → CP → CE1 → CE2 → CM1
 
-_Reproducible, seed = 7. **Does a CE1-appris brain accelerate CE2 more than CP accelerated CE1?**_
+_Reproducible, seed = 7. **Does a CE1-appris brain accelerate CE2 more than CP accelerated CE1 — and does a new bottleneck (multiplication at CM1) block transfer again?**_
 
-## Réponse : **oui** (sur l'arithmétique dépendante de la retenue)
+## Réponse : **oui**, et le motif se répète
 
-Le transfert arithmétique mesuré à chaque étape, sur le nœud-clé (addition avec retenue) :
+Le transfert sur le nœud-clé de chaque étape (la compétence arithmétique nouvelle de la classe cible) :
 
-| Étape | Nœud arithmétique | Transfert (Δ pré-test) | Essais (dev vs naïf) |
-|---|---|---|---|
-| **CP → CE1** | `math.CE1.add_within_100_carry` | **+0.00** | 16 vs 24 |
-| **CE1 → CE2** | `math.CE2.add_within_1000` | **+0.88** | 8 vs 56 |
+| Étape | Nœud-clé | Compétence-goulot | Transfert (Δ pré-test) | Essais (dev vs naïf) |
+|---|---|---|---|---|
+| **CP → CE1** | `math.CE1.add_within_100_carry` | `carry` (nouveau) | **+0.00** | 16 vs 24 |
+| **CE1 → CE2** | `math.CE2.add_within_1000` | `carry` (acquis) | **+0.88** | 8 vs 56 |
+| **CE2 → CM1** | `math.CM1.multiply_table` | `multiply` (nouveau) | **+0.00** | 16 vs 16 |
+
+## Le motif : nouveau goulot ⇒ blocage ; goulot acquis ⇒ déblocage
+
+* **CE2 → CM1** : la multiplication ne transfère **pas** (+0.00) — `multiply` est **nouveau** au CM1, exactement comme `carry` l'était au CE1. Le motif est **récurrent** : chaque classe rencontre un nouveau goulot qui bloque le transfert jusqu'à ce qu'il soit appris.
 
 ## Pourquoi — le goulot se débloque
 

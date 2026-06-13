@@ -1,7 +1,7 @@
 PYTHON ?= python3
 export PYTHONPATH := src
 
-.PHONY: test demo-cp demo-ce1 demo-ce1-after-cp demo-ce2 demo-ce2-after-ce1 \
+.PHONY: test demo-cp demo-ce1 demo-ce1-after-cp demo-ce2 demo-ce2-after-ce1 demo-cm1 \
         demo-developmental demo-developmental-evidence demo-developmental-curve report demo-docker
 
 test:
@@ -23,6 +23,9 @@ demo-ce2:                       # naïve: a fresh brain learns CE2 in isolation
 
 demo-ce2-after-ce1:             # developmental: naïf → CP → CE1 → CE2
 	$(PYTHON) scripts/demo_cp.py CE2 CP,CE1
+
+demo-cm1:                       # CM1 (introduces multiplication — a new bottleneck)
+	$(PYTHON) scripts/demo_cp.py CM1
 
 # Research study: does CP-appris help learn CE1? (developmental vs isolated)
 demo-developmental:

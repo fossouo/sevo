@@ -1,0 +1,235 @@
+{
+  "representative_node": "math.CM1.multiply_table",
+  "session": [
+    {
+      "prompt_to_emma": "9 × 5 = ?",
+      "brain_response": null,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "math.CM1.multiply_table",
+        "task_id": "math.CM1.multiply_table:(9, 5, 'mul')",
+        "observed_answer": null,
+        "correct_answer": 45,
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "declined",
+        "confidence": 0.1,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "multiply_facts": 0.05
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "multiply_facts": 0.316
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "5 × 2 = ?",
+      "brain_response": 7,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "math.CM1.multiply_table",
+        "task_id": "math.CM1.multiply_table:(5, 2, 'mul')",
+        "observed_answer": 7,
+        "correct_answer": 10,
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "multiplication_as_addition",
+        "confidence": 0.35,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "multiply_facts": 0.316
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "multiply_facts": 0.5075
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "7 × 2 = ?",
+      "brain_response": 14,
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "math.CM1.multiply_table",
+        "task_id": "math.CM1.multiply_table:(7, 2, 'mul')",
+        "observed_answer": 14,
+        "correct_answer": 14,
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.245,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "multiply_facts": 0.5075
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.25,
+        "skill_automaticity": {
+          "multiply_facts": 0.542
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "9 × 7 = ?",
+      "brain_response": 16,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "math.CM1.multiply_table",
+        "task_id": "math.CM1.multiply_table:(9, 7, 'mul')",
+        "observed_answer": 16,
+        "correct_answer": 63,
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "multiplication_as_addition",
+        "confidence": 0.4715,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.25,
+        "skill_automaticity": {
+          "multiply_facts": 0.542
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.1875,
+        "skill_automaticity": {
+          "multiply_facts": 0.6702
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "2 × 7 = ?",
+      "brain_response": 14,
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "math.CM1.multiply_table",
+        "task_id": "math.CM1.multiply_table:(2, 7, 'mul')",
+        "observed_answer": 14,
+        "correct_answer": 14,
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.33,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.1875,
+        "skill_automaticity": {
+          "multiply_facts": 0.6702
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.3906,
+        "skill_automaticity": {
+          "multiply_facts": 0.6933
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "7 × 9 = ?",
+      "brain_response": 63,
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "math.CM1.multiply_table",
+        "task_id": "math.CM1.multiply_table:(7, 9, 'mul')",
+        "observed_answer": 63,
+        "correct_answer": 63,
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.531,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.3906,
+        "skill_automaticity": {
+          "multiply_facts": 0.6933
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.543,
+        "skill_automaticity": {
+          "multiply_facts": 0.7148
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "5 × 3 = ?",
+      "brain_response": 15,
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "math.CM1.multiply_table",
+        "task_id": "math.CM1.multiply_table:(5, 3, 'mul')",
+        "observed_answer": 15,
+        "correct_answer": 15,
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.6717,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.543,
+        "skill_automaticity": {
+          "multiply_facts": 0.7148
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.6572,
+        "skill_automaticity": {
+          "multiply_facts": 0.7348
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "2 × 5 = ?",
+      "brain_response": 10,
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "math.CM1.multiply_table",
+        "task_id": "math.CM1.multiply_table:(2, 5, 'mul')",
+        "observed_answer": 10,
+        "correct_answer": 10,
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.7702,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.6572,
+        "skill_automaticity": {
+          "multiply_facts": 0.7348
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.7429,
+        "skill_automaticity": {
+          "multiply_facts": 0.7533
+        }
+      }
+    }
+  ],
+  "all_nodes_summary": {
+    "math.CM1.multiply_table": {
+      "sessions": 2,
+      "final_mastery": 0.9743
+    }
+  }
+}

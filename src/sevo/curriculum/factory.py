@@ -11,6 +11,7 @@ than guess.
 """
 from __future__ import annotations
 
+from . import cm1_maths as _cm1
 from . import cp_ce1_math as _math
 from . import cp_maths_numeration as _num
 from . import fr_conjugation as _conj
@@ -48,6 +49,8 @@ def build_task(node_id: str, content):
             return _num._decomp(node_id, int(content))
         if node_id == "math.CP.comparaison_nombres":
             return _num._comp(node_id, int(content["a"]), int(content["b"]))
+        if node_id in _cm1.NODES_CM1:
+            return _cm1._make_mul(node_id, int(content["a"]), int(content["b"]))
         if node_id in _math.NODES and _math.NODES[node_id]["op"] == "add":
             return _math._make_add(node_id, int(content["a"]), int(content["b"]))
         if node_id in _math.NODES and _math.NODES[node_id]["op"] == "sub":
@@ -65,6 +68,8 @@ def heldout_bank(node_id: str, seed: int = 0) -> list:
     """Reconstruct a node's held-out bank (for /evaluate and replay)."""
     from ..rng import Rng
     rng = Rng(seed).fork(node_id)
+    if node_id in _cm1.NODES_CM1:
+        return _cm1.build_bank_cm1(node_id, rng).heldout
     if node_id in _num.NODES_NUM:
         return _num.build_bank_num(node_id, rng).heldout
     if node_id in _lec.NODES_LECTURE:
@@ -81,6 +86,8 @@ def heldout_bank(node_id: str, seed: int = 0) -> list:
 def teaching_bank(node_id: str, seed: int = 0) -> list:
     from ..rng import Rng
     rng = Rng(seed).fork(node_id)
+    if node_id in _cm1.NODES_CM1:
+        return _cm1.build_bank_cm1(node_id, rng).teaching
     if node_id in _num.NODES_NUM:
         return _num.build_bank_num(node_id, rng).teaching
     if node_id in _lec.NODES_LECTURE:

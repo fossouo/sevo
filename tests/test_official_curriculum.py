@@ -101,3 +101,12 @@ def test_ce2_is_extension_not_rewrite():
     for rn in runnable_for("CE2").values():
         bank = rn.build(Rng(1))
         assert bank.teaching and bank.heldout
+
+
+def test_cm1_introduces_multiplication_as_extension():
+    from sevo.curriculum.official_curriculum import official_cm1_registry
+    reg = official_cm1_registry()
+    assert len(reg.by_class("CM1")) == 1
+    node = reg.get("math.CM1.multiply_table")
+    assert node.required_skills == {"multiply_facts": 1.0}
+    assert node.end_of_year_expectations and node.evaluation_criteria

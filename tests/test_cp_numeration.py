@@ -69,3 +69,28 @@ def test_characteristic_reversed_comparison():
     answers = {cold.procedural.solve(task, 0, cold.rng)["answer"] for _ in range(30)}
     assert "<" in answers             # reversed sign
     assert task.answer == ">"
+
+
+# ---- CM1 multiplication (new bottleneck skill) -----------------------------
+def test_cm1_multiplication_learns_and_memoriser_fails():
+    from sevo.brain import Brain
+    from sevo.curriculum.cm1_maths import build_bank_cm1, transfer_bank_cm1, _make_mul
+    from sevo.teacher import teach_to_mastery
+    NODE = "math.CM1.multiply_table"
+    brain = Brain(seed=7)
+    bank = build_bank_cm1(NODE, Rng(7).fork(NODE))
+    teach_to_mastery(brain, NODE, bank)
+    brain.consolidate("sleep", 1)
+    assert brain.evaluate(bank.heldout, "post")["accuracy"] >= 0.7
+    assert brain.evaluate(transfer_bank_cm1(), "tr")["accuracy"] >= 0.5
+    mem = MemorizerBrain(); mem.memorize(bank.teaching)
+    assert AssessmentOracle().assess(mem, bank.heldout, "h")["accuracy"] <= 0.1
+
+
+def test_cm1_characteristic_multiplication_as_addition():
+    from sevo.brain import Brain
+    from sevo.curriculum.cm1_maths import _make_mul
+    cold = Brain(seed=9)
+    task = _make_mul("math.CM1.multiply_table", 3, 4)   # 3×4=12
+    answers = {cold.procedural.solve(task, 0, cold.rng)["answer"] for _ in range(30)}
+    assert 7 in answers and task.answer == 12           # confuses × with + (3+4)

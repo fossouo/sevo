@@ -32,6 +32,7 @@ from typing import Callable
 from .cp_ce1_math import NODES as MATH_NODES
 from .cp_ce1_math import build_bank as build_bank_math
 from .cp_ce1_math import transfer_bank as transfer_bank_math
+from .cm1_maths import NODES_CM1, build_bank_cm1
 from .cp_maths_numeration import NODES_NUM, build_bank_num, transfer_bank_num
 from .fr_conjugation import NODES_CONJ, build_bank_conj, transfer_bank_conj
 from .fr_cp_ce1 import NODES_FR, build_bank_fr, transfer_bank_fr
@@ -414,9 +415,37 @@ RUNNABLE_CE2: dict[str, RunnableNode] = {
 }
 
 
+# ============================================================================
+# CM1 — introduces multiplication, a NEW bottleneck skill (`multiply_facts`) no
+# earlier class taught. Tests the curve hypothesis once more: place value is
+# known, but multiplication should get little transfer until it is learned.
+# ============================================================================
+CM1_PROGRAM = {
+    "class_level": "CM1", "cycle": "cycle 3", "status": "partial-seed",
+    "disclaimer": "Registre aligné sur les attendus officiels du CM1 — jeu amorce "
+                  "partiel, vérifié à la main (PAS un ingest exhaustif du BO).",
+    "disciplines": {"mathématiques": ["nombres et calculs"]},
+    "nodes": [{
+        "id": "math.CM1.multiply_table", "title": NODES_CM1["math.CM1.multiply_table"]["title"],
+        "class_level": "CM1", "subject": "mathématiques", "discipline": "nombres et calculs",
+        "required_skills": NODES_CM1["math.CM1.multiply_table"]["required_skills"],
+        "mastery_threshold": NODES_CM1["math.CM1.multiply_table"]["mastery_threshold"],
+        "end_of_year_expectations": ["mémoriser et mobiliser les tables de multiplication"],
+        "exercise_types": ["produit de deux nombres", "table de multiplication"],
+        "evaluation_criteria": ["produit exact", "pas de confusion × / + (3×4≠7)"],
+    }],
+}
+
+RUNNABLE_CM1: dict[str, RunnableNode] = {
+    "math.CM1.multiply_table": RunnableNode(
+        "math.CM1.multiply_table", "mathématiques", "nombres et calculs",
+        build=lambda rng: build_bank_cm1("math.CM1.multiply_table", rng)),
+}
+
+
 # ---- Public API ------------------------------------------------------------
-_PROGRAMS = {"CP": CP_PROGRAM, "CE1": CE1_PROGRAM, "CE2": CE2_PROGRAM}
-_RUNNABLE = {"CP": RUNNABLE_CP, "CE1": RUNNABLE_CE1, "CE2": RUNNABLE_CE2}
+_PROGRAMS = {"CP": CP_PROGRAM, "CE1": CE1_PROGRAM, "CE2": CE2_PROGRAM, "CM1": CM1_PROGRAM}
+_RUNNABLE = {"CP": RUNNABLE_CP, "CE1": RUNNABLE_CE1, "CE2": RUNNABLE_CE2, "CM1": RUNNABLE_CM1}
 
 
 def runnable_for(grade: str) -> dict:
@@ -460,3 +489,8 @@ def official_ce1_registry() -> CurriculumRegistry:
 def official_ce2_registry() -> CurriculumRegistry:
     """A registry pre-loaded with the CE2 seed set (extension of the CE1 core)."""
     return register_class(CurriculumRegistry(), "CE2")
+
+
+def official_cm1_registry() -> CurriculumRegistry:
+    """A registry pre-loaded with the CM1 seed set (introduces multiplication)."""
+    return register_class(CurriculumRegistry(), "CM1")
