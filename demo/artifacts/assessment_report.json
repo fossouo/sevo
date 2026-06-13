@@ -1,0 +1,135 @@
+{
+  "per_node": {
+    "math.CP.add_within_20": {
+      "node_id": "math.CP.add_within_20",
+      "n": 24,
+      "accuracy": 0.9583,
+      "calibration_error": 0.0502
+    },
+    "math.CP.sub_within_20": {
+      "node_id": "math.CP.sub_within_20",
+      "n": 24,
+      "accuracy": 0.9583,
+      "calibration_error": 0.0847
+    },
+    "fr.CP.lecture_mots_reguliers": {
+      "node_id": "fr.CP.lecture_mots_reguliers",
+      "n": 9,
+      "accuracy": 0.8889,
+      "calibration_error": 0.1233
+    },
+    "fr.CP.lecture_mots_irreguliers": {
+      "node_id": "fr.CP.lecture_mots_irreguliers",
+      "n": 4,
+      "accuracy": 1.0,
+      "calibration_error": 0.0749
+    },
+    "fr.CP.comprehension_phrase": {
+      "node_id": "fr.CP.comprehension_phrase",
+      "n": 34,
+      "accuracy": 0.9118,
+      "calibration_error": 0.1189
+    },
+    "fr.CP.segmentation_syllabes": {
+      "node_id": "fr.CP.segmentation_syllabes",
+      "n": 7,
+      "accuracy": 1.0,
+      "calibration_error": 0.0662
+    },
+    "fr.CP.dictee_simple": {
+      "node_id": "fr.CP.dictee_simple",
+      "n": 7,
+      "accuracy": 0.8571,
+      "calibration_error": 0.154
+    },
+    "math.CP.numeration_dizaines_unites": {
+      "node_id": "math.CP.numeration_dizaines_unites",
+      "n": 32,
+      "accuracy": 0.9688,
+      "calibration_error": 0.0998
+    },
+    "math.CP.comparaison_nombres": {
+      "node_id": "math.CP.comparaison_nombres",
+      "n": 27,
+      "accuracy": 0.9259,
+      "calibration_error": 0.1142
+    }
+  },
+  "verdict": {
+    "verdict": "GENUINE",
+    "passed": true,
+    "checks": {
+      "post_test_gain": true,
+      "held_out_gain_substantial": true,
+      "transfer_nonzero": true,
+      "beats_memoriser": true,
+      "retention_measurable": true
+    },
+    "reasons": [],
+    "details": {
+      "heldout_before": 0.0,
+      "heldout_after": 0.9092,
+      "best_transfer_after": 0.9092,
+      "memoriser_heldout": 0.0,
+      "memoriser_transfer": 0.0,
+      "retention_ratio_t2_over_t1": 1.0
+    }
+  },
+  "reload_exact": true,
+  "reassessment_after_reload": {
+    "math.CP.add_within_20": {
+      "node_id": "math.CP.add_within_20",
+      "n": 24,
+      "accuracy": 0.9167,
+      "calibration_error": 0.0911
+    },
+    "math.CP.sub_within_20": {
+      "node_id": "math.CP.sub_within_20",
+      "n": 24,
+      "accuracy": 1.0,
+      "calibration_error": 0.047
+    },
+    "fr.CP.lecture_mots_reguliers": {
+      "node_id": "fr.CP.lecture_mots_reguliers",
+      "n": 9,
+      "accuracy": 0.8889,
+      "calibration_error": 0.1233
+    },
+    "fr.CP.lecture_mots_irreguliers": {
+      "node_id": "fr.CP.lecture_mots_irreguliers",
+      "n": 4,
+      "accuracy": 1.0,
+      "calibration_error": 0.0749
+    },
+    "fr.CP.comprehension_phrase": {
+      "node_id": "fr.CP.comprehension_phrase",
+      "n": 34,
+      "accuracy": 0.9412,
+      "calibration_error": 0.0917
+    },
+    "fr.CP.segmentation_syllabes": {
+      "node_id": "fr.CP.segmentation_syllabes",
+      "n": 7,
+      "accuracy": 0.8571,
+      "calibration_error": 0.1902
+    },
+    "fr.CP.dictee_simple": {
+      "node_id": "fr.CP.dictee_simple",
+      "n": 7,
+      "accuracy": 1.0,
+      "calibration_error": 0.0156
+    },
+    "math.CP.numeration_dizaines_unites": {
+      "node_id": "math.CP.numeration_dizaines_unites",
+      "n": 32,
+      "accuracy": 1.0,
+      "calibration_error": 0.0732
+    },
+    "math.CP.comparaison_nombres": {
+      "node_id": "math.CP.comparaison_nombres",
+      "n": 27,
+      "accuracy": 0.8889,
+      "calibration_error": 0.1478
+    }
+  }
+}
