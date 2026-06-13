@@ -8,7 +8,9 @@
       "français": [
         "lecture / décodage",
         "lecture / mots-outils",
-        "compréhension"
+        "compréhension",
+        "lecture / phonologie",
+        "écriture / encodage"
       ],
       "mathématiques": [
         "nombres et calculs"
@@ -16,29 +18,34 @@
     },
     "nodes_ingested": [
       "fr.CP.comprehension_phrase",
+      "fr.CP.dictee_simple",
       "fr.CP.lecture_mots_irreguliers",
       "fr.CP.lecture_mots_reguliers",
+      "fr.CP.segmentation_syllabes",
       "math.CP.add_within_20",
+      "math.CP.comparaison_nombres",
+      "math.CP.numeration_dizaines_unites",
       "math.CP.sub_within_20"
     ]
   },
   "snapshots": {
-    "before": "599dd443-7390-48c3-bd0d-f34ef0541e28",
-    "after": "9a3fc5ef-cc39-4b46-9021-0905978ea758"
+    "before": "1ba935dc-7e84-40b2-b059-3aaa11a9f9ca",
+    "learned": "360d5201-076d-446b-b4c8-22d5a8ecb85f",
+    "after_delay": "c6578a28-8629-4a86-a736-06b4a338380a"
   },
   "facets_aggregate": {
     "connaissance_heldout": {
       "pre": 0.0,
-      "t1": 0.9466
+      "t1": 0.9381
     },
     "transfert": {
       "pre": 0.0,
-      "t1": 0.6119
+      "t1": 0.8833
     },
-    "retention_t2": 0.6248,
+    "retention_t2": 0.6995,
     "metacognition_calibration_error": {
       "pre": 0.1,
-      "t1": 0.0703
+      "t1": 0.101
     }
   },
   "per_node": {
@@ -47,17 +54,17 @@
       "discipline": "nombres et calculs",
       "heldout": {
         "pre": 0.0,
-        "t1": 0.917,
-        "t2": 0.583
+        "t1": 0.875,
+        "t2": 0.542
       },
-      "transfer_t1": 0.05
+      "transfer_t1": 0.35
     },
     "math.CP.sub_within_20": {
       "subject": "mathématiques",
       "discipline": "nombres et calculs",
       "heldout": {
         "pre": 0.0,
-        "t1": 0.875,
+        "t1": 1.0,
         "t2": 0.75
       },
       "transfer_t1": null
@@ -68,9 +75,9 @@
       "heldout": {
         "pre": 0.0,
         "t1": 1.0,
-        "t2": 0.556
+        "t2": 0.778
       },
-      "transfer_t1": 0.786
+      "transfer_t1": 1.0
     },
     "fr.CP.lecture_mots_irreguliers": {
       "subject": "français",
@@ -78,7 +85,7 @@
       "heldout": {
         "pre": 0.0,
         "t1": 1.0,
-        "t2": 0.5
+        "t2": 1.0
       },
       "transfer_t1": null
     },
@@ -87,19 +94,84 @@
       "discipline": "compréhension",
       "heldout": {
         "pre": 0.0,
-        "t1": 0.941,
-        "t2": 0.735
+        "t1": 0.853,
+        "t2": 0.618
       },
       "transfer_t1": 1.0
+    },
+    "fr.CP.segmentation_syllabes": {
+      "subject": "français",
+      "discipline": "lecture / phonologie",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 0.857,
+        "t2": 0.857
+      },
+      "transfer_t1": 1.0
+    },
+    "fr.CP.dictee_simple": {
+      "subject": "français",
+      "discipline": "écriture / encodage",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 1.0,
+        "t2": 0.286
+      },
+      "transfer_t1": 1.0
+    },
+    "math.CP.numeration_dizaines_unites": {
+      "subject": "mathématiques",
+      "discipline": "nombres et calculs",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 0.969,
+        "t2": 0.688
+      },
+      "transfer_t1": 1.0
+    },
+    "math.CP.comparaison_nombres": {
+      "subject": "mathématiques",
+      "discipline": "nombres et calculs",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 0.889,
+        "t2": 0.778
+      },
+      "transfer_t1": 0.833
     }
   },
   "procedure_skill_graph": {
     "place_value": {
-      "automaticity": 0.05,
-      "error_patterns": [],
-      "transfer_score": 0.0,
-      "consolidated": false,
-      "last_practiced_day": null
+      "automaticity": 0.6938,
+      "error_patterns": [
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
     },
     "add_facts_within_20": {
       "automaticity": 0.6832,
@@ -164,7 +236,7 @@
       "last_practiced_day": null
     },
     "grapheme_recognition": {
-      "automaticity": 0.6829,
+      "automaticity": 0.6885,
       "error_patterns": [
         {
           "node": "fr.CP.lecture_mots_reguliers",
@@ -282,7 +354,7 @@
       "last_practiced_day": null
     },
     "grapheme_phoneme": {
-      "automaticity": 0.6927,
+      "automaticity": 0.6938,
       "error_patterns": [
         {
           "node": "fr.CP.lecture_mots_reguliers",
@@ -294,7 +366,7 @@
       "last_practiced_day": 0
     },
     "blending": {
-      "automaticity": 0.6776,
+      "automaticity": 0.6819,
       "error_patterns": [
         {
           "node": "fr.CP.lecture_mots_reguliers",
@@ -416,6 +488,98 @@
       "transfer_score": 0.64,
       "consolidated": true,
       "last_practiced_day": 0
+    },
+    "syllable_segmentation": {
+      "automaticity": 0.673,
+      "error_patterns": [
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "orthographic_encoding": {
+      "automaticity": 0.673,
+      "error_patterns": [
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "number_comparison": {
+      "automaticity": 0.6885,
+      "error_patterns": [
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
     }
   },
   "teaching": [
@@ -428,7 +592,8 @@
       "mastery_history": [
         0.7429,
         0.9743
-      ]
+      ],
+      "taught_via": "emma_api_loop"
     },
     {
       "node_id": "math.CP.sub_within_20",
@@ -439,7 +604,8 @@
       "mastery_history": [
         0.5406,
         0.9206
-      ]
+      ],
+      "taught_via": "emma_api_loop"
     },
     {
       "node_id": "fr.CP.lecture_mots_reguliers",
@@ -455,7 +621,8 @@
         0.6147,
         0.7153,
         0.9715
-      ]
+      ],
+      "taught_via": "emma_api_loop"
     },
     {
       "node_id": "fr.CP.lecture_mots_irreguliers",
@@ -467,7 +634,8 @@
         0.3252,
         0.653,
         0.9653
-      ]
+      ],
+      "taught_via": "emma_api_loop"
     },
     {
       "node_id": "fr.CP.comprehension_phrase",
@@ -479,7 +647,57 @@
         0.1875,
         0.7815,
         0.9781
-      ]
+      ],
+      "taught_via": "emma_api_loop"
+    },
+    {
+      "node_id": "fr.CP.segmentation_syllabes",
+      "sessions": 2,
+      "trials": 16,
+      "reached_mastery": true,
+      "final_mastery": 0.869,
+      "mastery_history": [
+        0.7281,
+        0.869
+      ],
+      "taught_via": "emma_api_loop"
+    },
+    {
+      "node_id": "fr.CP.dictee_simple",
+      "sessions": 2,
+      "trials": 16,
+      "reached_mastery": true,
+      "final_mastery": 0.8332,
+      "mastery_history": [
+        0.7166,
+        0.8332
+      ],
+      "taught_via": "emma_api_loop"
+    },
+    {
+      "node_id": "math.CP.numeration_dizaines_unites",
+      "sessions": 2,
+      "trials": 16,
+      "reached_mastery": true,
+      "final_mastery": 0.9245,
+      "mastery_history": [
+        0.2461,
+        0.9245
+      ],
+      "taught_via": "emma_api_loop"
+    },
+    {
+      "node_id": "math.CP.comparaison_nombres",
+      "sessions": 3,
+      "trials": 24,
+      "reached_mastery": true,
+      "final_mastery": 0.9639,
+      "mastery_history": [
+        0.2333,
+        0.6399,
+        0.9639
+      ],
+      "taught_via": "emma_api_loop"
     }
   ],
   "consolidation": {
@@ -490,16 +708,24 @@
       "grapheme_phoneme",
       "grapheme_recognition",
       "lexical_access",
+      "number_comparison",
+      "orthographic_encoding",
+      "place_value",
       "sentence_parsing",
       "sight_words",
-      "sub_facts_within_20"
+      "sub_facts_within_20",
+      "syllable_segmentation"
     ],
     "nodes": [
       "math.CP.add_within_20",
       "math.CP.sub_within_20",
       "fr.CP.lecture_mots_reguliers",
       "fr.CP.lecture_mots_irreguliers",
-      "fr.CP.comprehension_phrase"
+      "fr.CP.comprehension_phrase",
+      "fr.CP.segmentation_syllabes",
+      "fr.CP.dictee_simple",
+      "math.CP.numeration_dizaines_unites",
+      "math.CP.comparaison_nombres"
     ]
   },
   "efficiency_control": {
@@ -514,7 +740,7 @@
   "memorizer_baseline": {
     "on_teaching": {
       "label": "mem.teaching",
-      "n": 101,
+      "n": 186,
       "accuracy": 1.0,
       "mean_confidence": 0.9,
       "calibration_error": 0.1,
@@ -522,7 +748,7 @@
     },
     "on_heldout": {
       "label": "mem.heldout",
-      "n": 95,
+      "n": 168,
       "accuracy": 0.0,
       "mean_confidence": 0.7,
       "calibration_error": 0.7,
@@ -530,7 +756,7 @@
     },
     "on_transfer": {
       "label": "mem.transfer",
-      "n": 50,
+      "n": 74,
       "accuracy": 0.0,
       "mean_confidence": 0.7,
       "calibration_error": 0.7,
@@ -569,11 +795,11 @@
   },
   "intelligence_delta": {
     "components": {
-      "knowledge_gain": 0.9466,
-      "transfer_gain": 0.6119,
-      "reasoning_gain": 0.6119,
-      "retention_gain": 0.6248,
-      "metacognition_gain": 0.0297,
+      "knowledge_gain": 0.9381,
+      "transfer_gain": 0.8833,
+      "reasoning_gain": 0.8833,
+      "retention_gain": 0.6995,
+      "metacognition_gain": -0.001,
       "learning_efficiency_gain": 0.0
     },
     "weights": {
@@ -584,8 +810,8 @@
       "metacognition_gain": 0.1,
       "learning_efficiency_gain": 0.05
     },
-    "weighted_delta": 0.6248,
-    "retention_ratio_t2_over_t1": 0.6601,
+    "weighted_delta": 0.7488,
+    "retention_ratio_t2_over_t1": 0.7456,
     "note": "Internal cognitive evolution index — not a human IQ."
   },
   "genuine_learning": {
@@ -601,11 +827,205 @@
     "reasons": [],
     "details": {
       "heldout_before": 0.0,
-      "heldout_after": 0.9466,
+      "heldout_after": 0.9381,
       "best_transfer_after": 1.0,
       "memoriser_heldout": 0.0,
       "memoriser_transfer": 0.0,
-      "retention_ratio_t2_over_t1": 0.6601
+      "retention_ratio_t2_over_t1": 0.7456
     }
-  }
+  },
+  "brain_diff": {
+    "semantic_concepts_added": [
+      "fr.CP.comprehension_phrase",
+      "fr.CP.dictee_simple",
+      "fr.CP.lecture_mots_irreguliers",
+      "fr.CP.lecture_mots_reguliers",
+      "fr.CP.segmentation_syllabes",
+      "math.CP.add_within_20",
+      "math.CP.comparaison_nombres",
+      "math.CP.numeration_dizaines_unites",
+      "math.CP.sub_within_20"
+    ],
+    "procedural_rules_acquired": [
+      "add_facts_within_20",
+      "blending",
+      "grapheme_phoneme",
+      "grapheme_recognition",
+      "lexical_access",
+      "number_comparison",
+      "orthographic_encoding",
+      "place_value",
+      "sentence_parsing",
+      "sight_words",
+      "sub_facts_within_20",
+      "syllable_segmentation"
+    ],
+    "mastered_skills": {
+      "add_facts_within_20": {
+        "before": 0.05,
+        "after": 0.936
+      },
+      "blending": {
+        "before": 0.05,
+        "after": 0.934
+      },
+      "grapheme_phoneme": {
+        "before": 0.05,
+        "after": 0.951
+      },
+      "grapheme_recognition": {
+        "before": 0.05,
+        "after": 0.944
+      },
+      "lexical_access": {
+        "before": 0.05,
+        "after": 0.913
+      },
+      "number_comparison": {
+        "before": 0.05,
+        "after": 0.943
+      },
+      "orthographic_encoding": {
+        "before": 0.05,
+        "after": 0.922
+      },
+      "place_value": {
+        "before": 0.05,
+        "after": 0.951
+      },
+      "sentence_parsing": {
+        "before": 0.05,
+        "after": 0.913
+      },
+      "sight_words": {
+        "before": 0.05,
+        "after": 0.94
+      },
+      "sub_facts_within_20": {
+        "before": 0.05,
+        "after": 0.944
+      },
+      "syllable_segmentation": {
+        "before": 0.05,
+        "after": 0.922
+      }
+    },
+    "misconceptions_reduced": {
+      "heldout_error_rate_before": 1.0,
+      "heldout_error_rate_after": 0.062,
+      "reduction": 0.938
+    },
+    "calibration_delta": {
+      "before": 0.1,
+      "after": 0.101,
+      "improvement": -0.001
+    },
+    "retention_traces": {
+      "t2_heldout_accuracy": 0.699,
+      "retention_ratio_t2_over_t1": 0.746,
+      "consolidated_skills": [
+        "add_facts_within_20",
+        "blending",
+        "grapheme_phoneme",
+        "grapheme_recognition",
+        "lexical_access",
+        "number_comparison",
+        "orthographic_encoding",
+        "place_value",
+        "sentence_parsing",
+        "sight_words",
+        "sub_facts_within_20",
+        "syllable_segmentation"
+      ]
+    },
+    "learning_efficiency": 0.0,
+    "snapshot_ids": {
+      "before": "1ba935dc-7e84-40b2-b059-3aaa11a9f9ca",
+      "after": "360d5201-076d-446b-b4c8-22d5a8ecb85f"
+    },
+    "transfer_after_best": 1.0
+  },
+  "competence_matrix": {
+    "add_facts_within_20": {
+      "before": 0.05,
+      "after": 0.936
+    },
+    "blending": {
+      "before": 0.05,
+      "after": 0.934
+    },
+    "borrow": {
+      "before": 0.05,
+      "after": 0.05
+    },
+    "carry": {
+      "before": 0.05,
+      "after": 0.05
+    },
+    "grapheme_phoneme": {
+      "before": 0.05,
+      "after": 0.951
+    },
+    "grapheme_recognition": {
+      "before": 0.05,
+      "after": 0.944
+    },
+    "lexical_access": {
+      "before": 0.05,
+      "after": 0.913
+    },
+    "number_comparison": {
+      "before": 0.05,
+      "after": 0.943
+    },
+    "orthographic_encoding": {
+      "before": 0.05,
+      "after": 0.922
+    },
+    "place_value": {
+      "before": 0.05,
+      "after": 0.951
+    },
+    "plural_exception_aux": {
+      "before": 0.05,
+      "after": 0.05
+    },
+    "plural_invariant": {
+      "before": 0.05,
+      "after": 0.05
+    },
+    "plural_rule_s": {
+      "before": 0.05,
+      "after": 0.05
+    },
+    "present_er_endings": {
+      "before": 0.05,
+      "after": 0.05
+    },
+    "sentence_parsing": {
+      "before": 0.05,
+      "after": 0.913
+    },
+    "sight_words": {
+      "before": 0.05,
+      "after": 0.94
+    },
+    "sub_facts_within_20": {
+      "before": 0.05,
+      "after": 0.944
+    },
+    "subject_agreement": {
+      "before": 0.05,
+      "after": 0.05
+    },
+    "syllable_segmentation": {
+      "before": 0.05,
+      "after": 0.922
+    },
+    "verb_stem_recognition": {
+      "before": 0.05,
+      "after": 0.05
+    }
+  },
+  "teaching_via": "emma_api_loop"
 }

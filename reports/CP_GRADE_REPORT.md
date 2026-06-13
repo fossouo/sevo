@@ -3,7 +3,7 @@ _Reproducible run, seed = 7. An **official-curriculum-shaped CP seed registry** 
 
 > ⚠️ Registre aligné sur les attendus officiels du CP — jeu amorce partiel, vérifié à la main (PAS un ingest exhaustif du Bulletin officiel).
 
-**Intelligence_delta (CP) = 0.625** (internal cognitive evolution index — not a human IQ).
+**Intelligence_delta (CP) = 0.749** (internal cognitive evolution index — not a human IQ).
 
 > ✅ **Apprentissage authentique : GENUINE** — le delta n'est déclaré que si les cinq garde-fous passent.
 
@@ -19,10 +19,10 @@ _Reproducible run, seed = 7. An **official-curriculum-shaped CP seed registry** 
 
 | Facet | Pretest | Posttest |
 |---|---|---|
-| **Connaissance** (held-out) | 0% | 95% |
-| **Transfert** (items jamais vus + pseudo-mots) | 0% | 61% |
-| **Rétention** (+7 jours) | — | 62% |
-| **Métacognition** (erreur de calibration, plus bas = mieux) | 0.10 | 0.07 |
+| **Connaissance** (held-out) | 0% | 94% |
+| **Transfert** (items jamais vus + pseudo-mots) | 0% | 88% |
+| **Rétention** (+7 jours) | — | 70% |
+| **Métacognition** (erreur de calibration, plus bas = mieux) | 0.10 | 0.10 |
 
 _**Procédure** : voir le graphe d'automaticité des compétences dans `last_run_cp_grade.json` (`procedure_skill_graph`) — c'est l'état interne des savoir-faire, distinct de la connaissance restituée._
 
@@ -30,11 +30,15 @@ _**Procédure** : voir le graphe d'automaticité des compétences dans `last_run
 
 | Nœud | Discipline | Held-out pré→T1→T2 | Transfert T1 |
 |---|---|---|---|
-| `math.CP.add_within_20` | nombres et calculs | 0% → 92% → 58% | 5% |
-| `math.CP.sub_within_20` | nombres et calculs | 0% → 88% → 75% | — |
-| `fr.CP.lecture_mots_reguliers` | lecture / décodage | 0% → 100% → 56% | 79% |
-| `fr.CP.lecture_mots_irreguliers` | lecture / mots-outils | 0% → 100% → 50% | — |
-| `fr.CP.comprehension_phrase` | compréhension | 0% → 94% → 74% | 100% |
+| `math.CP.add_within_20` | nombres et calculs | 0% → 88% → 54% | 35% |
+| `math.CP.sub_within_20` | nombres et calculs | 0% → 100% → 75% | — |
+| `fr.CP.lecture_mots_reguliers` | lecture / décodage | 0% → 100% → 78% | 100% |
+| `fr.CP.lecture_mots_irreguliers` | lecture / mots-outils | 0% → 100% → 100% | — |
+| `fr.CP.comprehension_phrase` | compréhension | 0% → 85% → 62% | 100% |
+| `fr.CP.segmentation_syllabes` | lecture / phonologie | 0% → 86% → 86% | 100% |
+| `fr.CP.dictee_simple` | écriture / encodage | 0% → 100% → 29% | 100% |
+| `math.CP.numeration_dizaines_unites` | nombres et calculs | 0% → 97% → 69% | 100% |
+| `math.CP.comparaison_nombres` | nombres et calculs | 0% → 89% → 78% | 83% |
 
 _La transfert mathématique (`add_within_20` → addition < 1000) est volontairement **hors-niveau** : son score quasi nul est attendu et montre que le cerveau ne sur-généralise pas au-delà de ce qui a été enseigné au CP._
 
@@ -42,12 +46,40 @@ _La transfert mathématique (`add_within_20` → addition < 1000) est volontaire
 
 | Composante | Poids | Valeur |
 |---|---|---|
-| knowledge_gain | 0.30 | +0.947 |
-| transfer_gain | 0.25 | +0.612 |
-| reasoning_gain | 0.20 | +0.612 |
-| retention_gain | 0.10 | +0.625 |
-| metacognition_gain | 0.10 | +0.030 |
+| knowledge_gain | 0.30 | +0.938 |
+| transfer_gain | 0.25 | +0.883 |
+| reasoning_gain | 0.20 | +0.883 |
+| retention_gain | 0.10 | +0.700 |
+| metacognition_gain | 0.10 | -0.001 |
 | learning_efficiency_gain | 0.05 | +0.000 |
+## Diff d'état du cerveau — Brain CP-naïf → Brain CP-appris
+
+_Enseigné via la **boucle API Emma** (emma_api_loop) : Emma présente → le cerveau répond → feedback structuré → le cerveau apprend ; l'évaluation reste indépendante (oracle)._
+
+* **Concepts sémantiques acquis** (9) : `fr.CP.comprehension_phrase`, `fr.CP.dictee_simple`, `fr.CP.lecture_mots_irreguliers`, `fr.CP.lecture_mots_reguliers`, `fr.CP.segmentation_syllabes`, `math.CP.add_within_20`, `math.CP.comparaison_nombres`, `math.CP.numeration_dizaines_unites`, `math.CP.sub_within_20`
+* **Règles procédurales acquises** (12) : `add_facts_within_20`, `blending`, `grapheme_phoneme`, `grapheme_recognition`, `lexical_access`, `number_comparison`, `orthographic_encoding`, `place_value`, `sentence_parsing`, `sight_words`, `sub_facts_within_20`, `syllable_segmentation`
+* **Compétences automatisées** (12) : `add_facts_within_20` (0.05→0.936), `blending` (0.05→0.934), `grapheme_phoneme` (0.05→0.951), `grapheme_recognition` (0.05→0.944), `lexical_access` (0.05→0.913), `number_comparison` (0.05→0.943), `orthographic_encoding` (0.05→0.922), `place_value` (0.05→0.951), `sentence_parsing` (0.05→0.913), `sight_words` (0.05→0.94), `sub_facts_within_20` (0.05→0.944), `syllable_segmentation` (0.05→0.922)
+* **Misconceptions réduites** : taux d'erreur held-out 1.0 → 0.062 (−0.938)
+* **Calibration** : 0.1 → 0.101 (amélioration -0.001)
+* **Traces de rétention (+7 j)** : held-out 0.699, ratio t2/t1 0.746, 12 compétences consolidées
+* **Efficacité d'apprentissage** : +0.000
+
+### Matrice de maîtrise par compétence (automaticité avant → après)
+
+| Compétence | Avant | Après |
+|---|---|---|
+| add_facts_within_20 | 0.05 | 0.936 |
+| blending | 0.05 | 0.934 |
+| grapheme_phoneme | 0.05 | 0.951 |
+| grapheme_recognition | 0.05 | 0.944 |
+| lexical_access | 0.05 | 0.913 |
+| number_comparison | 0.05 | 0.943 |
+| orthographic_encoding | 0.05 | 0.922 |
+| place_value | 0.05 | 0.951 |
+| sentence_parsing | 0.05 | 0.913 |
+| sight_words | 0.05 | 0.94 |
+| sub_facts_within_20 | 0.05 | 0.944 |
+| syllable_segmentation | 0.05 | 0.922 |
 
 ## Contrôles (le gain n'est pas de la mémorisation)
 

@@ -30,11 +30,13 @@ from dataclasses import dataclass
 from .base import Task
 
 SKILLS_LECTURE = [
-    "grapheme_phoneme",   # apply a grapheme→phoneme correspondence
-    "blending",           # fuse phonemes into syllables / a whole word
-    "sight_words",        # recall an irregular word as a whole (orthographic lexicon)
-    "lexical_access",     # map a decoded form to a known meaning
-    "sentence_parsing",   # assign words to roles (who does what)
+    "grapheme_phoneme",      # apply a grapheme→phoneme correspondence
+    "blending",              # fuse phonemes into syllables / a whole word
+    "sight_words",           # recall an irregular word as a whole (orthographic lexicon)
+    "lexical_access",        # map a decoded form to a known meaning
+    "sentence_parsing",      # assign words to roles (who does what)
+    "syllable_segmentation", # split a word into syllables
+    "orthographic_encoding", # write a heard word (the inverse of decoding: dictée)
 ]
 
 # ---- Grapheme → phoneme decoder --------------------------------------------
@@ -105,6 +107,23 @@ def decode_gpc(word: str) -> str:
     return ".".join(out)
 
 
+# Default phoneme → grapheme (for the dictée / encoding domain). A phonetic
+# speller picks the commonest spelling and so drops silent letters and complex
+# graphemes — the characteristic dictée error ("bateau" -> "bato").
+_PHONEME_TO_GRAPHEME = {
+    "a": "a", "e": "é", "E": "è", "i": "i", "o": "o", "y": "u", "U": "ou",
+    "Z9": "eu", "@": "e", "AN": "an", "ON": "on", "IN": "in", "wa": "oi",
+    "S": "ch", "Z": "j", "f": "f", "k": "c", "p": "p", "b": "b", "t": "t",
+    "d": "d", "g": "g", "v": "v", "s": "s", "z": "z", "l": "l", "R": "r",
+    "m": "m", "n": "n", "N": "gn", "ks": "x", "w": "w",
+}
+
+
+def phonetic_spelling(phonemes: str) -> str:
+    """A naive phonetic spelling of a phoneme string (the dictée error)."""
+    return "".join(_PHONEME_TO_GRAPHEME.get(p, p) for p in phonemes.split("."))
+
+
 def decode_letterwise(word: str) -> str:
     """Absolute-beginner decoding: letter by letter, no digraphs, no silent
     finals. Correct only on the simplest words; on any word with a digraph or
@@ -144,6 +163,22 @@ IRREGULAR_WORDS = {
     "second": "s.@.g.ON",
 }
 
+# Multi-syllable words with hand-verified syllable breaks (CP segmentation).
+SYLLABLES = {
+    "moulin": "mou-lin", "bateau": "ba-teau", "lapin": "la-pin",
+    "fourmi": "four-mi", "manteau": "man-teau", "chocolat": "cho-co-lat",
+    "pirate": "pi-rate", "jardin": "jar-din", "mouton": "mou-ton",
+    "tortue": "tor-tue", "banane": "ba-nane", "salade": "sa-lade",
+    "tomate": "to-mate", "domino": "do-mi-no",
+}
+SYLLABLES_TRANSFER = {"cinéma": "ci-né-ma", "tapis": "ta-pis", "vélo": "vé-lo",
+                      "radis": "ra-dis", "képi": "ké-pi"}
+# Words to write from dictation (encoding). Only words a phonetic speller gets
+# WRONG (a silent letter or a non-default grapheme) — so the orthographic skill
+# is genuinely required; transparent words (chou, lapin…) are excluded.
+ENCODING_WORDS = [w for w in REGULAR_WORDS if phonetic_spelling(decode_gpc(w)) != w]
+ENCODING_TRANSFER = ["chapeau", "gâteau", "cadeau", "rideau", "plateau"]
+
 NODES_LECTURE: dict[str, dict] = {
     "fr.CP.lecture_mots_reguliers": {
         "title": "Lecture de mots réguliers (décodage)",
@@ -161,6 +196,18 @@ NODES_LECTURE: dict[str, dict] = {
         "title": "Compréhension de phrase simple",
         "category": "comp",
         "required_skills": {"sentence_parsing": 0.4, "lexical_access": 0.4, "grapheme_phoneme": 0.2},
+        "mastery_threshold": 0.8,
+    },
+    "fr.CP.segmentation_syllabes": {
+        "title": "Segmentation en syllabes",
+        "category": "syll",
+        "required_skills": {"syllable_segmentation": 0.6, "blending": 0.2, "grapheme_recognition": 0.2},
+        "mastery_threshold": 0.8,
+    },
+    "fr.CP.dictee_simple": {
+        "title": "Dictée de mots simples (encodage)",
+        "category": "enc",
+        "required_skills": {"orthographic_encoding": 0.6, "grapheme_phoneme": 0.2, "grapheme_recognition": 0.2},
         "mastery_threshold": 0.8,
     },
 }
@@ -224,6 +271,50 @@ class SentenceTask(Task):
         return "?", "no_comprehension"
 
 
+@dataclass
+class SyllableTask(Task):
+    node_id: str
+    word: str
+    answer: str            # syllables joined by "-"
+    required_skills: dict
+    category: str = "syll"
+
+    @property
+    def prompt(self) -> str:
+        return f"Découpe « {self.word} » en syllabes : ?"
+
+    @property
+    def working_set(self) -> list:
+        return [self.word]
+
+    def mistake(self, weak_skill: str) -> tuple[str, str]:
+        if weak_skill in ("syllable_segmentation", "blending"):
+            return self.word, "no_segmentation"          # leaves the word whole
+        return self.word, "no_segmentation"
+
+
+@dataclass
+class EncodingTask(Task):
+    node_id: str
+    phonemes: str          # the "heard" word (prompt)
+    answer: str            # correct written word
+    required_skills: dict
+    category: str = "enc"
+
+    @property
+    def prompt(self) -> str:
+        return f"Écris le mot que tu entends [{self.phonemes}] : ?"
+
+    @property
+    def working_set(self) -> list:
+        return [self.phonemes]
+
+    def mistake(self, weak_skill: str) -> tuple[str, str]:
+        if weak_skill in ("orthographic_encoding", "grapheme_phoneme", "grapheme_recognition"):
+            return phonetic_spelling(self.phonemes), "phonetic_spelling"   # bateau -> bato
+        return "?", "no_encoding"
+
+
 # ---- Bank builders ---------------------------------------------------------
 @dataclass
 class Bank:
@@ -242,17 +333,44 @@ def _reading_task(node_id: str, word: str, category: str) -> ReadingTask:
                        required_skills=dict(spec["required_skills"]), category=category)
 
 
+def _syllable_task(node_id: str, word: str) -> SyllableTask:
+    return SyllableTask(node_id, word, SYLLABLES.get(word) or SYLLABLES_TRANSFER[word],
+                        dict(NODES_LECTURE[node_id]["required_skills"]))
+
+
+def _encoding_task(node_id: str, word: str) -> EncodingTask:
+    return EncodingTask(node_id, decode_gpc(word), word,
+                        dict(NODES_LECTURE[node_id]["required_skills"]))
+
+
 def build_bank_lecture(node_id: str, rng, frac_teach: float = 0.55) -> Bank:
     spec = NODES_LECTURE[node_id]
     cat = spec["category"]
     if cat == "comp":
         return _build_comprehension_bank(node_id, rng, frac_teach)
-    words = list(REGULAR_WORDS) if cat == "reg" else list(IRREGULAR_WORDS)
+    if cat == "syll":
+        words = list(SYLLABLES)
+        make = _syllable_task
+    elif cat == "enc":
+        words = list(ENCODING_WORDS)
+        make = lambda nid, w: _encoding_task(nid, w)  # noqa: E731
+    else:
+        words = list(REGULAR_WORDS) if cat == "reg" else list(IRREGULAR_WORDS)
+        make = lambda nid, w: _reading_task(nid, w, cat)  # noqa: E731
     rng.shuffle(words)
     cut = max(1, int(len(words) * frac_teach))
-    teaching = [_reading_task(node_id, w, cat) for w in words[:cut]]
-    heldout = [_reading_task(node_id, w, cat) for w in words[cut:]]
-    return Bank(teaching=teaching, heldout=heldout)
+    return Bank(teaching=[make(node_id, w) for w in words[:cut]],
+                heldout=[make(node_id, w) for w in words[cut:]])
+
+
+def transfer_bank_syllabes(node_id: str = "fr.CP.segmentation_syllabes") -> list:
+    return [_syllable_task(node_id, w) for w in SYLLABLES_TRANSFER]
+
+
+def transfer_bank_dictee(node_id: str = "fr.CP.dictee_simple") -> list:
+    """Encoding transfer: write unseen words (with silent/complex graphemes)
+    from their sounds."""
+    return [_encoding_task(node_id, w) for w in ENCODING_TRANSFER]
 
 
 def transfer_bank_lecture(node_id: str = "fr.CP.lecture_mots_reguliers") -> list:

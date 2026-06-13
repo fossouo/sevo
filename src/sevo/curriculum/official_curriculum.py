@@ -32,11 +32,14 @@ from typing import Callable
 from .cp_ce1_math import NODES as MATH_NODES
 from .cp_ce1_math import build_bank as build_bank_math
 from .cp_ce1_math import transfer_bank as transfer_bank_math
+from .cp_maths_numeration import NODES_NUM, build_bank_num, transfer_bank_num
 from .fr_lecture_cp import (
     NODES_LECTURE,
     build_bank_lecture,
     transfer_bank_comprehension,
+    transfer_bank_dictee,
     transfer_bank_lecture,
+    transfer_bank_syllabes,
 )
 from .ingestion import CurriculumRegistry
 
@@ -68,6 +71,18 @@ def _math_node(nid: str, discipline: str, attendus, ex, crit) -> dict:
     }
 
 
+def _num_node(nid: str, attendus, ex, crit) -> dict:
+    spec = NODES_NUM[nid]
+    return {
+        "id": nid, "title": spec["title"], "class_level": "CP",
+        "subject": "mathématiques", "discipline": "nombres et calculs",
+        "required_skills": spec["required_skills"],
+        "mastery_threshold": spec["mastery_threshold"],
+        "end_of_year_expectations": attendus,
+        "exercise_types": ex, "evaluation_criteria": crit,
+    }
+
+
 CP_MATHS_NODES = [
     _math_node(
         "math.CP.add_within_20", "nombres et calculs",
@@ -82,6 +97,18 @@ CP_MATHS_NODES = [
          "résoudre un problème de retrait simple"],
         ["compléter une soustraction en ligne", "problème de retrait à une étape"],
         ["résultat exact", "gestion correcte du passage à la dizaine"],
+    ),
+    _num_node(
+        "math.CP.numeration_dizaines_unites",
+        ["dénombrer et décomposer les nombres ≤ 99 en dizaines et unités"],
+        ["décomposer un nombre en dizaines/unités", "associer écriture chiffrée et décomposition"],
+        ["décomposition exacte", "place de la dizaine et de l'unité respectée"],
+    ),
+    _num_node(
+        "math.CP.comparaison_nombres",
+        ["comparer, ranger et encadrer les nombres ≤ 100 (< > =)"],
+        ["comparer deux nombres avec < > =", "ranger une suite de nombres"],
+        ["signe de comparaison correct", "prise en compte de la dizaine avant l'unité"],
     ),
 ]
 
@@ -120,6 +147,18 @@ CP_FRANCAIS_NODES = [
         ["question littérale sur une phrase", "appariement phrase-réponse"],
         ["rôle sujet/objet correctement attribué", "réponse littérale exacte"],
     ),
+    _lecture_node(
+        "fr.CP.segmentation_syllabes", "lecture / phonologie",
+        ["segmenter un mot en syllabes orales"],
+        ["découper un mot en syllabes", "frapper les syllabes"],
+        ["nombre et découpage des syllabes corrects"],
+    ),
+    _lecture_node(
+        "fr.CP.dictee_simple", "écriture / encodage",
+        ["écrire sous la dictée des mots simples déjà rencontrés"],
+        ["dictée de mots", "encoder un mot entendu"],
+        ["orthographe exacte (lettres muettes et graphies respectées)"],
+    ),
 ]
 
 # Surfaced in reports so no reader mistakes this for a full BO ingest.
@@ -134,7 +173,8 @@ CP_PROGRAM = {
     "status": "partial-seed",
     "disclaimer": SEED_DISCLAIMER,
     "disciplines": {
-        "français": ["lecture / décodage", "lecture / mots-outils", "compréhension"],
+        "français": ["lecture / décodage", "lecture / mots-outils", "compréhension",
+                     "lecture / phonologie", "écriture / encodage"],
         "mathématiques": ["nombres et calculs"],
     },
     "nodes": CP_FRANCAIS_NODES + CP_MATHS_NODES,
@@ -164,6 +204,26 @@ RUNNABLE_CP: dict[str, RunnableNode] = {
         "fr.CP.comprehension_phrase", "français", "compréhension",
         build=lambda rng: build_bank_lecture("fr.CP.comprehension_phrase", rng),
         transfer=lambda: transfer_bank_comprehension("fr.CP.comprehension_phrase"),
+    ),
+    "fr.CP.segmentation_syllabes": RunnableNode(
+        "fr.CP.segmentation_syllabes", "français", "lecture / phonologie",
+        build=lambda rng: build_bank_lecture("fr.CP.segmentation_syllabes", rng),
+        transfer=lambda: transfer_bank_syllabes("fr.CP.segmentation_syllabes"),
+    ),
+    "fr.CP.dictee_simple": RunnableNode(
+        "fr.CP.dictee_simple", "français", "écriture / encodage",
+        build=lambda rng: build_bank_lecture("fr.CP.dictee_simple", rng),
+        transfer=lambda: transfer_bank_dictee("fr.CP.dictee_simple"),
+    ),
+    "math.CP.numeration_dizaines_unites": RunnableNode(
+        "math.CP.numeration_dizaines_unites", "mathématiques", "nombres et calculs",
+        build=lambda rng: build_bank_num("math.CP.numeration_dizaines_unites", rng),
+        transfer=lambda: transfer_bank_num("math.CP.numeration_dizaines_unites"),
+    ),
+    "math.CP.comparaison_nombres": RunnableNode(
+        "math.CP.comparaison_nombres", "mathématiques", "nombres et calculs",
+        build=lambda rng: build_bank_num("math.CP.comparaison_nombres", rng),
+        transfer=lambda: transfer_bank_num("math.CP.comparaison_nombres"),
     ),
 }
 

@@ -7,16 +7,22 @@ beginner errors (letter-by-letter, regularisation, role confusion).
 from sevo.baselines import MemorizerBrain
 from sevo.brain import Brain
 from sevo.curriculum.fr_lecture_cp import (
+    ENCODING_WORDS,
     IRREGULAR_WORDS,
     PSEUDO_WORDS,
     REGULAR_WORDS,
+    _encoding_task,
     _reading_task,
     _sentence_tasks,
+    _syllable_task,
     build_bank_lecture,
     decode_gpc,
     decode_letterwise,
+    phonetic_spelling,
     transfer_bank_comprehension,
+    transfer_bank_dictee,
     transfer_bank_lecture,
+    transfer_bank_syllabes,
 )
 from sevo.rng import Rng
 from sevo.services import AssessmentOracle
@@ -101,3 +107,39 @@ def test_characteristic_role_confusion():
     answers = {cold.procedural.solve(task, 0, cold.rng)["answer"] for _ in range(30)}
     assert "la pomme" in answers                   # answers the object to "who?"
     assert task.answer == "le chat"
+
+
+# ---- syllable segmentation -------------------------------------------------
+def test_learns_syllable_segmentation_and_transfers():
+    brain, bank = _teach("fr.CP.segmentation_syllabes")
+    assert brain.evaluate(bank.heldout, "post")["accuracy"] >= 0.7
+    assert brain.evaluate(transfer_bank_syllabes(), "transfer")["accuracy"] >= 0.4
+
+
+def test_characteristic_undersegmentation():
+    cold = Brain(seed=9)
+    task = _syllable_task("fr.CP.segmentation_syllabes", "chocolat")
+    answers = {cold.procedural.solve(task, 0, cold.rng)["answer"] for _ in range(30)}
+    assert "chocolat" in answers          # leaves the word whole (no segmentation)
+    assert task.answer == "cho-co-lat"
+
+
+# ---- dictée / encoding (inverse of decoding) -------------------------------
+def test_encoding_words_need_the_orthographic_skill():
+    """Only words a phonetic speller gets wrong are kept — so the skill matters."""
+    for w in ENCODING_WORDS:
+        assert phonetic_spelling(decode_gpc(w)) != w
+
+
+def test_learns_dictee_and_transfers():
+    brain, bank = _teach("fr.CP.dictee_simple")
+    assert brain.evaluate(bank.heldout, "post")["accuracy"] >= 0.7
+    assert brain.evaluate(transfer_bank_dictee(), "transfer")["accuracy"] >= 0.4
+
+
+def test_characteristic_phonetic_spelling():
+    cold = Brain(seed=9)
+    task = _encoding_task("fr.CP.dictee_simple", "bateau")
+    answers = {cold.procedural.solve(task, 0, cold.rng)["answer"] for _ in range(30)}
+    assert phonetic_spelling(task.phonemes) in answers   # writes "bato"
+    assert task.answer == "bateau"
