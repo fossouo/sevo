@@ -19,6 +19,7 @@ from .curriculum.base import Task
 from .curriculum.cp_ce1_math import SKILLS
 from .curriculum.fr_conjugation import SKILLS_CONJ
 from .curriculum.fr_cp_ce1 import SKILLS_FR
+from .curriculum.fr_lecture_cp import SKILLS_LECTURE
 from .services import (
     AssessmentOracle,
     AttentionSalience,
@@ -39,7 +40,7 @@ from .state import CognitiveState, DevelopmentStage, Snapshot, take_snapshot
 # all known procedural skills (unused skills stay inert at baseline
 # automaticity). ``grapheme_recognition`` is shared between French domains, so
 # we de-duplicate while preserving order.
-ALL_SKILLS = list(dict.fromkeys(SKILLS + SKILLS_FR + SKILLS_CONJ))
+ALL_SKILLS = list(dict.fromkeys(SKILLS + SKILLS_FR + SKILLS_CONJ + SKILLS_LECTURE))
 
 
 class Brain:

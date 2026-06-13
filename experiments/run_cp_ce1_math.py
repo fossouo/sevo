@@ -31,7 +31,7 @@ from sevo.curriculum.cp_ce1_math import (
     reasoning_bank,
     transfer_bank,
 )
-from sevo.eval import compute_delta
+from sevo.eval import assess_genuine_learning, compute_delta
 from sevo.rng import Rng
 from sevo.teacher import make_banks, teach_to_mastery
 
@@ -122,6 +122,14 @@ def run() -> dict:
         trials_without_prereq=eff["trials_without_prereq"],
     )
 
+    genuine = assess_genuine_learning(
+        heldout_before=pre_heldout["accuracy"], heldout_after=t1_heldout["accuracy"],
+        transfer_before=pre_transfer["accuracy"], transfer_after=t1_transfer["accuracy"],
+        memoriser_heldout=mem["on_heldout"]["accuracy"],
+        memoriser_transfer=mem["on_transfer"]["accuracy"],
+        t1_after=t1_heldout["accuracy"], t2_after=t2_heldout["accuracy"],
+    )
+
     return {
         "seed": SEED,
         "snapshots": {"before": snap_before.snapshot_id, "after": snap_after.snapshot_id},
@@ -135,6 +143,7 @@ def run() -> dict:
         "transfer_efficiency_control": eff,
         "memorizer_baseline": mem,
         "intelligence_delta": delta,
+        "genuine_learning": genuine,
     }
 
 

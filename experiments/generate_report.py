@@ -11,6 +11,7 @@ import json
 import os
 
 from run_cp_ce1_math import run
+from run_cp_grade import run as run_cp_grade
 from run_fr_conjugation import run as run_conj
 from run_fr_cp_ce1 import run as run_fr
 
@@ -20,6 +21,19 @@ REPORTS = os.path.join(HERE, "..", "reports")
 
 def _fmt_pct(x: float) -> str:
     return f"{x * 100:.0f}%"
+
+
+def _verdict_md(g: dict) -> str:
+    """Integrity verdict + the five checks (anti-illusion-of-progression gate)."""
+    icon = "✅" if g["passed"] else "⛔"
+    head = (f"\n> {icon} **Apprentissage authentique : {g['verdict']}** — "
+            "le delta n'est déclaré que si les cinq garde-fous passent.\n")
+    body = "\n| Garde-fou | OK |\n|---|---|\n"
+    for k, v in g["checks"].items():
+        body += f"| {k} | {'✅' if v else '❌'} |\n"
+    if g["reasons"]:
+        body += "\n_Échecs : " + " ; ".join(g["reasons"]) + "._\n"
+    return head + body
 
 
 def main() -> None:
@@ -47,6 +61,7 @@ def main() -> None:
     a("\n## Headline\n")
     a(f"\n**Intelligence_delta = {d['weighted_delta']:.3f}** "
       "(internal cognitive evolution index — not a human IQ).\n")
+    a(_verdict_md(r["genuine_learning"]))
 
     a("\n## Before vs after\n")
     a("\n| Measure (held-out) | Pretest | Posttest T1 | Delayed T2 (+7d) |")
@@ -115,6 +130,7 @@ def main_fr() -> None:
       "maths experiment — different domain. This is the generalisation proof._\n")
     a(f"\n**Intelligence_delta = {d['weighted_delta']:.3f}** "
       "(internal cognitive evolution index — not a human IQ).\n")
+    a(_verdict_md(r["genuine_learning"]))
     a("\n## Before vs after\n")
     a("\n| Measure | Pretest | Posttest T1 | Delayed T2 (+7d) |")
     a("\n|---|---|---|---|")
@@ -164,6 +180,7 @@ def main_conj() -> None:
       "not a special case._\n")
     a(f"\n**Intelligence_delta = {d['weighted_delta']:.3f}** "
       "(internal cognitive evolution index — not a human IQ).\n")
+    a(_verdict_md(r["genuine_learning"]))
     a("\n## Before vs after\n")
     a("\n| Measure | Pretest | Posttest T1 | Delayed T2 (+7d) |")
     a("\n|---|---|---|---|")
@@ -198,7 +215,87 @@ def main_conj() -> None:
     print(f"conj   Intelligence_delta = {d['weighted_delta']:.3f}")
 
 
+def main_cp_grade() -> None:
+    r = run_cp_grade()
+    os.makedirs(REPORTS, exist_ok=True)
+    with open(os.path.join(REPORTS, "last_run_cp_grade.json"), "w", encoding="utf-8") as f:
+        json.dump(r, f, indent=2, ensure_ascii=False)
+
+    fac, d = r["facets_aggregate"], r["intelligence_delta"]
+    eff, mem = r["efficiency_control"], r["memorizer_baseline"]
+    comp = d["components"]
+
+    lines = []
+    a = lines.append
+    a("# CP grade report — whole-class learning cycle\n")
+    a(f"_Reproducible run, seed = {r['seed']}. An **official-curriculum-shaped CP "
+      "seed registry** (`curriculum/official_curriculum.py`) — aligned with the "
+      "official CP expectations, **partial and hand-verified, not a full BO "
+      "ingest** — loaded through the standard ingestion contract, then run through "
+      "the full lifecycle: cold pretest → Emma teaches every node → consolidation "
+      "→ immediate posttest → +7-day delayed posttest → transfer. All scores by "
+      "the assessment oracle on disjoint banks._\n")
+    a(f"\n> ⚠️ {r['program']['disclaimer']}\n")
+    a(f"\n**Intelligence_delta (CP) = {d['weighted_delta']:.3f}** "
+      "(internal cognitive evolution index — not a human IQ).\n")
+    a(_verdict_md(r["genuine_learning"]))
+
+    a("\n## Five facets (aggregate)\n")
+    a("\n| Facet | Pretest | Posttest |")
+    a("\n|---|---|---|")
+    a(f"\n| **Connaissance** (held-out) | {_fmt_pct(fac['connaissance_heldout']['pre'])} | "
+      f"{_fmt_pct(fac['connaissance_heldout']['t1'])} |")
+    a(f"\n| **Transfert** (items jamais vus + pseudo-mots) | {_fmt_pct(fac['transfert']['pre'])} | "
+      f"{_fmt_pct(fac['transfert']['t1'])} |")
+    a(f"\n| **Rétention** (+7 jours) | — | {_fmt_pct(fac['retention_t2'])} |")
+    a(f"\n| **Métacognition** (erreur de calibration, plus bas = mieux) | "
+      f"{fac['metacognition_calibration_error']['pre']:.2f} | "
+      f"{fac['metacognition_calibration_error']['t1']:.2f} |")
+    a("\n\n_**Procédure** : voir le graphe d'automaticité des compétences dans "
+      "`last_run_cp_grade.json` (`procedure_skill_graph`) — c'est l'état interne "
+      "des savoir-faire, distinct de la connaissance restituée._\n")
+
+    a("\n## Par nœud du programme CP\n")
+    a("\n| Nœud | Discipline | Held-out pré→T1→T2 | Transfert T1 |")
+    a("\n|---|---|---|---|")
+    for nid, n in r["per_node"].items():
+        h = n["heldout"]
+        tr = "—" if n["transfer_t1"] is None else _fmt_pct(n["transfer_t1"])
+        a(f"\n| `{nid}` | {n['discipline']} | "
+          f"{_fmt_pct(h['pre'])} → {_fmt_pct(h['t1'])} → {_fmt_pct(h['t2'])} | {tr} |")
+    a("\n\n_La transfert mathématique (`add_within_20` → addition < 1000) est "
+      "volontairement **hors-niveau** : son score quasi nul est attendu et "
+      "montre que le cerveau ne sur-généralise pas au-delà de ce qui a été "
+      "enseigné au CP._\n")
+
+    a("\n## Composantes de l'Intelligence_delta\n")
+    a("\n| Composante | Poids | Valeur |")
+    a("\n|---|---|---|")
+    for k, w in d["weights"].items():
+        a(f"\n| {k} | {w:.2f} | {comp[k]:+.3f} |")
+
+    a("\n\n## Contrôles (le gain n'est pas de la mémorisation)\n")
+    a(f"\n* **Mémoriseur anti-fuite** — {_fmt_pct(mem['on_teaching']['accuracy'])} "
+      f"sur les items enseignés, mais {_fmt_pct(mem['on_heldout']['accuracy'])} "
+      f"held-out et {_fmt_pct(mem['on_transfer']['accuracy'])} en transfert. Les "
+      "gains du cerveau ne s'expliquent pas par la mémorisation.\n")
+    a(f"* **Efficacité d'apprentissage** — apprendre la soustraction après "
+      f"l'addition : {eff['trials_with_prereq']} essais vs "
+      f"{eff['trials_without_prereq']} à froid ({eff['speedup']}×).\n")
+    a("* **Erreurs caractéristiques** (cerveau naïf) :")
+    for dom, e in r["characteristic_errors"].items():
+        errs = ", ".join(f"« {a_} » ({t})" for a_, t in e["observed_errors"].items()) or "—"
+        a(f"\n  * {dom} — *{e['word_or_item']}* (vrai : `{e['truth']}`) → {errs}")
+    a("\n")
+
+    with open(os.path.join(REPORTS, "CP_GRADE_REPORT.md"), "w", encoding="utf-8") as f:
+        f.write("".join(lines))
+    print("wrote reports/last_run_cp_grade.json and reports/CP_GRADE_REPORT.md")
+    print(f"CP     Intelligence_delta = {d['weighted_delta']:.3f}")
+
+
 if __name__ == "__main__":
     main()
     main_fr()
     main_conj()
+    main_cp_grade()

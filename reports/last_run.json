@@ -1,8 +1,8 @@
 {
   "seed": 7,
   "snapshots": {
-    "before": "6eed7200-56f0-4e32-b6ef-188c8421e402",
-    "after": "07a3cc1e-aa9f-4413-9384-ca6e72bdffd3"
+    "before": "1a42a92a-f94d-4247-9a2a-31c5be7a376d",
+    "after": "80fa7a80-67d5-473e-a68c-8bb48c997183"
   },
   "pretest": {
     "heldout": {
@@ -231,5 +231,25 @@
     "weighted_delta": 0.7482,
     "retention_ratio_t2_over_t1": 0.6445,
     "note": "Internal cognitive evolution index — not a human IQ."
+  },
+  "genuine_learning": {
+    "verdict": "GENUINE",
+    "passed": true,
+    "checks": {
+      "post_test_gain": true,
+      "held_out_gain_substantial": true,
+      "transfer_nonzero": true,
+      "beats_memoriser": true,
+      "retention_measurable": true
+    },
+    "reasons": [],
+    "details": {
+      "heldout_before": 0.0,
+      "heldout_after": 0.9375,
+      "best_transfer_after": 0.9,
+      "memoriser_heldout": 0.0,
+      "memoriser_transfer": 0.0,
+      "retention_ratio_t2_over_t1": 0.6445
+    }
   }
 }
