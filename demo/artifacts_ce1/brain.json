@@ -1,0 +1,1251 @@
+{
+  "runtime_schema_version": "0.5",
+  "brain": {
+    "schema_version": "0.4",
+    "brain_id": "22a2d3e5-c604-4529-86ea-18ff40739c03",
+    "day": 1,
+    "stage": {
+      "school_class": "CP",
+      "age_equivalent_months": null,
+      "curriculum_version": "MEN-2026"
+    },
+    "procedural_skills": {
+      "place_value": {
+        "automaticity": 0.9867662073168216,
+        "error_patterns": [
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "add_facts_within_20": {
+        "automaticity": 0.9810112177460354,
+        "error_patterns": [
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_nocarry",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "carry": {
+        "automaticity": 0.9680459779719225,
+        "error_patterns": [
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.add_within_100_carry",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "sub_facts_within_20": {
+        "automaticity": 0.91759720622685,
+        "error_patterns": [
+          {
+            "node": "math.CE1.sub_within_100_borrow",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.sub_within_100_borrow",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.sub_within_100_borrow",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "borrow": {
+        "automaticity": 0.9257937519179815,
+        "error_patterns": [
+          {
+            "node": "math.CE1.sub_within_100_borrow",
+            "day": 0
+          },
+          {
+            "node": "math.CE1.sub_within_100_borrow",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "grapheme_recognition": {
+        "automaticity": 0.9841842747654344,
+        "error_patterns": [
+          {
+            "node": "fr.CE1.pluriel_reguliers",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "plural_rule_s": {
+        "automaticity": 0.9202306720408258,
+        "error_patterns": [
+          {
+            "node": "fr.CE1.pluriel_reguliers",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "plural_exception_aux": {
+        "automaticity": 0.9777833716154537,
+        "error_patterns": [
+          {
+            "node": "fr.CE1.pluriel_en_al",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "plural_invariant": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      },
+      "verb_stem_recognition": {
+        "automaticity": 0.956635722623222,
+        "error_patterns": [
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "present_er_endings": {
+        "automaticity": 0.9706683346524569,
+        "error_patterns": [
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "subject_agreement": {
+        "automaticity": 0.956635722623222,
+        "error_patterns": [
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          },
+          {
+            "node": "fr.CE1.present_verbes_er",
+            "day": 0
+          }
+        ],
+        "transfer_score": 0.64,
+        "consolidated": true,
+        "last_practiced_day": 0
+      },
+      "grapheme_phoneme": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      },
+      "blending": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      },
+      "sight_words": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      },
+      "lexical_access": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      },
+      "sentence_parsing": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      },
+      "syllable_segmentation": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      },
+      "orthographic_encoding": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      },
+      "number_comparison": {
+        "automaticity": 0.05,
+        "error_patterns": [],
+        "transfer_score": 0.0,
+        "consolidated": false,
+        "last_practiced_day": null
+      }
+    },
+    "semantic_mastery": {
+      "fr.CE1.pluriel_reguliers": {
+        "mastery": 0.822021484375,
+        "confidence": 0.822021484375,
+        "last_seen": 1,
+        "evidence": [
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          }
+        ]
+      },
+      "fr.CE1.pluriel_en_al": {
+        "mastery": 0.9786506626922091,
+        "confidence": 0.9786506626922091,
+        "last_seen": 1,
+        "evidence": [
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          }
+        ]
+      },
+      "fr.CE1.present_verbes_er": {
+        "mastery": 0.8330695851240707,
+        "confidence": 0.8330695851240707,
+        "last_seen": 1,
+        "evidence": [
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          }
+        ]
+      },
+      "math.CE1.add_within_100_nocarry": {
+        "mastery": 0.9627921792891811,
+        "confidence": 0.9627921792891811,
+        "last_seen": 1,
+        "evidence": [
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          }
+        ]
+      },
+      "math.CE1.add_within_100_carry": {
+        "mastery": 0.9789147756712282,
+        "confidence": 0.9789147756712282,
+        "last_seen": 1,
+        "evidence": [
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          }
+        ]
+      },
+      "math.CE1.sub_within_100_borrow": {
+        "mastery": 0.8689573341980577,
+        "confidence": 0.8689573341980577,
+        "last_seen": 1,
+        "evidence": [
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": false
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          },
+          {
+            "day": 0,
+            "correct": true
+          }
+        ]
+      }
+    },
+    "metacognition": {
+      "node_self_accuracy": {
+        "fr.CE1.pluriel_reguliers": 0.9111750049999998,
+        "fr.CE1.pluriel_en_al": 0.9888728520123786,
+        "fr.CE1.present_verbes_er": 0.8398603055147034,
+        "math.CE1.add_within_100_nocarry": 0.9811813682056398,
+        "math.CE1.add_within_100_carry": 0.9913441579158446,
+        "math.CE1.sub_within_100_borrow": 0.9041393285460269
+      },
+      "help_requests": 0,
+      "attempts": 152
+    }
+  },
+  "counters": {
+    "perceptions": 0,
+    "actions": 0,
+    "feedbacks": 152,
+    "consolidations": 2
+  },
+  "sessions": {},
+  "baseline_snapshot": {
+    "snapshot_id": "f4538026-1aca-4900-bf47-c2a3cf604f6a",
+    "created_at_day": 0,
+    "parent_snapshot_id": null,
+    "development_stage": {
+      "school_class": "CP",
+      "age_equivalent_months": null,
+      "curriculum_version": "MEN-2026"
+    },
+    "cognitive_state": {
+      "knowledge_mastery_graph": {},
+      "procedural_skill_graph": {
+        "place_value": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "add_facts_within_20": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "carry": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "sub_facts_within_20": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "borrow": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "grapheme_recognition": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "plural_rule_s": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "plural_exception_aux": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "plural_invariant": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "verb_stem_recognition": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "present_er_endings": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "subject_agreement": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "grapheme_phoneme": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "blending": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "sight_words": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "lexical_access": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "sentence_parsing": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "syllable_segmentation": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "orthographic_encoding": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        },
+        "number_comparison": {
+          "automaticity": 0.05,
+          "error_patterns": [],
+          "transfer_score": 0.0,
+          "consolidated": false,
+          "last_practiced_day": null
+        }
+      },
+      "episodic_index": {
+        "episodes_count": 0,
+        "last_episode_id": null
+      },
+      "working_memory_profile": {
+        "capacity_tokens_estimate": 4,
+        "multi_step_depth": 0,
+        "distraction_sensitivity": 0.0
+      },
+      "metacognitive_profile": {
+        "calibration_error": 0.0,
+        "knows_unknowns_score": 0.0,
+        "help_seeking_quality": 0.0
+      },
+      "motivation_profile": {
+        "curiosity": 0.5,
+        "frustration_tolerance": 0.5,
+        "reward_sensitivity": 0.5
+      },
+      "intelligence_profile": {
+        "fluid_reasoning": 0.0,
+        "crystallized_knowledge": 0.0,
+        "transfer": 0.0,
+        "learning_efficiency": 0.0,
+        "retention": 0.0
+      }
+    }
+  },
+  "seed": 7
+}

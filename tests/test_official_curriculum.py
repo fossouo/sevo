@@ -9,10 +9,13 @@ import pytest
 
 from sevo.curriculum.ingestion import CurriculumRegistry
 from sevo.curriculum.official_curriculum import (
+    CE1_PROGRAM,
     CP_PROGRAM,
     RUNNABLE_CP,
+    official_ce1_registry,
     official_cp_registry,
     register_class,
+    runnable_for,
 )
 
 
@@ -51,3 +54,31 @@ def test_unpopulated_class_refuses_ingestion():
         register_class(reg, "CM2")
     with pytest.raises(ValueError):
         register_class(reg, "Université")
+
+
+def test_ce1_programme_ingests_via_same_contract():
+    reg = official_ce1_registry()
+    # CE1 français (pluriel ×2 + conjugaison) + CE1 maths (add nocarry/carry, sub borrow)
+    assert len(reg.by_class("CE1")) == 6
+    assert len(reg.by_subject("français")) == 3
+    assert len(reg.by_subject("mathématiques")) == 3
+
+
+def test_ce1_carries_rich_fields_like_cp():
+    node = official_ce1_registry().get("fr.CE1.present_verbes_er")
+    assert node.discipline and node.end_of_year_expectations
+    assert node.exercise_types and node.evaluation_criteria
+    assert abs(sum(node.required_skills.values()) - 1.0) < 1e-6
+
+
+def test_ce1_is_extension_not_rewrite():
+    """CE1 reuses pre-existing core nodes (plural / conjugation / maths within
+    100) — no new core, every program node has a runnable."""
+    ids = {n["id"] for n in CE1_PROGRAM["nodes"]}
+    assert {"fr.CE1.pluriel_reguliers", "fr.CE1.present_verbes_er",
+            "math.CE1.add_within_100_carry"} <= ids
+    assert set(runnable_for("CE1")) == ids
+    from sevo.rng import Rng
+    for rn in runnable_for("CE1").values():
+        bank = rn.build(Rng(1))
+        assert bank.teaching and bank.heldout

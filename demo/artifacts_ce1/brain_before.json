@@ -1,0 +1,401 @@
+{
+  "schema_version": "0.4",
+  "brain_id": "demo-brain",
+  "day": 0,
+  "stage": {
+    "school_class": "CP",
+    "age_equivalent_months": null,
+    "curriculum_version": "MEN-2026"
+  },
+  "procedural_skills": {
+    "place_value": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "add_facts_within_20": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_nocarry",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "carry": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "sub_facts_within_20": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "borrow": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 0
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "grapheme_recognition": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.pluriel_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "plural_rule_s": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.pluriel_reguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "plural_exception_aux": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "plural_invariant": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "verb_stem_recognition": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "present_er_endings": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "subject_agreement": {
+      "automaticity": 0.05,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "grapheme_phoneme": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "blending": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "sight_words": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "lexical_access": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "sentence_parsing": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "syllable_segmentation": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "orthographic_encoding": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "number_comparison": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    }
+  },
+  "semantic_mastery": {},
+  "metacognition": {
+    "node_self_accuracy": {},
+    "help_requests": 0,
+    "attempts": 0
+  }
+}

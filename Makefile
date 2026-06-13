@@ -1,15 +1,18 @@
 PYTHON ?= python3
 export PYTHONPATH := src
 
-.PHONY: test demo-cp report demo-docker
+.PHONY: test demo-cp demo-ce1 report demo-docker
 
 test:
 	$(PYTHON) -m pytest -q
 
-# One-command founder proof: Brain CP-naïf -> Emma -> Brain CP-appris ->
-# diff -> independent eval -> GENUINE -> save/reload -> re-eval.
+# One-command founder proof: Brain naïf -> Emma -> Brain appris -> diff ->
+# independent eval -> GENUINE -> save/reload -> re-eval. Same protocol per grade.
 demo-cp:
-	$(PYTHON) scripts/demo_cp.py
+	$(PYTHON) scripts/demo_cp.py CP
+
+demo-ce1:
+	$(PYTHON) scripts/demo_cp.py CE1
 
 # Regenerate the reproducible experiment reports (maths / FR / conjugation / CP).
 report:

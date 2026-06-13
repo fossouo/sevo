@@ -1,0 +1,103 @@
+{
+  "semantic_concepts_added": [
+    "fr.CE1.pluriel_en_al",
+    "fr.CE1.pluriel_reguliers",
+    "fr.CE1.present_verbes_er",
+    "math.CE1.add_within_100_carry",
+    "math.CE1.add_within_100_nocarry",
+    "math.CE1.sub_within_100_borrow"
+  ],
+  "procedural_rules_acquired": [
+    "add_facts_within_20",
+    "borrow",
+    "carry",
+    "grapheme_recognition",
+    "place_value",
+    "plural_exception_aux",
+    "plural_rule_s",
+    "present_er_endings",
+    "sub_facts_within_20",
+    "subject_agreement",
+    "verb_stem_recognition"
+  ],
+  "mastered_skills": {
+    "add_facts_within_20": {
+      "before": 0.05,
+      "after": 0.938
+    },
+    "borrow": {
+      "before": 0.05,
+      "after": 0.885
+    },
+    "carry": {
+      "before": 0.05,
+      "after": 0.925
+    },
+    "grapheme_recognition": {
+      "before": 0.05,
+      "after": 0.941
+    },
+    "place_value": {
+      "before": 0.05,
+      "after": 0.943
+    },
+    "plural_exception_aux": {
+      "before": 0.05,
+      "after": 0.935
+    },
+    "plural_rule_s": {
+      "before": 0.05,
+      "after": 0.88
+    },
+    "present_er_endings": {
+      "before": 0.05,
+      "after": 0.928
+    },
+    "sub_facts_within_20": {
+      "before": 0.05,
+      "after": 0.877
+    },
+    "subject_agreement": {
+      "before": 0.05,
+      "after": 0.914
+    },
+    "verb_stem_recognition": {
+      "before": 0.05,
+      "after": 0.914
+    }
+  },
+  "misconceptions_reduced": {
+    "heldout_error_rate_before": 1.0,
+    "heldout_error_rate_after": 0.089,
+    "reduction": 0.911
+  },
+  "calibration_delta": {
+    "before": 0.1,
+    "after": 0.146,
+    "improvement": -0.046
+  },
+  "retention_traces": {
+    "t2_heldout_accuracy": 0.911,
+    "retention_ratio_t2_over_t1": 1.0,
+    "consolidated_skills": [
+      "add_facts_within_20",
+      "borrow",
+      "carry",
+      "grapheme_recognition",
+      "place_value",
+      "plural_exception_aux",
+      "plural_rule_s",
+      "present_er_endings",
+      "sub_facts_within_20",
+      "subject_agreement",
+      "verb_stem_recognition"
+    ]
+  },
+  "learning_efficiency": 0.0,
+  "snapshot_ids": {
+    "before": "baseline",
+    "after": "after"
+  },
+  "transfer_after_best": 0.911,
+  "note": "live diff — retention is immediate (no 7-day delay); use run_cp_grade for the full delayed-retention protocol"
+}

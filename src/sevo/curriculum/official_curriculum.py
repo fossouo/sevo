@@ -33,6 +33,8 @@ from .cp_ce1_math import NODES as MATH_NODES
 from .cp_ce1_math import build_bank as build_bank_math
 from .cp_ce1_math import transfer_bank as transfer_bank_math
 from .cp_maths_numeration import NODES_NUM, build_bank_num, transfer_bank_num
+from .fr_conjugation import NODES_CONJ, build_bank_conj, transfer_bank_conj
+from .fr_cp_ce1 import NODES_FR, build_bank_fr, transfer_bank_fr
 from .fr_lecture_cp import (
     NODES_LECTURE,
     build_bank_lecture,
@@ -229,13 +231,130 @@ RUNNABLE_CP: dict[str, RunnableNode] = {
 
 
 def _math_transfer():
-    """Maths transfer = addition within 1000, never taught at CP."""
+    """Maths transfer = addition within 1000, never taught at CP/CE1."""
     from ..rng import Rng
     return transfer_bank_math(Rng(99), n=20)
 
 
+# ============================================================================
+# CE1 — an EXTENSION of the same core (no rewrite). Reuses nodes that already
+# exist and learn under the frozen CP protocol: plural of nouns, present tense
+# of -er verbs, and addition/subtraction within 100. GENUINE, teacher/oracle
+# separation and anti-leakage are inherited unchanged.
+# ============================================================================
+CE1_DISCLAIMER = (
+    "Registre aligné sur les attendus officiels du CE1 — jeu amorce partiel, "
+    "vérifié à la main (PAS un ingest exhaustif du Bulletin officiel)."
+)
+
+
+def _fr_node(nid: str, discipline: str, attendus, ex, crit) -> dict:
+    spec = NODES_FR.get(nid) or NODES_CONJ[nid]
+    return {
+        "id": nid, "title": spec["title"], "class_level": "CE1",
+        "subject": "français", "discipline": discipline,
+        "required_skills": spec["required_skills"],
+        "mastery_threshold": spec["mastery_threshold"],
+        "end_of_year_expectations": attendus,
+        "exercise_types": ex, "evaluation_criteria": crit,
+    }
+
+
+def _math_ce1_node(nid: str, attendus, ex, crit) -> dict:
+    spec = MATH_NODES[nid]
+    return {
+        "id": nid, "title": spec["title"], "class_level": "CE1",
+        "subject": "mathématiques", "discipline": "nombres et calculs",
+        "required_skills": spec["required_skills"],
+        "prerequisites": spec.get("prerequisites", []),
+        "mastery_threshold": spec["mastery_threshold"],
+        "end_of_year_expectations": attendus,
+        "exercise_types": ex, "evaluation_criteria": crit,
+    }
+
+
+CE1_FRANCAIS_NODES = [
+    _fr_node("fr.CE1.pluriel_reguliers", "orthographe grammaticale",
+             ["former le pluriel régulier des noms (+s)"],
+             ["accorder un nom au pluriel", "transformer singulier → pluriel"],
+             ["marque du pluriel correcte", "généralise à des noms jamais vus"]),
+    _fr_node("fr.CE1.pluriel_en_al", "orthographe grammaticale",
+             ["former le pluriel des noms en -al (-aux)"],
+             ["pluriel des noms en -al", "distinguer la règle des exceptions"],
+             ["-al → -aux correct", "pas de sur-régularisation « chevals »"]),
+    _fr_node("fr.CE1.present_verbes_er", "conjugaison",
+             ["conjuguer les verbes du 1er groupe (-er) au présent"],
+             ["conjuguer un verbe en -er", "accorder le verbe au sujet"],
+             ["terminaison correcte", "accord sujet-verbe respecté"]),
+]
+
+CE1_MATHS_NODES = [
+    _math_ce1_node("math.CE1.add_within_100_nocarry",
+                   ["additionner deux nombres < 100 sans retenue"],
+                   ["addition posée sans retenue", "problème additif"],
+                   ["résultat exact", "alignement des unités/dizaines"]),
+    _math_ce1_node("math.CE1.add_within_100_carry",
+                   ["additionner deux nombres < 100 avec retenue"],
+                   ["addition posée avec retenue", "problème additif à retenue"],
+                   ["résultat exact", "gestion correcte de la retenue"]),
+    _math_ce1_node("math.CE1.sub_within_100_borrow",
+                   ["soustraire deux nombres < 100 avec emprunt"],
+                   ["soustraction posée avec emprunt", "problème de retrait"],
+                   ["résultat exact", "gestion correcte de l'emprunt"]),
+]
+
+CE1_PROGRAM = {
+    "class_level": "CE1",
+    "cycle": "cycle 2",
+    "status": "partial-seed",
+    "disclaimer": CE1_DISCLAIMER,
+    "disciplines": {
+        "français": ["orthographe grammaticale", "conjugaison"],
+        "mathématiques": ["nombres et calculs"],
+    },
+    "nodes": CE1_FRANCAIS_NODES + CE1_MATHS_NODES,
+}
+
+
+def _plural_transfer(category: str):
+    return [t for t in transfer_bank_fr() if t.category == category]
+
+
+RUNNABLE_CE1: dict[str, RunnableNode] = {
+    "fr.CE1.pluriel_reguliers": RunnableNode(
+        "fr.CE1.pluriel_reguliers", "français", "orthographe grammaticale",
+        build=lambda rng: build_bank_fr("fr.CE1.pluriel_reguliers", rng),
+        transfer=lambda: _plural_transfer("reg")),
+    "fr.CE1.pluriel_en_al": RunnableNode(
+        "fr.CE1.pluriel_en_al", "français", "orthographe grammaticale",
+        build=lambda rng: build_bank_fr("fr.CE1.pluriel_en_al", rng),
+        transfer=lambda: _plural_transfer("al")),
+    "fr.CE1.present_verbes_er": RunnableNode(
+        "fr.CE1.present_verbes_er", "français", "conjugaison",
+        build=lambda rng: build_bank_conj("fr.CE1.present_verbes_er", rng),
+        transfer=lambda: transfer_bank_conj("fr.CE1.present_verbes_er")),
+    "math.CE1.add_within_100_nocarry": RunnableNode(
+        "math.CE1.add_within_100_nocarry", "mathématiques", "nombres et calculs",
+        build=lambda rng: build_bank_math("math.CE1.add_within_100_nocarry", rng)),
+    "math.CE1.add_within_100_carry": RunnableNode(
+        "math.CE1.add_within_100_carry", "mathématiques", "nombres et calculs",
+        build=lambda rng: build_bank_math("math.CE1.add_within_100_carry", rng),
+        transfer=lambda: _math_transfer()),
+    "math.CE1.sub_within_100_borrow": RunnableNode(
+        "math.CE1.sub_within_100_borrow", "mathématiques", "nombres et calculs",
+        build=lambda rng: build_bank_math("math.CE1.sub_within_100_borrow", rng)),
+}
+
+
 # ---- Public API ------------------------------------------------------------
-_PROGRAMS = {"CP": CP_PROGRAM}
+_PROGRAMS = {"CP": CP_PROGRAM, "CE1": CE1_PROGRAM}
+_RUNNABLE = {"CP": RUNNABLE_CP, "CE1": RUNNABLE_CE1}
+
+
+def runnable_for(grade: str) -> dict:
+    if grade not in _RUNNABLE:
+        raise NotImplementedError(f"no runnable set for {grade!r} (have {sorted(_RUNNABLE)})")
+    return _RUNNABLE[grade]
 
 
 def register_class(registry: CurriculumRegistry, class_level: str) -> CurriculumRegistry:
@@ -259,3 +378,8 @@ def official_cp_registry() -> CurriculumRegistry:
     with official CP expectations, partial and hand-verified (see
     ``SEED_DISCLAIMER``), not a full BO ingest."""
     return register_class(CurriculumRegistry(), "CP")
+
+
+def official_ce1_registry() -> CurriculumRegistry:
+    """A registry pre-loaded with the CE1 seed set (extension of the CP core)."""
+    return register_class(CurriculumRegistry(), "CE1")

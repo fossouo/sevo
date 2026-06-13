@@ -20,15 +20,29 @@ import json
 import os
 
 from sevo.curriculum.factory import teaching_bank
-from sevo.curriculum.official_curriculum import RUNNABLE_CP
+from sevo.curriculum.official_curriculum import runnable_for
 from sevo.runtime import BrainService
 
 SEED = 7
 THRESHOLD = 0.8
 MAX_SESSIONS = 8
-REPRESENTATIVE = "fr.CP.lecture_mots_reguliers"
+REPRESENTATIVE = {"CP": "fr.CP.lecture_mots_reguliers",
+                  "CE1": "fr.CE1.present_verbes_er"}
 HERE = os.path.dirname(__file__)
 ARTIFACTS = os.path.join(HERE, "..", "demo", "artifacts")
+
+
+def _default_out(grade: str) -> str:
+    base = os.path.join(HERE, "..", "demo")
+    return ARTIFACTS if grade == "CP" else os.path.join(base, f"artifacts_{grade.lower()}")
+
+
+def _rep_content(task):
+    """Extract the API content for a representative task (reading/plural use the
+    word; conjugation uses verb+pronoun)."""
+    if hasattr(task, "verb"):
+        return {"verb": task.verb, "pronoun": task.pronoun}
+    return task.word
 
 
 def _w(out: str, name: str, obj) -> None:
@@ -57,22 +71,23 @@ def _teach_to_mastery(svc: BrainService, node: str):
     return journals
 
 
-def run(out: str = ARTIFACTS) -> dict:
-    out = os.path.abspath(out)
+def run(out: str | None = None, grade: str = "CP") -> dict:
+    out = os.path.abspath(out if out is not None else _default_out(grade))
     os.makedirs(out, exist_ok=True)
-    nodes = list(RUNNABLE_CP)
+    nodes = list(runnable_for(grade))
+    representative = REPRESENTATIVE[grade]
 
-    # 1) Brain CP-naïf -------------------------------------------------------
+    # 1) Brain naïf ----------------------------------------------------------
     svc = BrainService(seed=SEED)
     brain_before = svc.brain_before
 
-    # 2) Emma teaches every CP node (journaled, structured feedback) ---------
+    # 2) Emma teaches every node of the grade (journaled, structured feedback)
     rep_journal, summary = None, {}
     for n in nodes:
         js = _teach_to_mastery(svc, n)
         summary[n] = {"sessions": len(js),
                       "final_mastery": round(svc.brain.semantic.mastery(n), 4)}
-        if n == REPRESENTATIVE:
+        if n == representative:
             rep_journal = js[0]["journal"]            # one full session, for the format
 
     # 3) consolidation -> Brain CP-appris ------------------------------------
@@ -99,8 +114,8 @@ def run(out: str = ARTIFACTS) -> dict:
     leakage_clean = audit_clean
     rsvc = BrainService(seed=SEED)
     sid = rsvc.start_session()
-    for w in [t.word for t in teaching_bank(REPRESENTATIVE, SEED)[:6]]:
-        rsvc.feedback(REPRESENTATIVE, w, correct=True)
+    for task in teaching_bank(representative, SEED)[:6]:
+        rsvc.feedback(representative, _rep_content(task), correct=True)
     replay_deterministic = (rsvc.replay_session(sid)["replayed_state"]
                             == rsvc.replay_session(sid)["replayed_state"])
 
@@ -112,11 +127,12 @@ def run(out: str = ARTIFACTS) -> dict:
         "per_node": assessment, "verdict": verdict,
         "reload_exact": reload_exact, "reassessment_after_reload": reassessment})
     _w(out, "emma_session_journal.json", {
-        "representative_node": REPRESENTATIVE, "session": rep_journal,
+        "representative_node": representative, "session": rep_journal,
         "all_nodes_summary": summary})
     _w(out, "audit_report.json", audit)
 
     result = {
+        "grade": grade,
         "verdict": verdict["verdict"],
         "genuine": verdict["passed"],
         "reload_exact": reload_exact,
@@ -130,8 +146,10 @@ def run(out: str = ARTIFACTS) -> dict:
 
 
 def main() -> None:
-    r = run()
-    print("=== Sèvo — Founder CP demo ===")
+    import sys
+    grade = sys.argv[1].upper() if len(sys.argv) > 1 else "CP"
+    r = run(grade=grade)
+    print(f"=== Sèvo — Founder demo ({grade}) ===")
     print(f"  nodes taught (Emma, journaled) : {r['nodes_taught']}")
     print(f"  independent verdict            : {r['verdict']}")
     print(f"  save/reload exact              : {r['reload_exact']}")

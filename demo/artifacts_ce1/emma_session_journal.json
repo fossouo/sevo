@@ -1,0 +1,303 @@
+{
+  "representative_node": "fr.CE1.present_verbes_er",
+  "session": [
+    {
+      "prompt_to_emma": "Conjugue « laver » avec « je » : ?",
+      "brain_response": "laver",
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CE1.present_verbes_er",
+        "task_id": "fr.CE1.present_verbes_er:('laver', 'je')",
+        "observed_answer": "laver",
+        "correct_answer": "lave",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "infinitive_used",
+        "confidence": 0.5,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.05,
+          "verb_stem_recognition": 0.05,
+          "subject_agreement": 0.05,
+          "grapheme_recognition": 0.7785
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.1564,
+          "verb_stem_recognition": 0.066,
+          "subject_agreement": 0.066,
+          "grapheme_recognition": 0.7823
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Conjugue « laver » avec « tu » : ?",
+      "brain_response": "laveres",
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CE1.present_verbes_er",
+        "task_id": "fr.CE1.present_verbes_er:('laver', 'tu')",
+        "observed_answer": "laveres",
+        "correct_answer": "laves",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "stem_not_reduced",
+        "confidence": 0.35,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.1564,
+          "verb_stem_recognition": 0.066,
+          "subject_agreement": 0.066,
+          "grapheme_recognition": 0.7823
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.1847,
+          "verb_stem_recognition": 0.1183,
+          "subject_agreement": 0.0817,
+          "grapheme_recognition": 0.7859
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Conjugue « laver » avec « il » : ?",
+      "brain_response": "lavent",
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CE1.present_verbes_er",
+        "task_id": "fr.CE1.present_verbes_er:('laver', 'il')",
+        "observed_answer": "lavent",
+        "correct_answer": "lave",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "subject_verb_disagreement",
+        "confidence": 0.245,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.1847,
+          "verb_stem_recognition": 0.1183,
+          "subject_agreement": 0.0817,
+          "grapheme_recognition": 0.7859
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.2121,
+          "verb_stem_recognition": 0.1331,
+          "subject_agreement": 0.1331,
+          "grapheme_recognition": 0.7895
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Conjugue « laver » avec « nous » : ?",
+      "brain_response": "laverons",
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CE1.present_verbes_er",
+        "task_id": "fr.CE1.present_verbes_er:('laver', 'nous')",
+        "observed_answer": "laverons",
+        "correct_answer": "lavons",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "stem_not_reduced",
+        "confidence": 0.1715,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.2121,
+          "verb_stem_recognition": 0.1331,
+          "subject_agreement": 0.1331,
+          "grapheme_recognition": 0.7895
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.2386,
+          "verb_stem_recognition": 0.1816,
+          "subject_agreement": 0.1476,
+          "grapheme_recognition": 0.793
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Conjugue « laver » avec « vous » : ?",
+      "brain_response": "lave",
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CE1.present_verbes_er",
+        "task_id": "fr.CE1.present_verbes_er:('laver', 'vous')",
+        "observed_answer": "lave",
+        "correct_answer": "lavez",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "subject_verb_disagreement",
+        "confidence": 0.12,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.2386,
+          "verb_stem_recognition": 0.1816,
+          "subject_agreement": 0.1476,
+          "grapheme_recognition": 0.793
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.2642,
+          "verb_stem_recognition": 0.1954,
+          "subject_agreement": 0.1954,
+          "grapheme_recognition": 0.7965
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Conjugue « laver » avec « ils » : ?",
+      "brain_response": "laverent",
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CE1.present_verbes_er",
+        "task_id": "fr.CE1.present_verbes_er:('laver', 'ils')",
+        "observed_answer": "laverent",
+        "correct_answer": "lavent",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "stem_not_reduced",
+        "confidence": 0.084,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.2642,
+          "verb_stem_recognition": 0.1954,
+          "subject_agreement": 0.1954,
+          "grapheme_recognition": 0.7965
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.2889,
+          "verb_stem_recognition": 0.2404,
+          "subject_agreement": 0.2089,
+          "grapheme_recognition": 0.7999
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Conjugue « arriver » avec « je » : ?",
+      "brain_response": "arrive",
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "fr.CE1.present_verbes_er",
+        "task_id": "fr.CE1.present_verbes_er:('arriver', 'je')",
+        "observed_answer": "arrive",
+        "correct_answer": "arrive",
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.0588,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "present_er_endings": 0.2889,
+          "verb_stem_recognition": 0.2404,
+          "subject_agreement": 0.2089,
+          "grapheme_recognition": 0.7999
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.25,
+        "skill_automaticity": {
+          "present_er_endings": 0.3088,
+          "verb_stem_recognition": 0.2511,
+          "subject_agreement": 0.22,
+          "grapheme_recognition": 0.8027
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Conjugue « arriver » avec « tu » : ?",
+      "brain_response": "arrivent",
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CE1.present_verbes_er",
+        "task_id": "fr.CE1.present_verbes_er:('arriver', 'tu')",
+        "observed_answer": "arrivent",
+        "correct_answer": "arrives",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "subject_verb_disagreement",
+        "confidence": 0.3412,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.25,
+        "skill_automaticity": {
+          "present_er_endings": 0.3088,
+          "verb_stem_recognition": 0.2511,
+          "subject_agreement": 0.22,
+          "grapheme_recognition": 0.8027
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.1875,
+        "skill_automaticity": {
+          "present_er_endings": 0.332,
+          "verb_stem_recognition": 0.2637,
+          "subject_agreement": 0.2637,
+          "grapheme_recognition": 0.8061
+        }
+      }
+    }
+  ],
+  "all_nodes_summary": {
+    "fr.CE1.pluriel_reguliers": {
+      "sessions": 1,
+      "final_mastery": 0.822
+    },
+    "fr.CE1.pluriel_en_al": {
+      "sessions": 4,
+      "final_mastery": 0.9787
+    },
+    "fr.CE1.present_verbes_er": {
+      "sessions": 6,
+      "final_mastery": 0.8331
+    },
+    "math.CE1.add_within_100_nocarry": {
+      "sessions": 3,
+      "final_mastery": 0.9628
+    },
+    "math.CE1.add_within_100_carry": {
+      "sessions": 3,
+      "final_mastery": 0.9789
+    },
+    "math.CE1.sub_within_100_borrow": {
+      "sessions": 2,
+      "final_mastery": 0.869
+    }
+  }
+}
