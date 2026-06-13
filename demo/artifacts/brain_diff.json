@@ -1,0 +1,112 @@
+{
+  "semantic_concepts_added": [
+    "fr.CP.comprehension_phrase",
+    "fr.CP.dictee_simple",
+    "fr.CP.lecture_mots_irreguliers",
+    "fr.CP.lecture_mots_reguliers",
+    "fr.CP.segmentation_syllabes",
+    "math.CP.add_within_20",
+    "math.CP.comparaison_nombres",
+    "math.CP.numeration_dizaines_unites",
+    "math.CP.sub_within_20"
+  ],
+  "procedural_rules_acquired": [
+    "add_facts_within_20",
+    "blending",
+    "grapheme_phoneme",
+    "grapheme_recognition",
+    "lexical_access",
+    "number_comparison",
+    "orthographic_encoding",
+    "place_value",
+    "sentence_parsing",
+    "sight_words",
+    "sub_facts_within_20",
+    "syllable_segmentation"
+  ],
+  "mastered_skills": {
+    "add_facts_within_20": {
+      "before": 0.05,
+      "after": 0.936
+    },
+    "blending": {
+      "before": 0.05,
+      "after": 0.936
+    },
+    "grapheme_phoneme": {
+      "before": 0.05,
+      "after": 0.951
+    },
+    "grapheme_recognition": {
+      "before": 0.05,
+      "after": 0.945
+    },
+    "lexical_access": {
+      "before": 0.05,
+      "after": 0.917
+    },
+    "number_comparison": {
+      "before": 0.05,
+      "after": 0.934
+    },
+    "orthographic_encoding": {
+      "before": 0.05,
+      "after": 0.924
+    },
+    "place_value": {
+      "before": 0.05,
+      "after": 0.954
+    },
+    "sentence_parsing": {
+      "before": 0.05,
+      "after": 0.921
+    },
+    "sight_words": {
+      "before": 0.05,
+      "after": 0.937
+    },
+    "sub_facts_within_20": {
+      "before": 0.05,
+      "after": 0.944
+    },
+    "syllable_segmentation": {
+      "before": 0.05,
+      "after": 0.929
+    }
+  },
+  "misconceptions_reduced": {
+    "heldout_error_rate_before": 1.0,
+    "heldout_error_rate_after": 0.05,
+    "reduction": 0.95
+  },
+  "calibration_delta": {
+    "before": 0.1,
+    "after": 0.126,
+    "improvement": -0.026
+  },
+  "retention_traces": {
+    "t2_heldout_accuracy": 0.95,
+    "retention_ratio_t2_over_t1": 1.0,
+    "consolidated_skills": [
+      "add_facts_within_20",
+      "blending",
+      "grapheme_phoneme",
+      "grapheme_recognition",
+      "lexical_access",
+      "number_comparison",
+      "orthographic_encoding",
+      "place_value",
+      "sentence_parsing",
+      "sight_words",
+      "sub_facts_within_20",
+      "syllable_segmentation"
+    ]
+  },
+  "learning_efficiency": 0.0,
+  "snapshot_ids": {
+    "before": "baseline",
+    "after": "after"
+  },
+  "transfer_after_best": 0.95,
+  "note": "live diff — retention is immediate (no 7-day delay); use run_cp_grade for the full delayed-retention protocol"
+}

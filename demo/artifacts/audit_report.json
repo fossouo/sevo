@@ -1,0 +1,237 @@
+{
+  "math.CP.add_within_20": {
+    "node_id": "math.CP.add_within_20",
+    "teaching": {
+      "n": 24,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 24,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 20,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "out-of-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "math.CP.sub_within_20": {
+    "node_id": "math.CP.sub_within_20",
+    "teaching": {
+      "n": 24,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 24,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 20,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "out-of-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "fr.CP.lecture_mots_reguliers": {
+    "node_id": "fr.CP.lecture_mots_reguliers",
+    "teaching": {
+      "n": 11,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 9,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 14,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "fr.CP.lecture_mots_irreguliers": {
+    "node_id": "fr.CP.lecture_mots_irreguliers",
+    "teaching": {
+      "n": 4,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 4,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "clean": true
+  },
+  "fr.CP.comprehension_phrase": {
+    "node_id": "fr.CP.comprehension_phrase",
+    "teaching": {
+      "n": 38,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 34,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 16,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "fr.CP.segmentation_syllabes": {
+    "node_id": "fr.CP.segmentation_syllabes",
+    "teaching": {
+      "n": 7,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 7,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 5,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "fr.CP.dictee_simple": {
+    "node_id": "fr.CP.dictee_simple",
+    "teaching": {
+      "n": 7,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 7,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 5,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "math.CP.numeration_dizaines_unites": {
+    "node_id": "math.CP.numeration_dizaines_unites",
+    "teaching": {
+      "n": 38,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 32,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 8,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "math.CP.comparaison_nombres": {
+    "node_id": "math.CP.comparaison_nombres",
+    "teaching": {
+      "n": 33,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 27,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 6,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  }
+}

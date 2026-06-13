@@ -1,6 +1,12 @@
 # Run the Sèvo brain as a persistent microservice.
-#   docker compose up --build
+#   docker compose up --build         (or: make demo-docker)
 #   ./scripts/smoke_test.sh            # once it is healthy
+#
+# The image is built ONLY from committed sources (pyproject, src, README,
+# LICENSE, NOTICE — see Dockerfile); it depends on no local uncommitted state.
+# The container starts from a NAÏVE brain and persists its learned state only to
+# the `sevo-state` volume mounted at /data (the single recommended state path,
+# $SEVO_STATE_DIR). The demo teaches, then save/loads to /data/brain.json.
 services:
   sevo:
     build: .

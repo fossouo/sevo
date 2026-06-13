@@ -20,3 +20,6 @@ reports/_*
 
 # OS
 .DS_Store
+
+# runtime save file produced by the demo (the 6 proof artifacts ARE committed)
+demo/artifacts/brain.json

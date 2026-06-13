@@ -1,0 +1,299 @@
+{
+  "representative_node": "fr.CP.lecture_mots_reguliers",
+  "session": [
+    {
+      "prompt_to_emma": "Lis le mot « chocolat » (phonèmes) : ?",
+      "brain_response": null,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CP.lecture_mots_reguliers",
+        "task_id": "fr.CP.lecture_mots_reguliers:('chocolat',)",
+        "observed_answer": null,
+        "correct_answer": "S.o.k.o.l.a",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "declined",
+        "confidence": 0.1,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.05,
+          "blending": 0.05,
+          "grapheme_recognition": 0.05
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.183,
+          "blending": 0.0739,
+          "grapheme_recognition": 0.066
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Lis le mot « banane » (phonèmes) : ?",
+      "brain_response": "b.a.n.a.n.@",
+      "raw_emma_feedback": "regarde les lettres qui vont ensemble (ch, ou, on…)",
+      "normalized_feedback": {
+        "node_id": "fr.CP.lecture_mots_reguliers",
+        "task_id": "fr.CP.lecture_mots_reguliers:('banane',)",
+        "observed_answer": "b.a.n.a.n.@",
+        "correct_answer": "b.a.n.a.n",
+        "hint": "regarde les lettres qui vont ensemble (ch, ou, on…)",
+        "error_type": "letter_by_letter",
+        "confidence": 0.35,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.183,
+          "blending": 0.0739,
+          "grapheme_recognition": 0.066
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.2173,
+          "blending": 0.0973,
+          "grapheme_recognition": 0.1183
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Lis le mot « chat » (phonèmes) : ?",
+      "brain_response": "S",
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "fr.CP.lecture_mots_reguliers",
+        "task_id": "fr.CP.lecture_mots_reguliers:('chat',)",
+        "observed_answer": "S",
+        "correct_answer": "S.a",
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "no_blending",
+        "confidence": 0.245,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.2173,
+          "blending": 0.0973,
+          "grapheme_recognition": 0.1183
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.2502,
+          "blending": 0.1731,
+          "grapheme_recognition": 0.1331
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Lis le mot « tomate » (phonèmes) : ?",
+      "brain_response": "t.o.m.a.t.@",
+      "raw_emma_feedback": "regarde les lettres qui vont ensemble (ch, ou, on…)",
+      "normalized_feedback": {
+        "node_id": "fr.CP.lecture_mots_reguliers",
+        "task_id": "fr.CP.lecture_mots_reguliers:('tomate',)",
+        "observed_answer": "t.o.m.a.t.@",
+        "correct_answer": "t.o.m.a.t",
+        "hint": "regarde les lettres qui vont ensemble (ch, ou, on…)",
+        "error_type": "letter_by_letter",
+        "confidence": 0.1715,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.2502,
+          "blending": 0.1731,
+          "grapheme_recognition": 0.1331
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.2817,
+          "blending": 0.1939,
+          "grapheme_recognition": 0.1816
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Lis le mot « jardin » (phonèmes) : ?",
+      "brain_response": "Z.a.R.d.IN",
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "fr.CP.lecture_mots_reguliers",
+        "task_id": "fr.CP.lecture_mots_reguliers:('jardin',)",
+        "observed_answer": "Z.a.R.d.IN",
+        "correct_answer": "Z.a.R.d.IN",
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.12,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.2817,
+          "blending": 0.1939,
+          "grapheme_recognition": 0.1816
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.25,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.3068,
+          "blending": 0.2109,
+          "grapheme_recognition": 0.1931
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Lis le mot « salade » (phonèmes) : ?",
+      "brain_response": "s.a.l.a.d",
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "fr.CP.lecture_mots_reguliers",
+        "task_id": "fr.CP.lecture_mots_reguliers:('salade',)",
+        "observed_answer": "s.a.l.a.d",
+        "correct_answer": "s.a.l.a.d",
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.384,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.25,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.3068,
+          "blending": 0.2109,
+          "grapheme_recognition": 0.1931
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.4375,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.3311,
+          "blending": 0.2274,
+          "grapheme_recognition": 0.2044
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Lis le mot « souris » (phonèmes) : ?",
+      "brain_response": "s.U.R.i",
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "fr.CP.lecture_mots_reguliers",
+        "task_id": "fr.CP.lecture_mots_reguliers:('souris',)",
+        "observed_answer": "s.U.R.i",
+        "correct_answer": "s.U.R.i",
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.5688,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.4375,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.3311,
+          "blending": 0.2274,
+          "grapheme_recognition": 0.2044
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.5781,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.3545,
+          "blending": 0.2437,
+          "grapheme_recognition": 0.2155
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "Lis le mot « pirate » (phonèmes) : ?",
+      "brain_response": "p.i.R.a.t.@",
+      "raw_emma_feedback": "regarde les lettres qui vont ensemble (ch, ou, on…)",
+      "normalized_feedback": {
+        "node_id": "fr.CP.lecture_mots_reguliers",
+        "task_id": "fr.CP.lecture_mots_reguliers:('pirate',)",
+        "observed_answer": "p.i.R.a.t.@",
+        "correct_answer": "p.i.R.a.t",
+        "hint": "regarde les lettres qui vont ensemble (ch, ou, on…)",
+        "error_type": "letter_by_letter",
+        "confidence": 0.6982,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.5781,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.3545,
+          "blending": 0.2437,
+          "grapheme_recognition": 0.2155
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.4336,
+        "skill_automaticity": {
+          "grapheme_phoneme": 0.3816,
+          "blending": 0.2627,
+          "grapheme_recognition": 0.2595
+        }
+      }
+    }
+  ],
+  "all_nodes_summary": {
+    "math.CP.add_within_20": {
+      "sessions": 2,
+      "final_mastery": 0.9743
+    },
+    "math.CP.sub_within_20": {
+      "sessions": 2,
+      "final_mastery": 0.9206
+    },
+    "fr.CP.lecture_mots_reguliers": {
+      "sessions": 7,
+      "final_mastery": 0.9715
+    },
+    "fr.CP.lecture_mots_irreguliers": {
+      "sessions": 5,
+      "final_mastery": 0.8902
+    },
+    "fr.CP.comprehension_phrase": {
+      "sessions": 3,
+      "final_mastery": 0.9313
+    },
+    "fr.CP.segmentation_syllabes": {
+      "sessions": 3,
+      "final_mastery": 0.9069
+    },
+    "fr.CP.dictee_simple": {
+      "sessions": 3,
+      "final_mastery": 0.9703
+    },
+    "math.CP.numeration_dizaines_unites": {
+      "sessions": 3,
+      "final_mastery": 0.8991
+    },
+    "math.CP.comparaison_nombres": {
+      "sessions": 2,
+      "final_mastery": 0.9182
+    }
+  }
+}

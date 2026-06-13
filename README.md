@@ -95,6 +95,22 @@ exporte une **matrice de maîtrise par compétence** avant/après. Ces facettes
 décrivent une capacité acquise **sur le curriculum CP mesuré** (*genuine learning
 under the CP protocol*) — **pas** une intelligence générale ni un QI.
 
+#### Reproduire la preuve en une commande
+
+```bash
+make demo-cp     # Brain CP-naïf → Emma enseigne → Brain CP-appris → diff
+                 # → évaluation indépendante → verdict GENUINE → save/reload → ré-évaluation
+```
+
+La démo (`scripts/demo_cp.py`) écrit six **artefacts de preuve** dans
+`demo/artifacts/` : `brain_before.json`, `brain_after.json`, `brain_diff.json`,
+`assessment_report.json`, `emma_session_journal.json`, `audit_report.json`. Le
+protocole CP est **gelé** et documenté dans [`docs/CP_PROTOCOL.md`](docs/CP_PROTOCOL.md)
+(définition de GENUINE, séparation teacher/oracle, anti-leakage, formats feedback/
+state/session) ; `tests/test_cp_protocol_freeze.py` garde la non-régression
+(GENUINE · save/reload exact · audit clean · replay déterministe · zéro leakage).
+Variante service : `make demo-docker` (conteneur + smoke test HTTP).
+
 **Intelligence_delta (CP) = 0,749** (`reports/CP_GRADE_REPORT.md`) — et ce delta
 n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**
 (`eval/integrity.py`) : gain post-test **et** held-out substantiel **et**
@@ -291,8 +307,10 @@ src/sevo/      # implémentation de référence
   curriculum/factory.py  # build_task(node_id, content) — pont JSON → Task
   api.py       # adaptateur HTTP FastAPI (optionnel) sur BrainService
 Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
+scripts/demo_cp.py · Makefile (make demo-cp)              # preuve fondatrice reproductible
+docs/CP_PROTOCOL.md · demo/artifacts/                     # protocole CP gelé + artefacts de preuve
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 120 tests : design + maths + français + lexique + curriculum officiel + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP
+tests/         # 127 tests : design + maths + français + lexique + curriculum officiel + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP-protocol-freeze
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 
@@ -341,9 +359,12 @@ une ressource lexicale réelle, validée de la même façon.
   feedback **structuré** (jamais de texte libre en mémoire), session journalisée
   et **gelable** en fixture reproductible, garde anti-contamination (Emma ne voit
   jamais les probes d'évaluation).
+- **Preuve fondatrice** : `make demo-cp` rejoue tout le cycle CP et écrit six
+  artefacts ; protocole CP **gelé** (`docs/CP_PROTOCOL.md`) + garde de
+  non-régression. C'est le socle scientifique avant toute montée en classe.
 - **Ensuite** : ingérer les **classes suivantes** (CE1, CE2…) via
-  `official_curriculum.register_class` (volontairement non démarré tant que le CP
-  n'est pas durci) ; brancher le lexique sur la **ressource réelle complète**
+  `official_curriculum.register_class` (volontairement non démarré tant que la
+  démo CP n'est pas le socle) ; brancher le lexique sur la **ressource réelle complète**
   (Manulex / Dubois-Buyse) ; ajouter la **fluence** et la compréhension de
   consignes ; génération live d'exercices (mêmes gardes).
 
