@@ -33,6 +33,7 @@ import json
 import os
 
 from ..curriculum.fr_cp_ce1 import NODES_FR, _make, vet_word
+from ..curriculum.fr_lexicon import in_lexicon
 
 LLM_KEYS_TO_STRIP = ("ANTHROPIC_API_KEY", "ANTHROPIC_BASE_URL", "ANTHROPIC_AUTH_TOKEN")
 DEFAULT_MODEL = "chat-fast"
@@ -126,12 +127,21 @@ class EmmaLiteLLM:
         )
         return self._transport
 
-    def generate_french_tasks(self, node_id: str, n: int, oversample: int = 3) -> list:
+    def generate_french_tasks(self, node_id: str, n: int, oversample: int = 3,
+                              require_lexicon: bool = True) -> list:
         """Ask the model for curriculum-aligned French nouns, vet them, and turn
         the safe ones into gradable tasks. Answers are computed deterministically
-        by the curriculum, never by the model. Words the curriculum can't grade
-        reliably (irregular -al plurals, mis-categorised words) are dropped — so
-        the brain is never taught a wrong plural."""
+        by the curriculum, never by the model. A proposed word becomes a task
+        only if it passes BOTH gates:
+
+        * ``vet_word`` — right *shape* for the node (drops irregular -al plurals
+          and mis-categorised words), and
+        * ``in_lexicon`` — an *attested* French noun (drops hallucinations of the
+          correct shape, e.g. a made-up « éral » → « éraux »).
+
+        So a live, non-deterministic teacher can never teach a wrong plural.
+        ``require_lexicon=False`` relaxes the second gate (only for offline
+        wiring tests that intentionally use shape-only words)."""
         if node_id not in NODES_FR:
             raise ValueError(f"unknown French node: {node_id}")
         spec = NODES_FR[node_id]
@@ -152,6 +162,8 @@ class EmmaLiteLLM:
         for w in _parse_words(raw):
             wl = w.strip().lower()
             if wl in seen or not vet_word(category, wl):
+                continue
+            if require_lexicon and not in_lexicon(wl):
                 continue
             seen.add(wl)
             vetted.append(_make(node_id, wl))

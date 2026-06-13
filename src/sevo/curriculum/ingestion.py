@@ -83,6 +83,7 @@ def builtin_registry() -> CurriculumRegistry:
     ingestion-contract shape — a worked example of the format the official
     programme should be fed in."""
     from .cp_ce1_math import NODES
+    from .fr_conjugation import NODES_CONJ
     from .fr_cp_ce1 import NODES_FR
 
     reg = CurriculumRegistry()
@@ -96,11 +97,12 @@ def builtin_registry() -> CurriculumRegistry:
             "prerequisites": spec.get("prerequisites", []),
             "mastery_threshold": spec["mastery_threshold"],
         })
-    for nid, spec in NODES_FR.items():
-        reg.ingest({
-            "id": nid, "title": spec["title"],
-            "class_level": nid.split(".")[1], "subject": "français",
-            "required_skills": spec["required_skills"],
-            "mastery_threshold": spec["mastery_threshold"],
-        })
+    for spec_map in (NODES_FR, NODES_CONJ):
+        for nid, spec in spec_map.items():
+            reg.ingest({
+                "id": nid, "title": spec["title"],
+                "class_level": nid.split(".")[1], "subject": "français",
+                "required_skills": spec["required_skills"],
+                "mastery_threshold": spec["mastery_threshold"],
+            })
     return reg

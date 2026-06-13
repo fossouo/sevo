@@ -17,6 +17,7 @@ import uuid
 from .bus import Event, EventBus
 from .curriculum.base import Task
 from .curriculum.cp_ce1_math import SKILLS
+from .curriculum.fr_conjugation import SKILLS_CONJ
 from .curriculum.fr_cp_ce1 import SKILLS_FR
 from .services import (
     AssessmentOracle,
@@ -35,8 +36,10 @@ from .rng import Rng
 from .state import CognitiveState, DevelopmentStage, Snapshot, take_snapshot
 
 # A brain may traverse several domains, so by default it carries the union of
-# all known procedural skills (unused skills stay inert at baseline automaticity).
-ALL_SKILLS = SKILLS + SKILLS_FR
+# all known procedural skills (unused skills stay inert at baseline
+# automaticity). ``grapheme_recognition`` is shared between French domains, so
+# we de-duplicate while preserving order.
+ALL_SKILLS = list(dict.fromkeys(SKILLS + SKILLS_FR + SKILLS_CONJ))
 
 
 class Brain:

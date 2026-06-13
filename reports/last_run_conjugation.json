@@ -1,0 +1,157 @@
+{
+  "seed": 5,
+  "domain": "français — présent des verbes en -er",
+  "snapshots": {
+    "before": "653e9350-661d-4b3f-b109-5de4032ecc42",
+    "after": "88a01b0e-2e6e-42ec-ace1-7673cfab1258"
+  },
+  "pretest": {
+    "heldout": {
+      "label": "pretest.heldout",
+      "n": 66,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    },
+    "transfer": {
+      "label": "pretest.transfer",
+      "n": 48,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    }
+  },
+  "teaching": [
+    {
+      "node_id": "fr.CE1.present_verbes_er",
+      "sessions": 6,
+      "trials": 48,
+      "reached_mastery": true,
+      "final_mastery": 0.8539,
+      "mastery_history": [
+        0.25,
+        0.318,
+        0.4023,
+        0.5402,
+        0.3183,
+        0.8539
+      ]
+    }
+  ],
+  "consolidation": {
+    "mode": "sleep",
+    "skills_consolidated": [
+      "grapheme_recognition",
+      "present_er_endings",
+      "subject_agreement",
+      "verb_stem_recognition"
+    ],
+    "nodes": [
+      "fr.CE1.present_verbes_er"
+    ]
+  },
+  "posttest_immediate": {
+    "heldout": {
+      "label": "posttest.t1.heldout",
+      "n": 66,
+      "accuracy": 0.8636,
+      "mean_confidence": 0.8988,
+      "calibration_error": 0.21,
+      "knows_unknowns": 0.1012
+    },
+    "transfer": {
+      "label": "posttest.t1.transfer",
+      "n": 48,
+      "accuracy": 0.875,
+      "mean_confidence": 0.8988,
+      "calibration_error": 0.2009,
+      "knows_unknowns": 0.1012
+    }
+  },
+  "posttest_delayed_t2": {
+    "heldout": {
+      "label": "posttest.t2.delayed.heldout",
+      "n": 66,
+      "accuracy": 0.6818,
+      "mean_confidence": 0.8988,
+      "calibration_error": 0.355,
+      "knows_unknowns": 0.1012
+    }
+  },
+  "transfer_efficiency_control": {
+    "node": "fr.CE1.present_verbes_er",
+    "shared_skill": "grapheme_recognition",
+    "prereq_node": "fr.CE1.pluriel_reguliers",
+    "n_seeds": 6,
+    "trials_with_prereq": 42.0,
+    "trials_without_prereq": 38.67,
+    "speedup": 0.921,
+    "per_seed": {
+      "with_prereq": [
+        40,
+        56,
+        48,
+        16,
+        28,
+        64
+      ],
+      "without_prereq": [
+        48,
+        40,
+        64,
+        24,
+        28,
+        28
+      ]
+    }
+  },
+  "memorizer_baseline": {
+    "on_teaching": {
+      "label": "memorizer.teaching",
+      "n": 78,
+      "accuracy": 1.0,
+      "mean_confidence": 0.9,
+      "calibration_error": 0.1,
+      "knows_unknowns": 1.0
+    },
+    "on_heldout": {
+      "label": "memorizer.heldout",
+      "n": 66,
+      "accuracy": 0.0,
+      "mean_confidence": 0.7,
+      "calibration_error": 0.7,
+      "knows_unknowns": 0.3
+    },
+    "on_transfer": {
+      "label": "memorizer.transfer",
+      "n": 48,
+      "accuracy": 0.0,
+      "mean_confidence": 0.7,
+      "calibration_error": 0.7,
+      "knows_unknowns": 0.3
+    }
+  },
+  "intelligence_delta": {
+    "components": {
+      "knowledge_gain": 0.8636,
+      "transfer_gain": 0.875,
+      "reasoning_gain": 0.875,
+      "retention_gain": 0.6818,
+      "metacognition_gain": -0.11,
+      "learning_efficiency_gain": -0.0861
+    },
+    "weights": {
+      "knowledge_gain": 0.3,
+      "transfer_gain": 0.25,
+      "reasoning_gain": 0.2,
+      "retention_gain": 0.1,
+      "metacognition_gain": 0.1,
+      "learning_efficiency_gain": 0.05
+    },
+    "weighted_delta": 0.7057,
+    "retention_ratio_t2_over_t1": 0.7895,
+    "note": "Internal cognitive evolution index — not a human IQ."
+  }
+}

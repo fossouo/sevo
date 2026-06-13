@@ -42,15 +42,23 @@ par l'expérience livrée** (`reports/EXPERIMENT_REPORT.md`) :
 seed 7). Ce n'est **pas un QI** :
 c'est un indice interne d'évolution cognitive (formule pondérée ci-dessous).
 
-### Le cœur cognitif généralise au-delà des maths
+### Le cœur cognitif généralise sur trois domaines
 
-Le même cerveau (mêmes microservices, même machinerie d'évaluation) apprend aussi
-un domaine **français CP/CE1** — l'accord du pluriel des noms — avec les mêmes
-garanties : held-out 0 → 85 %, **transfert de règle** (-s et -al→-aux) sur des
-mots jamais vus 0 → 83 %, mémoriseur 0 %, et l'**erreur caractéristique
-« chevals »** (sur-régularisation) émerge à faible maîtrise.
-**Intelligence_delta français = 0,693** (`reports/EXPERIMENT_REPORT_FR.md`).
-S'il ne marchait que sur l'arithmétique, ce serait une calculette, pas un cerveau.
+Le même cerveau (mêmes microservices, même machinerie d'évaluation) apprend
+**trois** domaines indépendants avec les mêmes garanties :
+
+| Domaine | Held-out | Transfert (jamais vu) | Erreur caractéristique | Δ |
+|---|---|---|---|---|
+| Maths CP/CE1 (addition, retenue) | 0 → 94 % | 0 → 90 % | oubli de la retenue | **0,748** |
+| Français — pluriel des noms (-s, -al→-aux) | 0 → 85 % | 0 → 83 % | *chevals* (sur-régularisation) | **0,693** |
+| Français — présent des verbes en -er | 0 → 86 % | 0 → 88 % | infinitif *« je parler »* | **0,706** |
+
+Rapports : `reports/EXPERIMENT_REPORT.md`, `_FR.md`, `_CONJUGATION.md`. Un
+résultat **honnête** ressort du 3ᵉ domaine : le transfert *inter-domaines* est
+quasi nul (la conjugaison ne partage qu'une compétence mineure avec le pluriel),
+ce qui confirme que **le transfert est proportionnel à la structure partagée** —
+fort entre `reg`→`-al` (pluriel), faible entre pluriel→conjugaison.
+S'il ne marchait que sur un domaine, ce serait une calculette, pas un cerveau.
 
 ---
 
@@ -138,13 +146,13 @@ français (accord du pluriel) pour prouver que l'architecture n'est pas spécifi
 design/        # contrats v0.3 (spec source de vérité, JSON + SPEC.md)
 src/sevo/      # implémentation de référence
   services/    # les 10 microservices MVP (+ stubs non-MVP)
-  curriculum/  # base.py (tâche agnostique) · cp_ce1_math · fr_cp_ce1 · ingestion
+  curriculum/  # base.py (tâche agnostique) · cp_ce1_math · fr_cp_ce1 · fr_conjugation · fr_lexicon · ingestion
   teacher/     # emma_stub (déterministe, offline) · emma_litellm (live, INERTE par défaut)
   eval/        # protocole + calcul Intelligence_delta
   brain.py     # orchestrateur + surface API (multi-domaines)
   api.py       # adaptateur HTTP FastAPI (optionnel)
-experiments/   # run_cp_ce1_math.py · run_fr_cp_ce1.py · generate_report.py
-tests/         # 26 tests : invariants design + dynamique maths + français + intégration
+experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_emma_live · generate_report
+tests/         # 38 tests : invariants design + dynamique maths + français (pluriel + conjugaison) + lexique + intégration
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, last_run*.json)
 ```
 
@@ -166,21 +174,29 @@ PYTHONPATH=src:experiments python3 experiments/run_emma_live.py
 # SEVO_LLM_URL=http://xeon:4000 SEVO_LLM_MODEL=code python3 experiments/run_emma_live.py
 ```
 
-**Limite connue** : le vetting morphologique écarte les mauvaises catégories et
-les exceptions connues (`final`, `bengal` → -als), mais pas un mot halluciné de
-*forme* correcte (« éral »). Le rule-learning encaisse ce bruit, mais l'ingestion
-du programme officiel devra valider les mots contre un lexique.
+**Double garde sur les mots proposés (le live ne peut pas enseigner un faux
+pluriel)** : un mot proposé par le modèle ne devient un exercice que s'il passe
+*deux* filtres — `vet_word` (bonne **forme** pour la notion : écarte les
+exceptions `-al`→`-als` et les mauvaises catégories) **et** `in_lexicon` (mot
+**attesté** : `src/sevo/curriculum/fr_lexicon.py`). Ce 2ᵉ filtre ferme la limite
+révélée par le 1ᵉʳ run live : une hallucination de *forme* correcte (« éral » →
+« éraux ») est désormais rejetée car ce n'est pas un mot réel. On préfère écarter
+un mot légitime non listé (l'adaptateur sur-échantillonne) plutôt qu'enseigner un
+pluriel fabriqué. L'ingestion du programme officiel grossira ce lexique depuis
+une ressource lexicale réelle, validée de la même façon.
 
 ## Feuille de route
 
-- **Fait** : MVP multi-domaines (maths + français), Emma déterministe hors-ligne
-  **et** Emma live (diffusiongemma/DGX) prouvées ; API d'ingestion conforme au
-  contrat ; adaptateur LiteLLM **inerte par défaut** (le run live ci-dessus
-  injecte le transport explicitement).
+- **Fait** : MVP **multi-domaines** (maths + pluriel + conjugaison), Emma
+  déterministe hors-ligne **et** Emma live (diffusiongemma/DGX) prouvées ; API
+  d'ingestion conforme au contrat (les 3 domaines y transitent) ; adaptateur
+  LiteLLM **inerte par défaut** avec **double garde** forme + lexique sur les
+  mots proposés.
 - **Ensuite** : ingérer le **programme scolaire français officiel** (sources dans
   `design/sources.json`) classe par classe — chaque classe = un épisode
-  développemental versionné — en validant les items contre un lexique, et ajouter
-  des domaines (lecture/décodage, conjugaison).
+  développemental versionné — en grossissant le lexique depuis une ressource
+  réelle, brancher la génération live d'exercices de conjugaison (mêmes gardes),
+  et ajouter la lecture/décodage.
 
 ## Provenance & licence
 

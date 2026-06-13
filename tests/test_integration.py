@@ -102,6 +102,34 @@ def test_emma_drops_exception_words_offline():
     assert all(t.answer.endswith("aux") for t in tasks)
 
 
+def test_lexicon_gate_drops_well_formed_hallucinations():
+    """The limitation surfaced by the first live run: a made-up word of the
+    *correct shape* (« éral » -> « éraux ») passes morphological vetting but is
+    not an attested noun. The lexicon gate (on by default) rejects it, so the
+    brain is never taught a fabricated plural."""
+    from sevo.curriculum.fr_cp_ce1 import vet_word
+    from sevo.curriculum.fr_lexicon import in_lexicon
+
+    assert vet_word("al", "éral")        # passes the shape check...
+    assert not in_lexicon("éral")        # ...but is not a real word
+    assert in_lexicon("journal") and in_lexicon("hôpital")
+
+    fake = FakeTransport(["journal", "éral", "fural", "hôpital"])
+    emma = EmmaLiteLLM(transport=fake)
+    tasks = emma.generate_french_tasks("fr.CE1.pluriel_en_al", 4)
+    words = [t.word for t in tasks]
+    assert "éral" not in words and "fural" not in words
+    assert set(words) == {"journal", "hôpital"}
+
+
+def test_lexicon_gate_can_be_relaxed_for_wiring_tests():
+    fake = FakeTransport(["zormal"])  # well-formed -al, not in the lexicon
+    emma = EmmaLiteLLM(transport=fake)
+    assert emma.generate_french_tasks("fr.CE1.pluriel_en_al", 1) == []
+    relaxed = emma.generate_french_tasks("fr.CE1.pluriel_en_al", 1, require_lexicon=False)
+    assert [t.word for t in relaxed] == ["zormal"] and relaxed[0].answer == "zormaux"
+
+
 def test_builtin_registry_has_both_domains():
     reg = builtin_registry()
     assert len(reg.by_subject("mathématiques")) >= 3
