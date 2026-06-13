@@ -1,0 +1,17 @@
+{
+  "source": "Programme scolaire français officiel ingéré comme curriculum externe",
+  "contract": {
+    "class_level": "CP|CE1|CE2|CM1|CM2|6e|5e|4e|3e|2nde|1ere|Terminale",
+    "subject": "français|mathématiques|histoire-géographie|sciences|langues|EMC|... ",
+    "node": {
+      "id": "math.CP.nombres.entiers_0_100",
+      "title": "Nombres entiers jusqu'à 100",
+      "prerequisites": [],
+      "learning_objectives": [],
+      "observable_behaviors": [],
+      "assessment_items_refs": [],
+      "mastery_threshold": 0.8
+    }
+  },
+  "important_design": "Le curriculum ne vit pas dans le cerveau. Il est injecté via API comme environnement pédagogique; le cerveau le transforme en traces mémoire et compétences."
+}

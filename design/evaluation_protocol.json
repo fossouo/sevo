@@ -1,0 +1,51 @@
+{
+  "comparison": "snapshot_after - snapshot_before",
+  "domains": [
+    {
+      "id": "crystallized_knowledge",
+      "measure": "maîtrise des notions du programme"
+    },
+    {
+      "id": "fluid_reasoning",
+      "measure": "résolution de problèmes nouveaux sans connaissances spécifiques supplémentaires"
+    },
+    {
+      "id": "transfer",
+      "measure": "utilisation d'un savoir dans un contexte non vu"
+    },
+    {
+      "id": "procedural_automaticity",
+      "measure": "vitesse + exactitude + faible charge mémoire"
+    },
+    {
+      "id": "retention",
+      "measure": "score différé T2/T1"
+    },
+    {
+      "id": "metacognitive_calibration",
+      "measure": "écart confiance/réussite; capacité à dire je ne sais pas"
+    },
+    {
+      "id": "learning_efficiency",
+      "measure": "gain par heure/session Emma"
+    },
+    {
+      "id": "robustness",
+      "measure": "résistance aux distracteurs, reformulations, pièges"
+    }
+  ],
+  "anti_leakage": [
+    "ban exact questions from teaching set",
+    "holdout private item bank",
+    "paraphrase adversarial tests",
+    "cross-domain transfer tasks",
+    "delayed tests after consolidation"
+  ],
+  "output": {
+    "global_delta_iq_like_score": "not an IQ; composite internal index",
+    "class_mastery_certificate": {},
+    "mastery_graph_diff": {},
+    "error_topology_diff": {},
+    "recommendation": "repeat|advance|targeted_remediation"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "official_curriculum": [
+    {
+      "name": "Ministère de l'Éducation nationale - programmes et priorités 2026-2027",
+      "url": "https://www.education.gouv.fr/priorites-pour-l-annee-scolaire-2026-2027-504725"
+    },
+    {
+      "name": "Bulletin officiel - programmes cycle 4 français/mathématiques 2026",
+      "url": "https://www.education.gouv.fr/bo/2026/Hebdo10/MENE2602912A"
+    },
+    {
+      "name": "Attendus de fin d'année et repères de progression cycles 2-4",
+      "url": "https://www.education.gouv.fr/bo/19/Hebdo22/MENE1913283N.htm"
+    }
+  ],
+  "cognitive_science": [
+    {
+      "name": "Complementary Learning Systems - hippocampus/neocortex",
+      "url": "https://www.researchgate.net/publication/15575602_Why_There_are_Complementary_Learning_Systems_in_the_Hippocampus_and_Neocortex_Insights_from_the_Successes_and_Failures_of_Connectionist_Models_of_Learning_and_Memory"
+    },
+    {
+      "name": "Semantic Memory and the Hippocampus - NIH PMC",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6993580/"
+    },
+    {
+      "name": "PISA OECD assessment framework",
+      "url": "https://www.oecd.org/en/about/programmes/pisa.html"
+    }
+  ]
+}

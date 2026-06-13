@@ -1,0 +1,72 @@
+{
+  "topics": [
+    {
+      "topic": "percept.created",
+      "producer": "sensory_gateway",
+      "consumers": [
+        "attention_salience",
+        "episodic_memory"
+      ]
+    },
+    {
+      "topic": "workspace.broadcast",
+      "producer": "global_workspace",
+      "consumers": [
+        "working_memory",
+        "executive_control",
+        "language_reasoner",
+        "metacognition_self_model"
+      ]
+    },
+    {
+      "topic": "memory.episodic.encoded",
+      "producer": "episodic_memory",
+      "consumers": [
+        "consolidation_sleep",
+        "metacognition_self_model"
+      ]
+    },
+    {
+      "topic": "memory.semantic.updated",
+      "producer": "semantic_memory",
+      "consumers": [
+        "world_model",
+        "assessment_oracle"
+      ]
+    },
+    {
+      "topic": "skill.procedure.updated",
+      "producer": "procedural_memory",
+      "consumers": [
+        "executive_control",
+        "assessment_oracle"
+      ]
+    },
+    {
+      "topic": "error.detected",
+      "producer": "assessment_oracle",
+      "consumers": [
+        "metacognition_self_model",
+        "consolidation_sleep",
+        "executive_control"
+      ]
+    },
+    {
+      "topic": "neuromodulation.signal",
+      "producer": "neuromodulation_control",
+      "consumers": [
+        "attention_salience",
+        "consolidation_sleep",
+        "procedural_memory",
+        "semantic_memory"
+      ]
+    }
+  ],
+  "event_shape": {
+    "event_id": "uuid",
+    "brain_id": "uuid",
+    "timestamp": "iso8601",
+    "payload": {},
+    "causal_parent_event_ids": []
+  }
+}

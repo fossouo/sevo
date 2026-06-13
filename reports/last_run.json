@@ -1,0 +1,235 @@
+{
+  "seed": 7,
+  "snapshots": {
+    "before": "717a9778-3405-4497-be21-5ab5d807ceed",
+    "after": "fe276a69-c2c4-444b-9600-7c9aece25c1d"
+  },
+  "pretest": {
+    "heldout": {
+      "label": "pretest.heldout",
+      "n": 48,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    },
+    "transfer": {
+      "label": "pretest.transfer",
+      "n": 20,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    },
+    "reasoning": {
+      "label": "pretest.reasoning",
+      "n": 16,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    },
+    "untaught_multiplication": {
+      "label": "pretest.untaught_multiplication",
+      "n": 4,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    }
+  },
+  "teaching": [
+    {
+      "node_id": "math.CP.add_within_20",
+      "sessions": 2,
+      "trials": 16,
+      "reached_mastery": true,
+      "final_mastery": 0.9743,
+      "mastery_history": [
+        0.7429,
+        0.9743
+      ]
+    },
+    {
+      "node_id": "math.CP.sub_within_20",
+      "sessions": 2,
+      "trials": 16,
+      "reached_mastery": true,
+      "final_mastery": 0.9206,
+      "mastery_history": [
+        0.5406,
+        0.9206
+      ]
+    },
+    {
+      "node_id": "math.CE1.add_within_100_nocarry",
+      "sessions": 2,
+      "trials": 16,
+      "reached_mastery": true,
+      "final_mastery": 0.8565,
+      "mastery_history": [
+        0.6197,
+        0.8565
+      ]
+    },
+    {
+      "node_id": "math.CE1.add_within_100_carry",
+      "sessions": 4,
+      "trials": 32,
+      "reached_mastery": true,
+      "final_mastery": 0.8927,
+      "mastery_history": [
+        0.4072,
+        0.6477,
+        0.7186,
+        0.8927
+      ]
+    },
+    {
+      "node_id": "math.CE1.sub_within_100_borrow",
+      "sessions": 4,
+      "trials": 32,
+      "reached_mastery": true,
+      "final_mastery": 0.975,
+      "mastery_history": [
+        0.7148,
+        0.3488,
+        0.7502,
+        0.975
+      ]
+    }
+  ],
+  "consolidation": {
+    "mode": "sleep",
+    "skills_consolidated": [
+      "add_facts_within_20",
+      "borrow",
+      "carry",
+      "place_value",
+      "sub_facts_within_20"
+    ],
+    "nodes": [
+      "math.CP.add_within_20",
+      "math.CP.sub_within_20",
+      "math.CE1.add_within_100_nocarry",
+      "math.CE1.add_within_100_carry",
+      "math.CE1.sub_within_100_borrow"
+    ]
+  },
+  "posttest_immediate": {
+    "heldout": {
+      "label": "posttest.t1.heldout",
+      "n": 48,
+      "accuracy": 0.9375,
+      "mean_confidence": 0.95,
+      "calibration_error": 0.1078,
+      "knows_unknowns": 0.0375
+    },
+    "transfer": {
+      "label": "posttest.t1.transfer",
+      "n": 20,
+      "accuracy": 0.9,
+      "mean_confidence": 0.5,
+      "calibration_error": 0.5,
+      "knows_unknowns": 0.5
+    },
+    "reasoning": {
+      "label": "posttest.t1.reasoning",
+      "n": 16,
+      "accuracy": 0.8125,
+      "mean_confidence": 0.5,
+      "calibration_error": 0.5,
+      "knows_unknowns": 0.5
+    },
+    "untaught_multiplication": {
+      "label": "posttest.t1.untaught_multiplication",
+      "n": 4,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    }
+  },
+  "posttest_delayed_t2": {
+    "heldout": {
+      "label": "posttest.t2.delayed.heldout",
+      "n": 48,
+      "accuracy": 0.6042,
+      "mean_confidence": 0.95,
+      "calibration_error": 0.4016,
+      "knows_unknowns": 0.0559
+    }
+  },
+  "transfer_efficiency_control": {
+    "node": "math.CE1.add_within_100_carry",
+    "n_seeds": 6,
+    "trials_with_prereq": 21.33,
+    "trials_without_prereq": 35.33,
+    "speedup": 1.656,
+    "per_seed": {
+      "with_prereq": [
+        12,
+        24,
+        12,
+        28,
+        28,
+        24
+      ],
+      "without_prereq": [
+        48,
+        28,
+        24,
+        32,
+        32,
+        48
+      ]
+    }
+  },
+  "memorizer_baseline": {
+    "on_teaching": {
+      "label": "memorizer.teaching",
+      "n": 48,
+      "accuracy": 1.0,
+      "mean_confidence": 0.9,
+      "calibration_error": 0.1,
+      "knows_unknowns": 1.0
+    },
+    "on_heldout": {
+      "label": "memorizer.heldout",
+      "n": 48,
+      "accuracy": 0.0,
+      "mean_confidence": 0.7,
+      "calibration_error": 0.7,
+      "knows_unknowns": 0.3
+    },
+    "on_transfer": {
+      "label": "memorizer.transfer",
+      "n": 20,
+      "accuracy": 0.0,
+      "mean_confidence": 0.7,
+      "calibration_error": 0.7,
+      "knows_unknowns": 0.3
+    }
+  },
+  "intelligence_delta": {
+    "components": {
+      "knowledge_gain": 0.9375,
+      "transfer_gain": 0.9,
+      "reasoning_gain": 0.8125,
+      "retention_gain": 0.6042,
+      "metacognition_gain": -0.0078,
+      "learning_efficiency_gain": 0.3963
+    },
+    "weights": {
+      "knowledge_gain": 0.3,
+      "transfer_gain": 0.25,
+      "reasoning_gain": 0.2,
+      "retention_gain": 0.1,
+      "metacognition_gain": 0.1,
+      "learning_efficiency_gain": 0.05
+    },
+    "weighted_delta": 0.7482,
+    "retention_ratio_t2_over_t1": 0.6445,
+    "note": "Internal cognitive evolution index — not a human IQ."
+  }
+}

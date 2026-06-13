@@ -1,0 +1,43 @@
+{
+  "episodic_memory": {
+    "stores": [
+      "lesson_episode",
+      "attempt",
+      "feedback",
+      "emotion_context",
+      "teacher_interaction"
+    ],
+    "write_speed": "fast",
+    "forgetting": "high unless consolidated"
+  },
+  "semantic_memory": {
+    "stores": [
+      "concept",
+      "relation",
+      "definition",
+      "example",
+      "counterexample"
+    ],
+    "write_speed": "slow via consolidation",
+    "forgetting": "lower"
+  },
+  "procedural_memory": {
+    "stores": [
+      "strategy",
+      "algorithm",
+      "heuristic",
+      "motor_cognitive_routine"
+    ],
+    "write_speed": "practice-dependent",
+    "forgetting": "skill decay if unused"
+  },
+  "autobiographical_self_model": {
+    "stores": [
+      "what_I_have_learned",
+      "known_weaknesses",
+      "preferred_strategies",
+      "confidence_history"
+    ],
+    "purpose": "continuité du cerveau dans le temps"
+  }
+}

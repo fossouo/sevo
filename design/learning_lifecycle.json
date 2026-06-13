@@ -1,0 +1,56 @@
+{
+  "class_learning_cycle": [
+    {
+      "step": "T0_freeze",
+      "description": "snapshot du cerveau avant la classe"
+    },
+    {
+      "step": "T0_pretest",
+      "description": "tests froids: connaissances, transfert, raisonnement, mémoire de travail, métacognition"
+    },
+    {
+      "step": "curriculum_plan",
+      "description": "décomposition du programme officiel en compétences, notions, prérequis"
+    },
+    {
+      "step": "emma_teaching_sessions",
+      "description": "Emma enseigne par dialogue, exercices, feedback, rappel actif"
+    },
+    {
+      "step": "brain_internal_update",
+      "description": "encodage episodique immédiat; mise à jour partielle mémoire de travail/procédures"
+    },
+    {
+      "step": "consolidation",
+      "description": "replay différé; transfert vers mémoire sémantique/procédurale; oubli des détails inutiles"
+    },
+    {
+      "step": "T1_posttest_immediate",
+      "description": "évaluation immédiate sur items nouveaux et items analogues"
+    },
+    {
+      "step": "T2_posttest_delayed",
+      "description": "évaluation différée pour vérifier rétention"
+    },
+    {
+      "step": "T3_transfer",
+      "description": "problèmes jamais vus, contextes transversaux"
+    },
+    {
+      "step": "promotion_decision",
+      "description": "passe à la classe suivante seulement si seuils atteints et calibration correcte"
+    }
+  ],
+  "learning_not_counted_as_intelligence": [
+    "copier une réponse vue",
+    "mémoriser le corrigé",
+    "améliorer seulement sur items identiques"
+  ],
+  "learning_counted_as_intelligence": [
+    "transfert",
+    "explication causale",
+    "choix autonome de stratégie",
+    "calibration de confiance",
+    "apprentissage plus rapide des notions voisines"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "public_api": [
+    {
+      "method": "POST",
+      "path": "/perceive",
+      "purpose": "envoyer un stimulus extérieur au cerveau",
+      "body": {
+        "modality": "text|audio|image|structured",
+        "content": "...",
+        "source": "emma|exam|user|world"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/act",
+      "purpose": "demander une réponse/action",
+      "body": {
+        "goal": "answer|ask_question|solve|explain|reflect",
+        "constraints": {}
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/learn/session",
+      "purpose": "ouvrir une session d'apprentissage avec Emma",
+      "body": {
+        "class_level": "CM2",
+        "subject": "maths",
+        "curriculum_nodes": [
+          "..."
+        ],
+        "teacher": "emma"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/learn/feedback",
+      "purpose": "envoyer correction/récompense/indice",
+      "body": {
+        "attempt_id": "...",
+        "correct": false,
+        "feedback": "...",
+        "rubric": {}
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/consolidate",
+      "purpose": "déclencher replay/consolidation/oubli contrôlé",
+      "body": {
+        "mode": "sleep|spaced_review|error_replay",
+        "duration_budget": "..."
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/evaluate/pretest",
+      "purpose": "mesure avant apprentissage, sans feedback pédagogique",
+      "body": {
+        "class_level": "6e",
+        "subject": "maths",
+        "protocol_id": "..."
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/evaluate/posttest",
+      "purpose": "mesure après apprentissage",
+      "body": {
+        "class_level": "6e",
+        "subject": "maths",
+        "compare_to_snapshot": "..."
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/state/snapshot/{id}",
+      "purpose": "lire un snapshot cognitif versionné"
+    },
+    {
+      "method": "GET",
+      "path": "/intelligence/delta",
+      "purpose": "comparer deux snapshots: avant/après classe"
+    }
+  ],
+  "rule": "L'API d'évaluation ne doit jamais écrire dans les mémoires d'apprentissage pour éviter d'enseigner pendant le test."
+}

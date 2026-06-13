@@ -1,0 +1,56 @@
+{
+  "brain_id": "uuid",
+  "development_stage": {
+    "school_class": "CP|CE1|...|Terminale",
+    "age_equivalent_months": null,
+    "curriculum_version": "MEN-YYYY"
+  },
+  "cognitive_state": {
+    "knowledge_mastery_graph": {
+      "node_id": {
+        "mastery": 0.0,
+        "confidence": 0.0,
+        "last_seen": null,
+        "evidence": []
+      }
+    },
+    "procedural_skill_graph": {
+      "skill_id": {
+        "automaticity": 0.0,
+        "error_patterns": [],
+        "transfer_score": 0.0
+      }
+    },
+    "episodic_index": {
+      "episodes_count": 0,
+      "last_episode_id": null
+    },
+    "working_memory_profile": {
+      "capacity_tokens_estimate": 0,
+      "multi_step_depth": 0,
+      "distraction_sensitivity": 0.0
+    },
+    "metacognitive_profile": {
+      "calibration_error": 0.0,
+      "knows_unknowns_score": 0.0,
+      "help_seeking_quality": 0.0
+    },
+    "motivation_profile": {
+      "curiosity": 0.5,
+      "frustration_tolerance": 0.5,
+      "reward_sensitivity": 0.5
+    },
+    "intelligence_profile": {
+      "fluid_reasoning": 0.0,
+      "crystallized_knowledge": 0.0,
+      "transfer": 0.0,
+      "learning_efficiency": 0.0,
+      "retention": 0.0
+    }
+  },
+  "versioning": {
+    "snapshot_id": "uuid",
+    "created_at": "iso8601",
+    "parent_snapshot_id": null
+  }
+}

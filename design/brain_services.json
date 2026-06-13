@@ -1,0 +1,106 @@
+{
+  "services": [
+    {
+      "id": "sensory_gateway",
+      "biological_analogy": "systèmes sensoriels + thalamus relais",
+      "role": "reçoit tout input externe texte/audio/image/API, normalise en percepts",
+      "stateful": false
+    },
+    {
+      "id": "attention_salience",
+      "biological_analogy": "réseau de saillance, thalamus, cortex cingulaire antérieur, insula",
+      "role": "sélectionne ce qui entre dans l'espace de travail; détecte nouveauté, erreur, urgence, curiosité",
+      "stateful": true
+    },
+    {
+      "id": "global_workspace",
+      "biological_analogy": "global neuronal workspace / conscience de travail",
+      "role": "blackboard central; maintient le contexte conscient courant; broadcast aux autres services",
+      "stateful": true
+    },
+    {
+      "id": "working_memory",
+      "biological_analogy": "cortex préfrontal dorsolatéral + boucles pariétales",
+      "role": "mémoire de travail limitée; manipule objectifs, contraintes, variables intermédiaires",
+      "stateful": true
+    },
+    {
+      "id": "executive_control",
+      "biological_analogy": "cortex préfrontal, ACC, ganglions de la base",
+      "role": "planifie, inhibe, arbitre, choisit stratégie, contrôle effort",
+      "stateful": true
+    },
+    {
+      "id": "episodic_memory",
+      "biological_analogy": "hippocampe + cortex entorhinal",
+      "role": "encode expériences d'apprentissage, dialogues Emma, erreurs, contextes; retrieval rapide",
+      "stateful": true
+    },
+    {
+      "id": "semantic_memory",
+      "biological_analogy": "néocortex temporal/parietal associatif",
+      "role": "stocke connaissances durables, concepts, relations, définitions, théorèmes, dates",
+      "stateful": true
+    },
+    {
+      "id": "procedural_memory",
+      "biological_analogy": "ganglions de la base + cervelet + cortex moteur/cognitif",
+      "role": "automatise savoir-faire: poser division, résoudre équation, analyser texte, rédiger démonstration",
+      "stateful": true
+    },
+    {
+      "id": "world_model",
+      "biological_analogy": "cortex associatif multimodal + predictive processing",
+      "role": "modèle causal du monde; anticipe conséquences; teste cohérence",
+      "stateful": true
+    },
+    {
+      "id": "language_reasoner",
+      "biological_analogy": "aires du langage + réseau fronto-temporal",
+      "role": "production/compréhension langagière; raisonnement explicite; dialogue API",
+      "stateful": true
+    },
+    {
+      "id": "emotion_motivation",
+      "biological_analogy": "amygdale, hypothalamus, striatum ventral",
+      "role": "valence, motivation, frustration, curiosité, confiance; module attention et consolidation",
+      "stateful": true
+    },
+    {
+      "id": "neuromodulation_control",
+      "biological_analogy": "dopamine, noradrénaline, acétylcholine, sérotonine",
+      "role": "règle exploration/exploitation, plasticité, vigilance, patience, récompense",
+      "stateful": true
+    },
+    {
+      "id": "metacognition_self_model",
+      "biological_analogy": "préfrontal médian, réseau par défaut, monitoring d'erreur",
+      "role": "estime ce qu'il sait/ne sait pas; calibration confiance; identité cognitive; autobiographie d'apprentissage",
+      "stateful": true
+    },
+    {
+      "id": "consolidation_sleep",
+      "biological_analogy": "replay hippocampo-cortical + sommeil",
+      "role": "rejoue, généralise, compresse, oublie, transfère episodique→sémantique/procédural",
+      "stateful": true
+    },
+    {
+      "id": "assessment_oracle",
+      "biological_analogy": "pas biologique; instrument externe",
+      "role": "évalue sans enseigner; produit mesures pré/post; détecte fuite/mémorisation",
+      "stateful": false
+    }
+  ],
+  "minimal_mvp": [
+    "sensory_gateway",
+    "global_workspace",
+    "working_memory",
+    "executive_control",
+    "episodic_memory",
+    "semantic_memory",
+    "procedural_memory",
+    "metacognition_self_model",
+    "consolidation_sleep",
+    "assessment_oracle"
+  ]
+}

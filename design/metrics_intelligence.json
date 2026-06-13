@@ -1,0 +1,21 @@
+{
+  "notion_metrics": [
+    "mastery",
+    "confidence",
+    "retention",
+    "transfer",
+    "response_time",
+    "hint_dependency"
+  ],
+  "brain_metrics": [
+    "learning_efficiency",
+    "working_memory_depth",
+    "self_correction_rate",
+    "strategy_diversity",
+    "curiosity_index",
+    "autonomy_index",
+    "calibration_error"
+  ],
+  "intelligence_delta_formula": "weighted_delta = knowledge_gain*0.30 + transfer_gain*0.25 + reasoning_gain*0.20 + retention_gain*0.10 + metacognition_gain*0.10 + learning_efficiency_gain*0.05",
+  "warning": "Ce score mesure l'évolution interne du système, pas un QI humain officiel."
+}

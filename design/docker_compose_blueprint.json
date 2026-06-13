@@ -1,0 +1,64 @@
+{
+  "services": {
+    "sensory_gateway": {
+      "image": "talki-brain/sensory_gateway:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "global_workspace": {
+      "image": "talki-brain/global_workspace:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "working_memory": {
+      "image": "talki-brain/working_memory:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "executive_control": {
+      "image": "talki-brain/executive_control:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "episodic_memory": {
+      "image": "talki-brain/episodic_memory:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "semantic_memory": {
+      "image": "talki-brain/semantic_memory:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "procedural_memory": {
+      "image": "talki-brain/procedural_memory:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "metacognition_self_model": {
+      "image": "talki-brain/metacognition_self_model:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "consolidation_sleep": {
+      "image": "talki-brain/consolidation_sleep:v0.3",
+      "ports": [],
+      "depends_on": []
+    },
+    "assessment_oracle": {
+      "image": "talki-brain/assessment_oracle:v0.3",
+      "ports": [],
+      "depends_on": []
+    }
+  },
+  "infrastructure": {
+    "message_bus": "nats or redpanda",
+    "state_store": "postgres",
+    "vector_memory": "pgvector/qdrant",
+    "graph_memory": "neo4j or postgres recursive graph",
+    "cache_working_memory": "redis",
+    "object_store": "minio",
+    "observability": "prometheus+grafana",
+    "llm_runtime": "local models through LiteLLM; Emma as teacher adapter"
+  }
+}

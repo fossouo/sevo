@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.env
+
+# Test / tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Scratch report files (committed reports are EXPERIMENT_REPORT.md + last_run.json)
+reports/_*
+
+# OS
+.DS_Store

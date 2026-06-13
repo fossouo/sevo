@@ -1,0 +1,26 @@
+{
+  "project": "human_brain_api_school_v0_3",
+  "intent": "Créer un cerveau artificiel anthropomorphique exposé par API, capable d'interagir avec Emma et l'extérieur, apprendre le programme scolaire français classe par classe, puis mesurer son évolution cognitive avant/après.",
+  "core_shift_from_v0_2": "On ne modélise plus un agent éducatif, mais une architecture cognitive persistante. Le programme scolaire est un environnement d'apprentissage externe, pas le cerveau lui-même.",
+  "principles": [
+    "Le cerveau possède un état interne continu et persistant.",
+    "L'apprentissage modifie ses mémoires, procédures, modèles du monde et stratégies, pas seulement une base de connaissances.",
+    "Emma agit comme professeur/environnement social via API.",
+    "L'évaluation mesure des capacités: connaissances, transfert, raisonnement, mémoire différée, métacognition, vitesse, robustesse.",
+    "Chaque classe scolaire est un épisode développemental versionné."
+  ],
+  "files": [
+    "brain_services.json",
+    "brain_state_schema.json",
+    "api_surface.json",
+    "learning_lifecycle.json",
+    "evaluation_protocol.json",
+    "curriculum_ingestion_contract.json",
+    "docker_compose_blueprint.json",
+    "events_topics.json",
+    "memory_model.json",
+    "metrics_intelligence.json",
+    "sources.json",
+    "README.md"
+  ]
+}
