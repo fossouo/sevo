@@ -17,6 +17,10 @@ demo-ce1:                       # naïve: a fresh brain learns CE1 in isolation
 demo-ce1-after-cp:              # developmental: a CP-appris brain then learns CE1
 	$(PYTHON) scripts/demo_cp.py CE1 CP
 
+# Research study: does CP-appris help learn CE1? (developmental vs isolated)
+demo-developmental:
+	$(PYTHON) scripts/developmental.py
+
 # Regenerate the reproducible experiment reports (maths / FR / conjugation / CP).
 report:
 	PYTHONPATH=src:experiments $(PYTHON) experiments/generate_report.py

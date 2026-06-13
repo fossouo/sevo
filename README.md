@@ -124,9 +124,24 @@ make demo-ce1-after-cp   # développemental : un cerveau CP-appris apprend ensui
 ```
 
 Chaque mode produit les **six mêmes artefacts** que le CP et ressort **GENUINE**.
-La **comparaison développementale CP→CE1** (un cerveau CP-appris apprend-il CE1
-mieux/plus vite/plus proprement qu'un cerveau naïf ?) fait l'objet de la PR
-suivante. Le protocole CP reste la référence (`docs/CP_PROTOCOL.md`).
+Le protocole CP reste la référence (`docs/CP_PROTOCOL.md`).
+
+#### Trajectoire développementale : CP-appris apprend-il CE1 mieux ?
+
+```bash
+make demo-developmental    # naïf→CP→CE1  vs  naïf→CE1 ; -> reports/DEVELOPMENTAL_REPORT.md
+```
+
+Compare un cerveau **CP-appris** à un cerveau **naïf** sur l'apprentissage de CE1
+(transfert au pré-test, vitesse, post). Résultat **honnête et localisé** : le
+cerveau CP-appris démarre CE1 avec un **avantage de transfert réel**
+(pré-test ≈ 0,29 vs 0,13), **fort là où les compétences sont partagées** —
+l'arithmétique CE1 réutilise la valeur de position + les faits numériques du CP
+(`add_within_100_nocarry` : pré-test **0,75 vs 0,00**, **8 vs 32 essais**) — et
+**nul** sur les règles françaises (pluriel, conjugaison) qui ne partagent rien
+avec le CP. Pas d'accélération *globale* magique : **le transfert est
+proportionnel à la structure partagée**. Artefacts : `demo/developmental/`
+(`brain_after_cp.json`, `brain_after_ce1.json`, `cp_to_ce1_diff.json`).
 
 **Intelligence_delta (CP) = 0,749** (`reports/CP_GRADE_REPORT.md`) — et ce delta
 n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**
@@ -327,7 +342,8 @@ Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
 scripts/demo_cp.py · Makefile (make demo-cp)              # preuve fondatrice reproductible
 docs/CP_PROTOCOL.md · demo/artifacts/ · demo/artifacts_ce1/  # protocole gelé + preuves CP & CE1
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 135 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze
+tests/         # 142 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
+scripts/developmental.py · reports/DEVELOPMENTAL_REPORT.md · demo/developmental/  # étude CP→CE1
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 
@@ -382,6 +398,9 @@ une ressource lexicale réelle, validée de la même façon.
 - **CE1 (extension)** : `register_class("CE1")` + `make demo-ce1` — le même
   cerveau traverse une 2ᵉ classe (pluriel, conjugaison, calcul < 100), GENUINE,
   six artefacts comparables au CP, protocole gelé respecté (aucune réécriture).
+- **Trajectoire développementale** : `make demo-developmental` mesure si un
+  cerveau CP-appris apprend CE1 mieux/plus vite qu'un naïf — transfert réel et
+  localisé (fort sur l'arithmétique partagée, nul sur le français).
 - **Ensuite** : CE2… via le même `register_class` ; brancher le lexique sur la
   **ressource réelle complète** (Manulex / Dubois-Buyse) ; ajouter la **fluence**
   et la compréhension de consignes ; génération live d'exercices (mêmes gardes).

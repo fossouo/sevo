@@ -1,0 +1,103 @@
+{
+  "research_question": "Does a CP-appris brain learn CE1 better/faster/cleaner than a naïve one?",
+  "per_node": {
+    "fr.CE1.pluriel_reguliers": {
+      "developmental": {
+        "pretest": 0.1818,
+        "trials": 16,
+        "final_mastery": 0.8866,
+        "post": 0.8182
+      },
+      "isolated": {
+        "pretest": 0.0,
+        "trials": 8,
+        "final_mastery": 0.822,
+        "post": 0.8182
+      }
+    },
+    "fr.CE1.pluriel_en_al": {
+      "developmental": {
+        "pretest": 0.125,
+        "trials": 32,
+        "final_mastery": 0.9612,
+        "post": 1.0
+      },
+      "isolated": {
+        "pretest": 0.375,
+        "trials": 24,
+        "final_mastery": 0.9769,
+        "post": 1.0
+      }
+    },
+    "fr.CE1.present_verbes_er": {
+      "developmental": {
+        "pretest": 0.0909,
+        "trials": 16,
+        "final_mastery": 0.8806,
+        "post": 0.8485
+      },
+      "isolated": {
+        "pretest": 0.0758,
+        "trials": 24,
+        "final_mastery": 0.8293,
+        "post": 0.8636
+      }
+    },
+    "math.CE1.add_within_100_nocarry": {
+      "developmental": {
+        "pretest": 0.75,
+        "trials": 8,
+        "final_mastery": 0.8999,
+        "post": 0.9167
+      },
+      "isolated": {
+        "pretest": 0.0,
+        "trials": 32,
+        "final_mastery": 0.9087,
+        "post": 1.0
+      }
+    },
+    "math.CE1.add_within_100_carry": {
+      "developmental": {
+        "pretest": 0.2917,
+        "trials": 16,
+        "final_mastery": 0.8113,
+        "post": 0.875
+      },
+      "isolated": {
+        "pretest": 0.2917,
+        "trials": 24,
+        "final_mastery": 0.8578,
+        "post": 1.0
+      }
+    },
+    "math.CE1.sub_within_100_borrow": {
+      "developmental": {
+        "pretest": 0.2917,
+        "trials": 32,
+        "final_mastery": 0.9067,
+        "post": 0.9583
+      },
+      "isolated": {
+        "pretest": 0.0417,
+        "trials": 16,
+        "final_mastery": 0.8295,
+        "post": 0.9167
+      }
+    }
+  },
+  "aggregate": {
+    "transfer_pretest": {
+      "developmental": 0.2885,
+      "isolated": 0.1307
+    },
+    "trials_to_mastery": {
+      "developmental": 120,
+      "isolated": 128
+    },
+    "post_heldout": {
+      "developmental": 0.9028,
+      "isolated": 0.9331
+    }
+  }
+}

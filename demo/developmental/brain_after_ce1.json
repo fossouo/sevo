@@ -1,0 +1,2119 @@
+{
+  "schema_version": "0.4",
+  "brain_id": "demo-brain",
+  "day": 2,
+  "stage": {
+    "school_class": "CE1",
+    "age_equivalent_months": null,
+    "curriculum_version": "MEN-2026"
+  },
+  "procedural_skills": {
+    "place_value": {
+      "automaticity": 0.9996683228390973,
+      "error_patterns": [
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        },
+        {
+          "node": "math.CP.numeration_dizaines_unites",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.8704000000000001,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "add_facts_within_20": {
+      "automaticity": 0.9891015791297517,
+      "error_patterns": [
+        {
+          "node": "math.CP.add_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.add_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.add_within_20",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "carry": {
+      "automaticity": 0.9369823931290192,
+      "error_patterns": [
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.add_within_100_carry",
+          "day": 1
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "sub_facts_within_20": {
+      "automaticity": 0.9990919230839731,
+      "error_patterns": [
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.8704000000000001,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "borrow": {
+      "automaticity": 0.974540161195134,
+      "error_patterns": [
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        },
+        {
+          "node": "math.CE1.sub_within_100_borrow",
+          "day": 1
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "grapheme_recognition": {
+      "automaticity": 0.9995367106604524,
+      "error_patterns": [
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.8704000000000001,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "plural_rule_s": {
+      "automaticity": 0.9724525886336951,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.pluriel_reguliers",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_reguliers",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_reguliers",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_reguliers",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_reguliers",
+          "day": 1
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "plural_exception_aux": {
+      "automaticity": 0.9925493242960051,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.pluriel_en_al",
+          "day": 1
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "plural_invariant": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "verb_stem_recognition": {
+      "automaticity": 0.9055317999552966,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 1
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "present_er_endings": {
+      "automaticity": 0.9206299966798525,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 1
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "subject_agreement": {
+      "automaticity": 0.901608967919542,
+      "error_patterns": [
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 1
+        },
+        {
+          "node": "fr.CE1.present_verbes_er",
+          "day": 1
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 1
+    },
+    "grapheme_phoneme": {
+      "automaticity": 0.9993401897646933,
+      "error_patterns": [
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.8704000000000001,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "blending": {
+      "automaticity": 0.9969794061514283,
+      "error_patterns": [
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.8704000000000001,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "sight_words": {
+      "automaticity": 0.9732719219961891,
+      "error_patterns": [
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "lexical_access": {
+      "automaticity": 0.9766585967396232,
+      "error_patterns": [
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "sentence_parsing": {
+      "automaticity": 0.9766585967396232,
+      "error_patterns": [
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "syllable_segmentation": {
+      "automaticity": 0.9971556498292492,
+      "error_patterns": [
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.segmentation_syllabes",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.8704000000000001,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "orthographic_encoding": {
+      "automaticity": 0.9971556498292492,
+      "error_patterns": [
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.dictee_simple",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.8704000000000001,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "number_comparison": {
+      "automaticity": 0.9965066058772067,
+      "error_patterns": [
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        },
+        {
+          "node": "math.CP.comparaison_nombres",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.8704000000000001,
+      "consolidated": true,
+      "last_practiced_day": 0
+    }
+  },
+  "semantic_mastery": {
+    "math.CP.add_within_20": {
+      "mastery": 0.9742629639804363,
+      "confidence": 0.0,
+      "last_seen": 0,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "math.CP.sub_within_20": {
+      "mastery": 0.9206359917297959,
+      "confidence": 0.9206359917297959,
+      "last_seen": 1,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "fr.CP.lecture_mots_reguliers": {
+      "mastery": 0.9715014617058306,
+      "confidence": 0.9715014617058306,
+      "last_seen": 1,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "fr.CP.lecture_mots_irreguliers": {
+      "mastery": 0.879899263381958,
+      "confidence": 0.879899263381958,
+      "last_seen": 1,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "fr.CP.comprehension_phrase": {
+      "mastery": 0.8883634709312442,
+      "confidence": 0.8883634709312442,
+      "last_seen": 1,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "fr.CP.segmentation_syllabes": {
+      "mastery": 0.9397784376808431,
+      "confidence": 0.9397784376808431,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "fr.CP.dictee_simple": {
+      "mastery": 0.9354283253747262,
+      "confidence": 0.9354283253747262,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "math.CP.numeration_dizaines_unites": {
+      "mastery": 0.9047401063144207,
+      "confidence": 0.9047401063144207,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "math.CP.comparaison_nombres": {
+      "mastery": 0.9245242476463318,
+      "confidence": 0.9245242476463318,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": false
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        },
+        {
+          "day": 0,
+          "correct": true
+        }
+      ]
+    },
+    "fr.CE1.pluriel_reguliers": {
+      "mastery": 0.8865823894739151,
+      "confidence": 0.8865823894739151,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        }
+      ]
+    },
+    "fr.CE1.pluriel_en_al": {
+      "mastery": 0.9612298620541074,
+      "confidence": 0.9612298620541074,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        }
+      ]
+    },
+    "fr.CE1.present_verbes_er": {
+      "mastery": 0.8805944919586182,
+      "confidence": 0.8805944919586182,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        }
+      ]
+    },
+    "math.CE1.add_within_100_nocarry": {
+      "mastery": 0.9639593505859375,
+      "confidence": 0.9639593505859375,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        }
+      ]
+    },
+    "math.CE1.add_within_100_carry": {
+      "mastery": 0.8113240783568472,
+      "confidence": 0.8113240783568472,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        }
+      ]
+    },
+    "math.CE1.sub_within_100_borrow": {
+      "mastery": 0.9067175698625791,
+      "confidence": 0.9067175698625791,
+      "last_seen": 2,
+      "evidence": [
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": false
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        },
+        {
+          "day": 1,
+          "correct": true
+        }
+      ]
+    }
+  },
+  "metacognition": {
+    "node_self_accuracy": {
+      "math.CP.add_within_20": 0.9907270296396897,
+      "math.CP.sub_within_20": 0.9530426564460268,
+      "fr.CP.lecture_mots_reguliers": 0.9842932845874119,
+      "fr.CP.lecture_mots_irreguliers": 0.9218873890984798,
+      "fr.CP.comprehension_phrase": 0.9189065583082152,
+      "fr.CP.segmentation_syllabes": 0.9614153577508497,
+      "fr.CP.dictee_simple": 0.9578241017983928,
+      "math.CP.numeration_dizaines_unites": 0.9381379266396899,
+      "math.CP.comparaison_nombres": 0.9584198742274799,
+      "fr.CE1.pluriel_reguliers": 0.9140107652587799,
+      "fr.CE1.pluriel_en_al": 0.9764582329755347,
+      "fr.CE1.present_verbes_er": 0.9277816039984801,
+      "math.CE1.add_within_100_nocarry": 0.9711759949999998,
+      "math.CE1.add_within_100_carry": 0.8379582969990098,
+      "math.CE1.sub_within_100_borrow": 0.9364340017101043
+    },
+    "help_requests": 0,
+    "attempts": 344
+  }
+}
