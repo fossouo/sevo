@@ -7,6 +7,16 @@ The brain traverses the full class-learning cycle (`design/learning_lifecycle.js
 
 **Intelligence_delta = 0.748** (internal cognitive evolution index — not a human IQ).
 
+> ✅ **Apprentissage authentique : GENUINE** — le delta n'est déclaré que si les cinq garde-fous passent.
+
+| Garde-fou | OK |
+|---|---|
+| post_test_gain | ✅ |
+| held_out_gain_substantial | ✅ |
+| transfer_nonzero | ✅ |
+| beats_memoriser | ✅ |
+| retention_measurable | ✅ |
+
 ## Before vs after
 
 | Measure (held-out) | Pretest | Posttest T1 | Delayed T2 (+7d) |

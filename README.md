@@ -63,11 +63,17 @@ S'il ne marchait que sur un domaine, ce serait une calculette, pas un cerveau.
 ### Le cycle CP complet, ingéré depuis le programme officiel
 
 Au-delà des domaines isolés, Sèvo exécute désormais **toute une classe** de bout
-en bout. Le programme **CP** (français + maths) est ingéré via le contrat
-standard (`curriculum/official_curriculum.py` — disciplines, attendus de fin
-d'année, prérequis, types d'exercices, critères d'évaluation), puis le cerveau
+en bout. Un **registre CP de forme officielle** (`curriculum/official_curriculum.py`
+— disciplines, attendus de fin d'année, prérequis, types d'exercices, critères
+d'évaluation) est chargé via le contrat d'ingestion standard, puis le cerveau
 traverse le cycle complet sur les 5 nœuds : pré-test à froid → Emma enseigne →
 consolidation → post-test immédiat → post-test différé (+7 j) → transfert.
+
+> ⚠️ **Portée honnête** : ce registre est *aligné sur les attendus officiels du
+> CP* mais reste un **jeu amorce partiel, vérifié à la main — ce n'est pas un
+> ingest exhaustif du Bulletin officiel**. Les sources (Manulex, Dubois-Buyse,
+> BO CP) sont une **provenance méthodologique**, pas des jeux de données
+> embarqués.
 
 | Facette (agrégée) | Pré-test | Post-test |
 |---|---|---|
@@ -76,8 +82,12 @@ consolidation → post-test immédiat → post-test différé (+7 j) → transfe
 | **Rétention** (+7 j) | — | 62 % |
 | **Métacognition** (erreur de calibration ↓) | 0,10 | 0,07 |
 
-**Intelligence_delta (CP) = 0,625** (`reports/CP_GRADE_REPORT.md`). Le nouveau
-domaine **lecture / décodage** (correspondances graphème-phonème, mots réguliers,
+**Intelligence_delta (CP) = 0,625** (`reports/CP_GRADE_REPORT.md`) — et ce delta
+n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**
+(`eval/integrity.py`) : gain post-test **et** held-out substantiel **et**
+transfert non nul dans ≥ 1 domaine **et** mémoriseur battu **et** rétention
+différée mesurable. Sans les cinq, le verdict est `NOT_PROVEN` et aucune
+« intelligence » n'est revendiquée. Le nouveau domaine **lecture / décodage** (correspondances graphème-phonème, mots réguliers,
 mots irréguliers, compréhension de phrase) y est prouvé comme les autres :
 décodage de **pseudo-mots** 0 → 79 % (le test étalon d'une vraie compétence
 alphabétique — un mémoriseur y est à 0 %), erreurs caractéristiques *« chat »
@@ -174,11 +184,11 @@ src/sevo/      # implémentation de référence
   services/    # les 10 microservices MVP (+ stubs non-MVP)
   curriculum/  # base · cp_ce1_math · fr_cp_ce1 · fr_conjugation · fr_lecture_cp · fr_lexicon · official_curriculum · ingestion
   teacher/     # emma_stub (déterministe, offline) · emma_litellm (live, INERTE par défaut)
-  eval/        # protocole + calcul Intelligence_delta
+  eval/        # protocole + Intelligence_delta + integrity (garde-fou anti-illusion)
   brain.py     # orchestrateur + surface API (multi-domaines)
   api.py       # adaptateur HTTP FastAPI (optionnel)
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 55 tests : invariants design + maths + français (pluriel/conjugaison/lecture) + lexique + curriculum officiel + intégration
+tests/         # 60 tests : invariants design + maths + français (pluriel/conjugaison/lecture) + lexique + curriculum officiel + intégrité + intégration
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 

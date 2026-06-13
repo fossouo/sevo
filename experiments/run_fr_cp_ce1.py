@@ -19,7 +19,7 @@ from sevo.curriculum.fr_cp_ce1 import (
     build_bank_fr,
     transfer_bank_fr,
 )
-from sevo.eval import compute_delta
+from sevo.eval import assess_genuine_learning, compute_delta
 from sevo.rng import Rng
 from sevo.services import AssessmentOracle
 from sevo.teacher import teach_to_mastery
@@ -74,9 +74,19 @@ def run() -> dict:
         trials_with_prereq=eff["trials_with_prereq"], trials_without_prereq=eff["trials_without_prereq"],
     )
 
+    genuine = assess_genuine_learning(
+        heldout_before=pre_held["accuracy"], heldout_after=t1_held["accuracy"],
+        transfer_before=max(pre_treg["accuracy"], pre_tal["accuracy"]),
+        transfer_after=max(t1_treg["accuracy"], t1_tal["accuracy"]),
+        memoriser_heldout=mem["on_heldout"]["accuracy"],
+        memoriser_transfer=mem["on_transfer"]["accuracy"],
+        t1_after=t1_held["accuracy"], t2_after=t2_held["accuracy"],
+    )
+
     return {
         "seed": SEED,
         "domain": "français — pluriel des noms",
+        "genuine_learning": genuine,
         "snapshots": {"before": snap_before.snapshot_id, "after": snap_after.snapshot_id},
         "pretest": {"heldout": pre_held, "transfer_regular": pre_treg, "transfer_al_rule": pre_tal},
         "teaching": teaching_log,

@@ -2,6 +2,8 @@
   "grade": "CP",
   "seed": 7,
   "program": {
+    "status": "partial-seed",
+    "disclaimer": "Registre aligné sur les attendus officiels du CP — jeu amorce partiel, vérifié à la main (PAS un ingest exhaustif du Bulletin officiel).",
     "disciplines": {
       "français": [
         "lecture / décodage",
@@ -21,8 +23,8 @@
     ]
   },
   "snapshots": {
-    "before": "4db7dbc0-d6c4-4bae-80e1-f99a574ad514",
-    "after": "328edf0c-7b2f-4cce-b3f2-22cd1d70917e"
+    "before": "599dd443-7390-48c3-bd0d-f34ef0541e28",
+    "after": "9a3fc5ef-cc39-4b46-9021-0905978ea758"
   },
   "facets_aggregate": {
     "connaissance_heldout": {
@@ -585,5 +587,25 @@
     "weighted_delta": 0.6248,
     "retention_ratio_t2_over_t1": 0.6601,
     "note": "Internal cognitive evolution index — not a human IQ."
+  },
+  "genuine_learning": {
+    "verdict": "GENUINE",
+    "passed": true,
+    "checks": {
+      "post_test_gain": true,
+      "held_out_gain_substantial": true,
+      "transfer_nonzero": true,
+      "beats_memoriser": true,
+      "retention_measurable": true
+    },
+    "reasons": [],
+    "details": {
+      "heldout_before": 0.0,
+      "heldout_after": 0.9466,
+      "best_transfer_after": 1.0,
+      "memoriser_heldout": 0.0,
+      "memoriser_transfer": 0.0,
+      "retention_ratio_t2_over_t1": 0.6601
+    }
   }
 }

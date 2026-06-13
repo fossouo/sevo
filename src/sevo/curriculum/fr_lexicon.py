@@ -30,13 +30,25 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 # ---- Provenance --------------------------------------------------------------
+# IMPORTANT: these are **methodological references** — the public resources this
+# lexicon's metadata (frequency band, grade) is *modelled on*. They are NOT
+# embedded here as datasets: no Manulex/Dubois-Buyse table is bundled or copied.
+# The entries below are a hand-verified bootstrap subset; a real ingest would
+# load each reference's licensed data and tag every entry with its row source.
+PROVENANCE_NOTE = (
+    "Provenance méthodologique uniquement : les bandes de fréquence et niveaux "
+    "scolaires sont MODÉLISÉS sur les références ci-dessous, qui ne sont PAS "
+    "embarquées comme jeux de données. Les entrées sont un sous-ensemble amorce "
+    "vérifié à la main."
+)
 SOURCES = {
-    "manulex": "Manulex — fréquences lexicales des manuels scolaires "
-               "(Lété, Sprenger-Charolles & Colé, 2004), graduées CP→CM2.",
-    "dubois-buyse": "Échelle d'acquisition orthographique Dubois-Buyse "
-                    "(répartition des mots par échelon scolaire).",
-    "bo-cp": "Bulletin officiel / Éduscol — listes de mots fréquents et "
-             "attendus de fin d'année CP (lecture / orthographe).",
+    "manulex": "Référence méthodologique (non embarquée) : Manulex — fréquences "
+               "lexicales des manuels scolaires (Lété, Sprenger-Charolles & Colé, "
+               "2004), graduées CP→CM2.",
+    "dubois-buyse": "Référence méthodologique (non embarquée) : Échelle "
+                    "d'acquisition orthographique Dubois-Buyse (mots par échelon).",
+    "bo-cp": "Référence méthodologique (non embarquée) : Bulletin officiel / "
+             "Éduscol — mots fréquents et attendus de fin d'année CP.",
     "builtin-curriculum": "Mots utilisés par les nœuds intégrés de Sèvo "
                           "(pluriel / conjugaison), vérifiés à la main.",
 }

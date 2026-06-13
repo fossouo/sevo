@@ -23,6 +23,19 @@ def _fmt_pct(x: float) -> str:
     return f"{x * 100:.0f}%"
 
 
+def _verdict_md(g: dict) -> str:
+    """Integrity verdict + the five checks (anti-illusion-of-progression gate)."""
+    icon = "✅" if g["passed"] else "⛔"
+    head = (f"\n> {icon} **Apprentissage authentique : {g['verdict']}** — "
+            "le delta n'est déclaré que si les cinq garde-fous passent.\n")
+    body = "\n| Garde-fou | OK |\n|---|---|\n"
+    for k, v in g["checks"].items():
+        body += f"| {k} | {'✅' if v else '❌'} |\n"
+    if g["reasons"]:
+        body += "\n_Échecs : " + " ; ".join(g["reasons"]) + "._\n"
+    return head + body
+
+
 def main() -> None:
     r = run()
     os.makedirs(REPORTS, exist_ok=True)
@@ -48,6 +61,7 @@ def main() -> None:
     a("\n## Headline\n")
     a(f"\n**Intelligence_delta = {d['weighted_delta']:.3f}** "
       "(internal cognitive evolution index — not a human IQ).\n")
+    a(_verdict_md(r["genuine_learning"]))
 
     a("\n## Before vs after\n")
     a("\n| Measure (held-out) | Pretest | Posttest T1 | Delayed T2 (+7d) |")
@@ -116,6 +130,7 @@ def main_fr() -> None:
       "maths experiment — different domain. This is the generalisation proof._\n")
     a(f"\n**Intelligence_delta = {d['weighted_delta']:.3f}** "
       "(internal cognitive evolution index — not a human IQ).\n")
+    a(_verdict_md(r["genuine_learning"]))
     a("\n## Before vs after\n")
     a("\n| Measure | Pretest | Posttest T1 | Delayed T2 (+7d) |")
     a("\n|---|---|---|---|")
@@ -165,6 +180,7 @@ def main_conj() -> None:
       "not a special case._\n")
     a(f"\n**Intelligence_delta = {d['weighted_delta']:.3f}** "
       "(internal cognitive evolution index — not a human IQ).\n")
+    a(_verdict_md(r["genuine_learning"]))
     a("\n## Before vs after\n")
     a("\n| Measure | Pretest | Posttest T1 | Delayed T2 (+7d) |")
     a("\n|---|---|---|---|")
@@ -212,14 +228,17 @@ def main_cp_grade() -> None:
     lines = []
     a = lines.append
     a("# CP grade report — whole-class learning cycle\n")
-    a(f"_Reproducible run, seed = {r['seed']}. The CP programme "
-      "(`curriculum/official_curriculum.py`) ingested through the standard "
-      "contract, then run through the full lifecycle: cold pretest → Emma "
-      "teaches every node → consolidation → immediate posttest → +7-day delayed "
-      "posttest → transfer. All scores by the assessment oracle on disjoint "
-      "banks._\n")
+    a(f"_Reproducible run, seed = {r['seed']}. An **official-curriculum-shaped CP "
+      "seed registry** (`curriculum/official_curriculum.py`) — aligned with the "
+      "official CP expectations, **partial and hand-verified, not a full BO "
+      "ingest** — loaded through the standard ingestion contract, then run through "
+      "the full lifecycle: cold pretest → Emma teaches every node → consolidation "
+      "→ immediate posttest → +7-day delayed posttest → transfer. All scores by "
+      "the assessment oracle on disjoint banks._\n")
+    a(f"\n> ⚠️ {r['program']['disclaimer']}\n")
     a(f"\n**Intelligence_delta (CP) = {d['weighted_delta']:.3f}** "
       "(internal cognitive evolution index — not a human IQ).\n")
+    a(_verdict_md(r["genuine_learning"]))
 
     a("\n## Five facets (aggregate)\n")
     a("\n| Facet | Pretest | Posttest |")

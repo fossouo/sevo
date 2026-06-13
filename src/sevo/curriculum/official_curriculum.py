@@ -1,4 +1,12 @@
-"""Official French national curriculum — class-by-class registry.
+"""Official-curriculum-shaped registry — class-by-class, CP seed set.
+
+⚠️ **Scope claim (read first).** This is an *official-curriculum-**shaped** CP
+seed registry*: a small, **hand-verified partial seed set aligned with the
+official CP expectations** — it is **NOT** an exhaustive ingest of the Bulletin
+officiel. The structure follows the BO / *attendus de fin d'année* cycle 2 (see
+``design/sources.json``); the content embedded here covers only what the CP grade
+experiment exercises. Treat it as a worked, extensible template, not a complete
+programme database.
 
 The brief: build a *source of truth per class* (CP → Terminale) holding, for each
 class, its disciplines, competencies, end-of-year expectations, prerequisites,
@@ -7,15 +15,14 @@ cycle** end to end without ingesting the entire programme at once.
 
 This module is the per-class loader. Every node is expressed in the existing
 ingestion-contract shape (so nothing about the brain changes) plus the richer
-official fields added to ``CurriculumNode``. Each node is also bound to a
+official-style fields added to ``CurriculumNode``. Each node is also bound to a
 *runnable* — the bank builder that turns it into gradable exercises — so the CP
 grade experiment can drive pretest → teaching → consolidation → posttest →
 delayed posttest → transfer uniformly across maths and French.
 
-Provenance: structure follows the Bulletin officiel / *attendus de fin d'année*
-cycle 2 (see ``design/sources.json``). Only **CP** is populated here; the other
-classes are declared but intentionally left empty until each is ingested in
-turn (``register_class`` raises for an un-populated class rather than guessing).
+Only **CP** is populated (as a partial seed); the other classes are declared but
+intentionally left empty until each is ingested in turn (``register_class``
+raises for an un-populated class rather than guessing).
 """
 from __future__ import annotations
 
@@ -115,9 +122,17 @@ CP_FRANCAIS_NODES = [
     ),
 ]
 
+# Surfaced in reports so no reader mistakes this for a full BO ingest.
+SEED_DISCLAIMER = (
+    "Registre aligné sur les attendus officiels du CP — jeu amorce partiel, "
+    "vérifié à la main (PAS un ingest exhaustif du Bulletin officiel)."
+)
+
 CP_PROGRAM = {
     "class_level": "CP",
     "cycle": "cycle 2",
+    "status": "partial-seed",
+    "disclaimer": SEED_DISCLAIMER,
     "disciplines": {
         "français": ["lecture / décodage", "lecture / mots-outils", "compréhension"],
         "mathématiques": ["nombres et calculs"],
@@ -180,5 +195,7 @@ def register_class(registry: CurriculumRegistry, class_level: str) -> Curriculum
 
 
 def official_cp_registry() -> CurriculumRegistry:
-    """A registry pre-loaded with the full CP programme (français + maths)."""
+    """A registry pre-loaded with the CP seed set (français + maths) — aligned
+    with official CP expectations, partial and hand-verified (see
+    ``SEED_DISCLAIMER``), not a full BO ingest."""
     return register_class(CurriculumRegistry(), "CP")

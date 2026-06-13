@@ -1,9 +1,29 @@
 {
   "seed": 5,
   "domain": "français — pluriel des noms",
+  "genuine_learning": {
+    "verdict": "GENUINE",
+    "passed": true,
+    "checks": {
+      "post_test_gain": true,
+      "held_out_gain_substantial": true,
+      "transfer_nonzero": true,
+      "beats_memoriser": true,
+      "retention_measurable": true
+    },
+    "reasons": [],
+    "details": {
+      "heldout_before": 0.0,
+      "heldout_after": 0.8519,
+      "best_transfer_after": 0.8333,
+      "memoriser_heldout": 0.0,
+      "memoriser_transfer": 0.0,
+      "retention_ratio_t2_over_t1": 0.7391
+    }
+  },
   "snapshots": {
-    "before": "2aff6864-2d7b-45ec-8e94-c926d8b36911",
-    "after": "0c4ec0ef-7241-45d7-94e5-8608fcbb24cf"
+    "before": "2a13c20e-df21-4e0e-bf27-6003549928b1",
+    "after": "8e16bc6c-d0ac-4ddf-9095-5ce2e69cb297"
   },
   "pretest": {
     "heldout": {

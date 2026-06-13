@@ -1,7 +1,19 @@
 # CP grade report — whole-class learning cycle
-_Reproducible run, seed = 7. The CP programme (`curriculum/official_curriculum.py`) ingested through the standard contract, then run through the full lifecycle: cold pretest → Emma teaches every node → consolidation → immediate posttest → +7-day delayed posttest → transfer. All scores by the assessment oracle on disjoint banks._
+_Reproducible run, seed = 7. An **official-curriculum-shaped CP seed registry** (`curriculum/official_curriculum.py`) — aligned with the official CP expectations, **partial and hand-verified, not a full BO ingest** — loaded through the standard ingestion contract, then run through the full lifecycle: cold pretest → Emma teaches every node → consolidation → immediate posttest → +7-day delayed posttest → transfer. All scores by the assessment oracle on disjoint banks._
+
+> ⚠️ Registre aligné sur les attendus officiels du CP — jeu amorce partiel, vérifié à la main (PAS un ingest exhaustif du Bulletin officiel).
 
 **Intelligence_delta (CP) = 0.625** (internal cognitive evolution index — not a human IQ).
+
+> ✅ **Apprentissage authentique : GENUINE** — le delta n'est déclaré que si les cinq garde-fous passent.
+
+| Garde-fou | OK |
+|---|---|
+| post_test_gain | ✅ |
+| held_out_gain_substantial | ✅ |
+| transfer_nonzero | ✅ |
+| beats_memoriser | ✅ |
+| retention_measurable | ✅ |
 
 ## Five facets (aggregate)
 

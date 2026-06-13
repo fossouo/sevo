@@ -24,7 +24,7 @@ from sevo.baselines import MemorizerBrain
 from sevo.brain import Brain
 from sevo.curriculum.cp_ce1_math import build_bank as build_bank_math
 from sevo.curriculum.official_curriculum import CP_PROGRAM, RUNNABLE_CP, official_cp_registry
-from sevo.eval import compute_delta
+from sevo.eval import assess_genuine_learning, compute_delta
 from sevo.rng import Rng
 from sevo.services import AssessmentOracle
 from sevo.teacher import teach_to_mastery
@@ -96,9 +96,26 @@ def run() -> dict:
         trials_without_prereq=eff["trials_without_prereq"],
     )
 
+    # Integrity gate: a brain is only declared "more capable" if it clears ALL
+    # the anti-illusion checks. "transfer in at least one domain" => the BEST
+    # per-node transfer, not the (conservative) aggregate that mixes the
+    # deliberately out-of-grade maths probe.
+    best_tr_after = max((t1[n]["transfer"]["accuracy"] for n in banks
+                         if t1[n]["transfer"]), default=0.0)
+    best_tr_before = max((pre[n]["transfer"]["accuracy"] for n in banks
+                          if pre[n]["transfer"]), default=0.0)
+    genuine = assess_genuine_learning(
+        heldout_before=held_pre, heldout_after=held_t1,
+        transfer_before=best_tr_before, transfer_after=best_tr_after,
+        memoriser_heldout=mem["on_heldout"]["accuracy"],
+        memoriser_transfer=mem["on_transfer"]["accuracy"],
+        t1_after=held_t1, t2_after=held_t2,
+    )
+
     return {
         "grade": "CP", "seed": SEED,
-        "program": {"disciplines": CP_PROGRAM["disciplines"],
+        "program": {"status": CP_PROGRAM["status"], "disclaimer": CP_PROGRAM["disclaimer"],
+                    "disciplines": CP_PROGRAM["disciplines"],
                     "nodes_ingested": sorted(registry.nodes)},
         "snapshots": {"before": snap_before.snapshot_id, "after": snap_after.snapshot_id},
         "facets_aggregate": {
@@ -124,6 +141,7 @@ def run() -> dict:
         "memorizer_baseline": mem,
         "characteristic_errors": errors,
         "intelligence_delta": delta,
+        "genuine_learning": genuine,
     }
 
 

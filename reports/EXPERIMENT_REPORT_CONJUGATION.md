@@ -3,6 +3,16 @@ _Reproducible run, seed = 5. A **third** domain on the same brain architecture �
 
 **Intelligence_delta = 0.706** (internal cognitive evolution index — not a human IQ).
 
+> ✅ **Apprentissage authentique : GENUINE** — le delta n'est déclaré que si les cinq garde-fous passent.
+
+| Garde-fou | OK |
+|---|---|
+| post_test_gain | ✅ |
+| held_out_gain_substantial | ✅ |
+| transfer_nonzero | ✅ |
+| beats_memoriser | ✅ |
+| retention_measurable | ✅ |
+
 ## Before vs after
 
 | Measure | Pretest | Posttest T1 | Delayed T2 (+7d) |
