@@ -41,6 +41,35 @@ def al_plural(word: str) -> str:
     return word[:-2] + "aux"  # cheval -> chevaux
 
 
+# Nouns/adjectives ending in -al that take a regular -s plural (NOT -aux).
+# The brain must not be taught "finaux"/"bancals"; the curriculum refuses to
+# grade these under the -al->-aux node. (Surfaced by the first live Emma run:
+# the model happily proposes exception words.)
+AL_S_EXCEPTIONS = {
+    "bal", "carnaval", "chacal", "festival", "récital", "regal", "régal", "cal",
+    "aval", "étal", "pal", "final", "fatal", "natal", "naval", "banal", "bancal",
+    "glacial", "tonal", "bengal", "serval", "narval", "chersal", "nopal", "sisal",
+}
+_INVARIABLE_ENDINGS = ("s", "x", "z")
+_SPECIAL_X_ENDINGS = ("eau", "eu", "au")  # take -x, handled by other rules
+
+
+def vet_word(category: str, word: str) -> bool:
+    """Is ``word`` safe to grade under this plural category? Used to filter
+    model-proposed words so the brain is never taught a wrong plural."""
+    w = word.strip().lower()
+    if not w or " " in w or not w.isalpha():
+        return False
+    if category == "al":
+        return w.endswith("al") and w not in AL_S_EXCEPTIONS
+    if category == "inv":
+        return w.endswith(_INVARIABLE_ENDINGS)
+    # regular: plain "+s" words only — exclude endings governed by other rules.
+    if w.endswith(_INVARIABLE_ENDINGS) or w.endswith("al") or w.endswith(_SPECIAL_X_ENDINGS):
+        return False
+    return True
+
+
 @dataclass
 class PluralTask(Task):
     node_id: str
@@ -146,17 +175,21 @@ def make_banks_fr(rng: Rng, node_ids: list[str]) -> dict[str, Bank]:
 
 # ---- Transfer stock: words NEVER used in teaching --------------------------
 # If the brain learned the *rule*, it applies it to these unseen words. A pure
-# memoriser, which only stored teaching words, scores at chance here.
+# memoriser, which only stored teaching words, scores at chance here. Every word
+# is vetted (regular +s; clean -al->-aux, no -als exceptions) so the ground
+# truth is correct.
 TRANSFER_REG = ["nuage", "crayon", "tigre", "banane", "guitare", "montagne"]
-TRANSFER_AL = ["minéral", "littoral", "chacal", "récital", "amiral", "bancal"]
+TRANSFER_AL = ["minéral", "littoral", "amiral", "arsenal", "maréchal", "caporal"]
 
 
 def transfer_bank_fr() -> list:
     out = []
     for w in TRANSFER_REG:
+        assert vet_word("reg", w), w
         out.append(PluralTask("fr.transfer.pluriel_reguliers", w, regular_plural(w),
                               {"grapheme_recognition": 0.3, "plural_rule_s": 0.7}, "reg"))
     for w in TRANSFER_AL:
+        assert vet_word("al", w), w
         out.append(PluralTask("fr.transfer.pluriel_en_al", w, al_plural(w),
                               {"grapheme_recognition": 0.3, "plural_exception_aux": 0.7}, "al"))
     return out

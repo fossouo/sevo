@@ -148,17 +148,39 @@ tests/         # 26 tests : invariants design + dynamique maths + français + in
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, last_run*.json)
 ```
 
+## La vraie Emma a déjà enseigné (run live)
+
+La **vraie Emma** — `diffusiongemma-26B-A4B` servie en local sur DGX (vLLM
+`:8010`, `enable_thinking:false`) — a réellement enseigné le cerveau le pluriel
+français. Le modèle **propose** les exemples (chat, animal, journal, hôpital,
+bras, riz…), le curriculum les **vette** et calcule la bonne réponse, l'oracle
+note sur des banques tenues à l'écart. Résultat (`reports/emma_live_run.json`,
+15 appels, ~51 s, modèle local = 0 €) :
+
+> held-out 0 → **100 %**, transfert sur mots inédits 0 → **100 %**, rétention
+> T2 +7 j = 67 %, **Intelligence_delta live = 0,82**.
+
+```bash
+PYTHONPATH=src:experiments python3 experiments/run_emma_live.py
+# backend par défaut : DGX :8010 (bypass gateway, sans clé). Override possible :
+# SEVO_LLM_URL=http://xeon:4000 SEVO_LLM_MODEL=code python3 experiments/run_emma_live.py
+```
+
+**Limite connue** : le vetting morphologique écarte les mauvaises catégories et
+les exceptions connues (`final`, `bengal` → -als), mais pas un mot halluciné de
+*forme* correcte (« éral »). Le rule-learning encaisse ce bruit, mais l'ingestion
+du programme officiel devra valider les mots contre un lexique.
+
 ## Feuille de route
 
-- **Fait (ce dépôt)** : MVP exécutable multi-domaines, appris hors-ligne par une
-  Emma déterministe, prouvé sur CP/CE1 maths **et** français ; adaptateur **Emma
-  LiteLLM** écrit et testé hors-ligne mais **inerte par défaut** ; API d'ingestion
-  de curriculum conforme au contrat.
-- **Ensuite (gardé pour un GO explicite)** : activer la **vraie Emma** sur une
-  fenêtre GPU dédiée (`SEVO_EMMA_LIVE=1` + `LITELLM_URL`, voir l'en-tête de
-  `teacher/emma_litellm.py`), puis ingérer le **programme scolaire français
-  officiel** (sources dans `design/sources.json`) classe par classe — chaque
-  classe étant un épisode développemental versionné.
+- **Fait** : MVP multi-domaines (maths + français), Emma déterministe hors-ligne
+  **et** Emma live (diffusiongemma/DGX) prouvées ; API d'ingestion conforme au
+  contrat ; adaptateur LiteLLM **inerte par défaut** (le run live ci-dessus
+  injecte le transport explicitement).
+- **Ensuite** : ingérer le **programme scolaire français officiel** (sources dans
+  `design/sources.json`) classe par classe — chaque classe = un épisode
+  développemental versionné — en validant les items contre un lexique, et ajouter
+  des domaines (lecture/décodage, conjugaison).
 
 ## Provenance & licence
 

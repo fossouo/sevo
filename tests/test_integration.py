@@ -73,6 +73,35 @@ def test_ingestion_rejects_malformed_nodes():
                     "required_skills": {"a": 0.5, "b": 0.2}})  # weights != 1
 
 
+def test_vet_word_rejects_irregular_and_miscategorised():
+    from sevo.curriculum.fr_cp_ce1 import vet_word
+    # -al category: clean -aux words pass, -als exceptions are rejected
+    assert vet_word("al", "animal") and vet_word("al", "journal")
+    assert not vet_word("al", "final")    # final -> finals (exception)
+    assert not vet_word("al", "bengal")   # bengal -> bengals
+    assert not vet_word("al", "chat")     # not an -al word
+    # regular: plain +s only
+    assert vet_word("reg", "chat")
+    assert not vet_word("reg", "cheval")  # -> chevaux, wrong category
+    assert not vet_word("reg", "souris")  # invariable
+    # invariable: must end in s/x/z
+    assert vet_word("inv", "souris") and vet_word("inv", "prix")
+    assert not vet_word("inv", "chat")
+    # garbage rejected
+    assert not vet_word("al", "x y z")
+
+
+def test_emma_drops_exception_words_offline():
+    """Given a mix including -als exceptions, only clean -aux words become tasks."""
+    fake = FakeTransport(["animal", "final", "journal", "bengal", "local", "canal"])
+    emma = EmmaLiteLLM(transport=fake)
+    tasks = emma.generate_french_tasks("fr.CE1.pluriel_en_al", 6)
+    words = [t.word for t in tasks]
+    assert "final" not in words and "bengal" not in words
+    assert set(words) <= {"animal", "journal", "local", "canal"}
+    assert all(t.answer.endswith("aux") for t in tasks)
+
+
 def test_builtin_registry_has_both_domains():
     reg = builtin_registry()
     assert len(reg.by_subject("mathématiques")) >= 3

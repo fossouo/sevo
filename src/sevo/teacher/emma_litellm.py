@@ -32,11 +32,14 @@ from __future__ import annotations
 import json
 import os
 
-from ..curriculum.fr_cp_ce1 import NODES_FR, _make
+from ..curriculum.fr_cp_ce1 import NODES_FR, _make, vet_word
 
 LLM_KEYS_TO_STRIP = ("ANTHROPIC_API_KEY", "ANTHROPIC_BASE_URL", "ANTHROPIC_AUTH_TOKEN")
 DEFAULT_MODEL = "chat-fast"
-TIMEOUT_S = 30
+TIMEOUT_S = 60
+# Local vLLM-served Gemma/Qwen need thinking disabled (talki R-501): it both
+# wastes tokens and can return content:None on short completions.
+GEMMA_EXTRA_BODY = {"chat_template_kwargs": {"enable_thinking": False}}
 
 
 def _safe_env() -> dict:
@@ -67,18 +70,22 @@ class FakeTransport(Transport):
 
 
 class LiteLLMTransport(Transport):
-    """HTTP transport to a LiteLLM gateway. Built only when a live run is enabled."""
+    """HTTP transport to a LiteLLM gateway (or a vLLM backend directly). Built
+    only when a live run is enabled."""
 
-    def __init__(self, url: str, master_key: str, model: str) -> None:
+    def __init__(self, url: str, master_key: str, model: str, extra_body: dict | None = None) -> None:
         self.url = url.rstrip("/")
         self.master_key = master_key
         self.model = model
+        self.extra_body = extra_body or {}
 
     def chat(self, messages: list[dict]) -> str:  # pragma: no cover - needs network
         import urllib.request
 
         _safe_env()  # defensive: ensure no Anthropic creds linger in this scope
-        body = json.dumps({"model": self.model, "messages": messages, "temperature": 0.7}).encode()
+        payload = {"model": self.model, "messages": messages, "temperature": 0.7,
+                   "max_tokens": 256, **self.extra_body}
+        body = json.dumps(payload).encode()
         req = urllib.request.Request(
             f"{self.url}/v1/chat/completions",
             data=body,
@@ -90,8 +97,10 @@ class LiteLLMTransport(Transport):
 
 
 class EmmaLiteLLM:
-    def __init__(self, transport: Transport | None = None, model: str = DEFAULT_MODEL) -> None:
+    def __init__(self, transport: Transport | None = None, model: str = DEFAULT_MODEL,
+                 extra_body: dict | None = None) -> None:
         self.model = model
+        self.extra_body = GEMMA_EXTRA_BODY if extra_body is None else extra_body
         # An injected transport (e.g. FakeTransport) bypasses the env gate so the
         # wiring is testable offline. A None transport requires an explicit live run.
         self._transport = transport
@@ -113,29 +122,42 @@ class EmmaLiteLLM:
             url=env["LITELLM_URL"],
             master_key=env.get("LITELLM_MASTER_KEY", ""),
             model=self.model,
+            extra_body=self.extra_body,
         )
         return self._transport
 
-    def generate_french_tasks(self, node_id: str, n: int) -> list:
-        """Ask the model for ``n`` curriculum-aligned French nouns, then turn
-        them into gradable tasks (answers computed deterministically by the
-        curriculum, never by the model)."""
+    def generate_french_tasks(self, node_id: str, n: int, oversample: int = 3) -> list:
+        """Ask the model for curriculum-aligned French nouns, vet them, and turn
+        the safe ones into gradable tasks. Answers are computed deterministically
+        by the curriculum, never by the model. Words the curriculum can't grade
+        reliably (irregular -al plurals, mis-categorised words) are dropped — so
+        the brain is never taught a wrong plural."""
         if node_id not in NODES_FR:
             raise ValueError(f"unknown French node: {node_id}")
         spec = NODES_FR[node_id]
+        category = spec["category"]
         transport = self._ensure_transport()
         system = (
             "Tu es Emma, enseignante de CP/CE1. Réponds UNIQUEMENT par un tableau "
             "JSON de noms communs français au singulier, sans phrase autour."
         )
         user = (
-            f"Donne {n} noms communs français adaptés à la notion « {spec['title']} » "
-            f"(catégorie {spec['category']}). Format: [\"mot1\", \"mot2\", ...]"
+            f"Donne {n * oversample} noms communs français adaptés à la notion "
+            f"« {spec['title']} » (catégorie {category}). "
+            f"Format strict: [\"mot1\", \"mot2\", ...]"
         )
         raw = transport.chat([{"role": "system", "content": system},
                               {"role": "user", "content": user}])
-        words = _parse_words(raw)
-        return [_make(node_id, w) for w in words[:n]]
+        seen, vetted = set(), []
+        for w in _parse_words(raw):
+            wl = w.strip().lower()
+            if wl in seen or not vet_word(category, wl):
+                continue
+            seen.add(wl)
+            vetted.append(_make(node_id, wl))
+            if len(vetted) >= n:
+                break
+        return vetted
 
 
 def _parse_words(raw: str) -> list[str]:
