@@ -28,6 +28,7 @@ except ImportError as exc:  # pragma: no cover - optional dependency
         "The HTTP API needs the optional 'api' extra: pip install -e '.[api]'"
     ) from exc
 
+import os
 from typing import Any, Optional
 
 from .brain import StateSchemaError
@@ -74,11 +75,17 @@ class EvaluateReq(BaseModel):
 
 
 class PathReq(BaseModel):
-    path: str
+    path: Optional[str] = None          # defaults to $SEVO_STATE_DIR/brain.json
 
 
 class AuditReq(BaseModel):
     node_id: str
+
+
+def _state_path(path: Optional[str]) -> str:
+    """The single recommended state location is the mounted volume
+    $SEVO_STATE_DIR (/data in Docker); used when no explicit path is given."""
+    return path or os.path.join(os.environ.get("SEVO_STATE_DIR", "/data"), "brain.json")
 
 
 def _guard(fn):
@@ -168,18 +175,20 @@ def session_replay(session_id: str):
 
 @app.post("/save")
 def save(r: PathReq):
-    service.save(r.path)
-    return {"saved": r.path}
+    path = _state_path(r.path)
+    service.save(path)
+    return {"saved": path}
 
 
 @app.post("/load")
 def load(r: PathReq):
     global service
+    path = _state_path(r.path)
     try:
-        service = BrainService.load(r.path)
+        service = BrainService.load(path)
     except (StateSchemaError, EnvelopeSchemaError) as e:
         raise HTTPException(status_code=409, detail=str(e)) from e      # incompatible schema
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e)) from e
-    return {"loaded": r.path, "day": service.brain.day,
+    return {"loaded": path, "day": service.brain.day,
             "schema_version": service.brain.export_state()["schema_version"]}

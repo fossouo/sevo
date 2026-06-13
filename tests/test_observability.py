@@ -35,6 +35,18 @@ def test_audit_clean_for_builtin_banks():
     assert rep["heldout"]["clean"]
 
 
+def test_audit_distinguishes_categories():
+    """C: the audit separates teaching / held-out / transfer (intra- vs
+    out-of-grade) / retention, to diagnose where a contamination came from."""
+    add = audit_node("math.CP.add_within_20", 7)
+    assert add["teaching"]["role"].startswith("reference")
+    assert add["heldout"]["clean"]
+    assert add["transfer"]["kind"] == "out-of-grade"     # addition within 1000
+    assert add["retention"]["reuses"] == "heldout"
+    num = audit_node("math.CP.numeration_dizaines_unites", 7)
+    assert num["transfer"]["kind"] == "intra-grade"      # numbers 80–99, same grade
+
+
 def test_detect_leakage_flags_seen_items():
     teaching = teaching_bank(NODE, 0)
     contaminated = detect_leakage(teaching[:3], teaching)

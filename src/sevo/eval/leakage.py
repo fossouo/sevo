@@ -34,27 +34,53 @@ def detect_leakage(eval_items, teaching_items) -> dict:
     }
 
 
+# Maths CP nodes whose transfer probe is deliberately *out-of-grade* (addition
+# within 1000). Everything else transfers within grade (unseen words / numbers).
+_OUT_OF_GRADE_TRANSFER = {"math.CP.add_within_20", "math.CP.sub_within_20"}
+
+
+def transfer_kind(node_id: str) -> str:
+    return "out-of-grade" if node_id in _OUT_OF_GRADE_TRANSFER else "intra-grade"
+
+
 def audit_node(node_id: str, seed: int = 0) -> dict:
-    """Verify a node's held-out and transfer banks contain no teaching item."""
+    """Audit a node's evaluation banks against its teaching bank, category by
+    category, so a contamination can be diagnosed (which probe leaked, and from
+    where). Distinguishes teaching / held-out / transfer (intra- vs out-of-grade)
+    / retention (which, by protocol, reuses the held-out bank at t2)."""
     from ..curriculum.factory import heldout_bank, teaching_bank
 
     teaching = teaching_bank(node_id, seed)
-    report = {"node_id": node_id, "heldout": detect_leakage(heldout_bank(node_id, seed), teaching)}
+    heldout = heldout_bank(node_id, seed)
+    report = {
+        "node_id": node_id,
+        "teaching": {"n": len(teaching), "role": "reference (seen in training)"},
+        "heldout": {**detect_leakage(heldout, teaching), "vs": "teaching"},
+        "retention": {"reuses": "heldout",
+                      "note": "retention (t2) is measured on the held-out bank "
+                              "after a delay — same items, so its leakage status "
+                              "is the held-out one above"},
+    }
     transfer = _transfer_for(node_id)
     if transfer is not None:
-        report["transfer"] = detect_leakage(transfer, teaching)
-    report["clean"] = all(v["clean"] for k, v in report.items()
+        report["transfer"] = {**detect_leakage(transfer, teaching),
+                              "kind": transfer_kind(node_id), "vs": "teaching"}
+    report["clean"] = all(v["clean"] for v in report.values()
                           if isinstance(v, dict) and "clean" in v)
     return report
 
 
 def _transfer_for(node_id: str):
     """Best-effort transfer bank for the node, or None."""
+    from ..curriculum import cp_ce1_math as _math
     from ..curriculum import cp_maths_numeration as _num
     from ..curriculum import fr_conjugation as _conj
     from ..curriculum import fr_cp_ce1 as _plur
     from ..curriculum import fr_lecture_cp as _lec
+    from ..rng import Rng
 
+    if node_id in _math.NODES and node_id != "math.CE2.multiply_table":
+        return _math.transfer_bank(Rng(99), n=20)        # addition within 1000 (out-of-grade)
     if node_id in _num.NODES_NUM:
         return _num.transfer_bank_num(node_id)
     if node_id == "fr.CP.lecture_mots_reguliers":

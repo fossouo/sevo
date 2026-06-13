@@ -70,3 +70,20 @@ def test_service_save_load_preserves_competence(tmp_path):
     assert reloaded.brain.export_state()["procedural_skills"] == \
         svc.brain.export_state()["procedural_skills"]
     assert reloaded.brain.semantic.mastery(NODE) == mastery
+
+
+def test_save_load_preserves_baseline_and_seed(tmp_path):
+    """A: the migration/round-trip is non-destructive — the original Brain-naïf
+    baseline snapshot and the seed survive a reload (so /diff stays meaningful
+    and the stochastic act/eval path stays reproducible)."""
+    svc = BrainService(seed=7)
+    base_id = svc.baseline_snapshot_id
+    for _ in range(6):
+        svc.replay_emma_session(NODE)
+    path = str(tmp_path / "env.json")
+    svc.save(path)
+    reloaded = BrainService.load(path)            # seed read from the envelope
+    assert reloaded.baseline_snapshot_id == base_id
+    assert reloaded.seed == 7
+    # baseline is the cold brain, not the trained one -> diff still shows learning
+    assert NODE in reloaded.diff()["semantic_concepts_added"]

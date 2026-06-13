@@ -25,12 +25,15 @@ class EnvelopeSchemaError(ValueError):
     pass
 
 
-def make_envelope(brain_state: dict, counters: dict, sessions: dict) -> dict:
+def make_envelope(brain_state: dict, counters: dict, sessions: dict,
+                  baseline: dict | None = None, seed: int = 0) -> dict:
     return {
         "runtime_schema_version": RUNTIME_SCHEMA_VERSION,
         "brain": brain_state,
         "counters": {**DEFAULT_COUNTERS, **counters},
         "sessions": sessions,
+        "baseline_snapshot": baseline,   # Brain-naïf reference for /diff (preserved)
+        "seed": seed,                    # stochastic act/eval reproducibility
     }
 
 
@@ -39,9 +42,14 @@ def _looks_like_bare_brain(env: dict) -> bool:
 
 
 def _migrate_0_4_to_0_5(env: dict) -> dict:
+    """Non-destructive: keep the cognitive state, counters and sessions if
+    present; backfill the new fields with safe defaults (a legacy save has no
+    baseline snapshot — /diff will re-anchor to the loaded brain and say so)."""
     env = dict(env)
     env["counters"] = {**DEFAULT_COUNTERS, **env.get("counters", {})}
     env.setdefault("sessions", {})
+    env.setdefault("baseline_snapshot", None)
+    env.setdefault("seed", 0)
     env["runtime_schema_version"] = "0.5"
     return env
 

@@ -77,3 +77,14 @@ def test_evaluate_leakage_returns_422():
     seen = teaching_bank(NODE, 0)[0].word
     r = client.post("/evaluate", json={"node_id": NODE, "items": [seen]})
     assert r.status_code == 422
+
+
+def test_save_load_default_to_state_volume(tmp_path, monkeypatch):
+    """D: /save and /load with no path default to $SEVO_STATE_DIR (the volume)."""
+    monkeypatch.setenv("SEVO_STATE_DIR", str(tmp_path))
+    client = _client()
+    for _ in range(3):
+        client.post("/replay", json={"node_id": NODE})
+    saved = client.post("/save", json={}).json()["saved"]          # no path
+    assert saved == str(tmp_path / "brain.json")
+    assert client.post("/load", json={}).status_code == 200        # no path

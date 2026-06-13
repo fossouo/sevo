@@ -18,8 +18,10 @@ from __future__ import annotations
 
 import json
 import uuid
+from dataclasses import asdict
 
 from .brain import Brain
+from .state import Snapshot
 from .curriculum.factory import build_task, heldout_bank, teaching_bank
 from .eval import (
     ItemLeakageError,
@@ -203,15 +205,21 @@ class BrainService:
 
     # -- persistence (versioned envelope) ------------------------------------
     def save(self, path: str) -> None:
+        env = make_envelope(self.brain.export_state(), self.counters, self.sessions,
+                            baseline=asdict(self._baseline_snapshot), seed=self.seed)
         with open(path, "w", encoding="utf-8") as f:
-            json.dump(make_envelope(self.brain.export_state(), self.counters, self.sessions),
-                      f, indent=2, ensure_ascii=False)
+            json.dump(env, f, indent=2, ensure_ascii=False)
 
     @classmethod
-    def load(cls, path: str, seed: int = 0) -> "BrainService":
+    def load(cls, path: str, seed: int | None = None) -> "BrainService":
         with open(path, encoding="utf-8") as f:
             env = migrate_envelope(json.load(f))
-        svc = cls(brain=Brain.from_state(env["brain"], seed=seed), seed=seed)
+        resolved_seed = seed if seed is not None else env.get("seed", 0)
+        svc = cls(brain=Brain.from_state(env["brain"], seed=resolved_seed), seed=resolved_seed)
         svc.counters = {**DEFAULT_COUNTERS, **env.get("counters", {})}
         svc.sessions = env.get("sessions", {})
+        # Restore the ORIGINAL Brain-naïf baseline so /diff stays meaningful
+        # across a reload (a legacy 0.4 save has none — keep the re-captured one).
+        if env.get("baseline_snapshot"):
+            svc._baseline_snapshot = Snapshot(**env["baseline_snapshot"])
         return svc

@@ -26,6 +26,8 @@ def test_explicit_0_4_envelope_migrates_and_backfills_counters():
     assert env["runtime_schema_version"] == "0.5"
     assert env["counters"]["feedbacks"] == 3       # preserved
     assert env["counters"]["perceptions"] == 0     # backfilled
+    assert env["baseline_snapshot"] is None        # legacy had none
+    assert env["seed"] == 0                         # backfilled default
 
 
 def test_current_envelope_passes_through():

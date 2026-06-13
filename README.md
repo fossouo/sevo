@@ -205,6 +205,23 @@ testable sans serveur.
 - **Docker** : `Dockerfile` + `docker-compose.yml` (volume `/data` pour l'état),
   `scripts/smoke_test.sh` (`docker compose up --build` puis le smoke test).
 
+**État persistant — chemin unique recommandé** : `$SEVO_STATE_DIR` (= `/data`
+dans le conteneur, monté sur le volume `sevo-state`). `POST /save` et `/load`
+**sans `path`** y écrivent/lisent `brain.json` par défaut. Sauvegarder /
+restaurer le volume :
+
+```bash
+# enregistrer l'état appris dans le volume
+curl -X POST localhost:8000/save -H 'content-type: application/json' -d '{}'
+# sauvegarde du volume hors conteneur
+docker run --rm -v sevo-state:/data -v "$PWD":/backup busybox \
+  tar czf /backup/sevo-state.tgz -C /data .
+# restauration
+docker run --rm -v sevo-state:/data -v "$PWD":/backup busybox \
+  tar xzf /backup/sevo-state.tgz -C /data
+curl -X POST localhost:8000/load -H 'content-type: application/json' -d '{}'
+```
+
 ---
 
 ## La formule Intelligence_delta
