@@ -28,9 +28,24 @@ class BrainService:
         self.brain = brain or Brain(seed=seed)
         self.seed = seed
         self.emma = EmmaTeacher()
+        # Baseline captured ONCE at construction (Brain-naïf). /diff always
+        # compares the current brain to this stored snapshot — it is never
+        # reconstructed per call (which could drift). set_baseline() re-anchors
+        # it explicitly if a caller wants a new reference point.
         self.brain_before = self.brain.export_state()
         self._baseline_snapshot = self.brain.snapshot()
         self._touched: set[str] = set()
+
+    def set_baseline(self) -> str:
+        """Re-anchor the diff baseline to the brain's current state. Returns the
+        new baseline snapshot id."""
+        self.brain_before = self.brain.export_state()
+        self._baseline_snapshot = self.brain.snapshot()
+        return self._baseline_snapshot.snapshot_id
+
+    @property
+    def baseline_snapshot_id(self) -> str:
+        return self._baseline_snapshot.snapshot_id
 
     # -- teaching channel ----------------------------------------------------
     def perceive(self, modality: str, content, source: str = "api") -> dict:

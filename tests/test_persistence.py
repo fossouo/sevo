@@ -3,7 +3,9 @@
 This is the core promise of the runtime: the CP-appris brain is durable, not a
 transient of one process.
 """
-from sevo.brain import Brain
+import pytest
+
+from sevo.brain import STATE_SCHEMA_VERSION, Brain, StateSchemaError
 from sevo.curriculum.fr_lecture_cp import build_bank_lecture
 from sevo.rng import Rng
 from sevo.runtime import BrainService
@@ -28,6 +30,20 @@ def test_export_import_round_trip_is_exact():
     assert b2.export_state()["semantic_mastery"] == s["semantic_mastery"]
     assert b2.semantic.mastery(NODE) == b.semantic.mastery(NODE)
     assert b2.day == b.day and b2.stage.school_class == b.stage.school_class
+
+
+def test_export_carries_schema_version():
+    s = _trained().export_state()
+    assert s["schema_version"] == STATE_SCHEMA_VERSION
+
+
+def test_from_state_refuses_missing_or_unsupported_schema():
+    s = _trained().export_state()
+    no_version = {k: v for k, v in s.items() if k != "schema_version"}
+    with pytest.raises(StateSchemaError):
+        Brain.from_state(no_version)
+    with pytest.raises(StateSchemaError):
+        Brain.from_state({**s, "schema_version": "9.9"})
 
 
 def test_from_state_keeps_default_for_skill_absent_in_save():

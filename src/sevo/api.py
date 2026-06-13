@@ -30,6 +30,7 @@ except ImportError as exc:  # pragma: no cover - optional dependency
 
 from typing import Any, Optional
 
+from .brain import StateSchemaError
 from .curriculum.factory import TaskFactoryError
 from .runtime import BrainService
 
@@ -130,5 +131,11 @@ def save(r: PathReq):
 @app.post("/load")
 def load(r: PathReq):
     global service
-    service = BrainService.load(r.path)
-    return {"loaded": r.path, "day": service.brain.day}
+    try:
+        service = BrainService.load(r.path)
+    except StateSchemaError as e:
+        raise HTTPException(status_code=409, detail=str(e)) from e      # incompatible schema
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
+    return {"loaded": r.path, "day": service.brain.day,
+            "schema_version": service.brain.export_state()["schema_version"]}

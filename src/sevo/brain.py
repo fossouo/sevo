@@ -37,6 +37,17 @@ from .services import (
 from .rng import Rng
 from .state import CognitiveState, DevelopmentStage, Snapshot, take_snapshot
 
+# State-schema version of export_state(); bumped when the serialised shape
+# changes. from_state() refuses an unsupported version rather than silently
+# misreading an old save against a newer structure.
+STATE_SCHEMA_VERSION = "0.4"
+SUPPORTED_STATE_SCHEMAS = {"0.4"}
+
+
+class StateSchemaError(ValueError):
+    pass
+
+
 # A brain may traverse several domains, so by default it carries the union of
 # all known procedural skills (unused skills stay inert at baseline
 # automaticity). ``grapheme_recognition`` is shared between French domains, so
@@ -180,7 +191,7 @@ class Brain:
         mastery graph, the metacognitive self-model, the clock and the stage —
         everything a CP-appris brain must keep across a save/reload."""
         return {
-            "version": 1,
+            "schema_version": STATE_SCHEMA_VERSION,
             "brain_id": self.brain_id,
             "day": self.day,
             "stage": {"school_class": self.stage.school_class,
@@ -199,7 +210,22 @@ class Brain:
     def from_state(cls, state: dict, seed: int = 0) -> "Brain":
         """Rebuild a brain from ``export_state``. Skills present in the saved
         state overwrite the defaults; any newer skill keeps its baseline, so an
-        old save still loads after the skill set grows."""
+        old save still loads after the skill set grows.
+
+        Refuses a state whose ``schema_version`` is missing or unsupported, so an
+        export written by a different structure is never misread silently."""
+        version = state.get("schema_version")
+        if version is None:
+            raise StateSchemaError(
+                "brain state has no 'schema_version'; refusing to load an "
+                "unversioned export (expected one of "
+                f"{sorted(SUPPORTED_STATE_SCHEMAS)})"
+            )
+        if version not in SUPPORTED_STATE_SCHEMAS:
+            raise StateSchemaError(
+                f"unsupported brain state schema_version {version!r}; this build "
+                f"supports {sorted(SUPPORTED_STATE_SCHEMAS)}. Migrate the state first."
+            )
         brain = cls(seed=seed)
         brain.brain_id = state.get("brain_id", brain.brain_id)
         brain.day = state.get("day", 0)

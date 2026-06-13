@@ -55,12 +55,34 @@ def test_replay_teaches_to_competence():
     assert svc.evaluate(NODE)["accuracy"] >= 0.7
 
 
-def test_evaluate_is_independent_of_teaching():
+def test_evaluate_writes_nothing_to_state():
+    """B: /evaluate must not learn, give feedback, consolidate, move the clock,
+    or touch metacognition — the entire exported state is byte-identical after
+    repeated independent evaluation (calibration included, it is computed by the
+    oracle and never written back)."""
     svc = _taught()
-    g1 = svc.brain.procedural.graph(svc.brain.day)
-    for _ in range(3):
-        svc.evaluate(NODE)              # the oracle channel
-    assert svc.brain.procedural.graph(svc.brain.day) == g1   # taught nothing
+    state_before = svc.brain.export_state()
+    for _ in range(5):
+        svc.evaluate(NODE)
+    assert svc.brain.export_state() == state_before
+
+
+def test_feedback_requires_a_known_node_and_builds_a_task():
+    """C: no free-form teaching — feedback on an unknown node is refused, so the
+    brain can never be taught off-curriculum without a reconstructable task."""
+    svc = BrainService(seed=1)
+    with pytest.raises(TaskFactoryError):
+        svc.feedback("fr.CM2.unknown", "x", correct=True)
+
+
+def test_diff_baseline_is_stable_across_calls():
+    """D: the diff baseline is the snapshot stored at construction, not
+    reconstructed per call — so repeated /diff use the same reference point."""
+    svc = _taught()
+    d1, d2 = svc.diff(), svc.diff()
+    assert d1["snapshot_ids"]["before"] == svc.baseline_snapshot_id
+    assert d1["snapshot_ids"]["before"] == d2["snapshot_ids"]["before"]
+    assert d1["semantic_concepts_added"] == d2["semantic_concepts_added"]
 
 
 def test_diff_and_genuine_verdict():
