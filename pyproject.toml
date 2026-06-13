@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sevo"
-version = "0.3.0"
+version = "0.4.0"
 description = "Sèvo — a persistent artificial brain exposed by API, that learns a school curriculum and is measured before/after (Intelligence_delta)."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -14,8 +14,8 @@ keywords = ["cognitive-architecture", "complementary-learning-systems", "educati
 dependencies = []
 
 [project.optional-dependencies]
-api = ["fastapi>=0.110", "uvicorn>=0.27", "pydantic>=2"]
-dev = ["pytest>=8"]
+api = ["fastapi>=0.110", "uvicorn>=0.27", "pydantic>=2", "httpx>=0.27"]
+dev = ["pytest>=8", "fastapi>=0.110", "httpx>=0.27"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

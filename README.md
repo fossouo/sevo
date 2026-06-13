@@ -156,10 +156,34 @@ pip install -e ".[api]"
 uvicorn sevo.api:app --reload
 ```
 
-Surface API (`design/api_surface.json`) : `/perceive` · `/act` · `/learn/session`
-· `/learn/feedback` · `/consolidate` · `/evaluate/pretest` · `/evaluate/posttest`
-· `/state/snapshot/{id}` · `/intelligence/delta`. Règle cardinale : **l'API
-d'évaluation n'écrit jamais dans les mémoires d'apprentissage**.
+### Le cerveau comme microservice persistant
+
+Le cerveau CP-appris est exposé comme un **service persistant** interrogeable
+(`sevo.runtime.BrainService`, surface HTTP `sevo.api`) :
+
+```bash
+pip install -e ".[api]"
+uvicorn sevo.api:app --reload
+```
+
+| Endpoint | Rôle | Canal |
+|---|---|---|
+| `POST /perceive` | percevoir un stimulus | enseignement |
+| `POST /act` | répondre (lecture seule, **n'apprend pas**) | enseignement |
+| `POST /feedback` | feedback structuré d'Emma → le cerveau apprend | enseignement |
+| `POST /consolidate` | replay / « sommeil » | enseignement |
+| `POST /replay` | rejouer une session Emma sur un nœud | enseignement |
+| `GET /state` | exporter l'état appris (brain_after) | — |
+| `GET /diff` | diff `Brain-naïf → Brain-appris` + verdict GENUINE | observation |
+| `POST /evaluate` | oracle sur la banque held-out d'un nœud | **assessment** |
+| `POST /save` · `/load` | persister / recharger un état par chemin | — |
+
+**Règles cardinales** : (1) le **canal d'enseignement** (`act`/`feedback`/
+`consolidate`) et le **canal d'évaluation** (`evaluate`, oracle) sont stricts et
+séparés — Emma ne se note jamais ; (2) un cerveau **sauvegardé puis rechargé
+conserve exactement ses compétences** (état procédural/sémantique identique au
+bit près — testé). L'API HTTP est un mince adaptateur sur `BrainService`, lui-même
+testable sans serveur.
 
 ---
 
@@ -198,10 +222,12 @@ src/sevo/      # implémentation de référence
   curriculum/  # base · cp_ce1_math · cp_maths_numeration · fr_cp_ce1 · fr_conjugation · fr_lecture_cp · fr_lexicon · official_curriculum · ingestion
   teacher/     # emma_stub (offline) · emma_session (boucle API Emma) · emma_litellm (live, INERTE par défaut)
   eval/        # protocole + Intelligence_delta + integrity (anti-illusion) + state_diff (Brain-before/after)
-  brain.py     # orchestrateur + surface API (multi-domaines, /learn/feedback)
-  api.py       # adaptateur HTTP FastAPI (optionnel)
+  brain.py     # orchestrateur + surface API + export_state/from_state (persistance)
+  runtime.py   # BrainService : cerveau persistant (perceive/act/feedback/consolidate/state/diff/evaluate/save/load/replay)
+  curriculum/factory.py  # build_task(node_id, content) — pont JSON → Task
+  api.py       # adaptateur HTTP FastAPI (optionnel) sur BrainService
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 77 tests : design + maths (calcul/numération) + français (pluriel/conjugaison/lecture/syllabes/dictée) + lexique + curriculum officiel + intégrité + state-diff + boucle Emma + intégration
+tests/         # 91 tests : design + maths + français (toutes notions) + lexique + curriculum officiel + intégrité + state-diff + boucle Emma + persistance + runtime + API HTTP + intégration
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 
@@ -242,6 +268,9 @@ une ressource lexicale réelle, validée de la même façon.
   `Brain CP-naïf → Brain CP-appris` (concepts/règles/compétences/misconceptions/
   rétention) + matrice de maîtrise par compétence ; **garde-fou anti-illusion**
   sur chaque delta ; lexique structuré ; Emma déterministe **et** live prouvées.
+- **Runtime** : le cerveau CP-appris est un **microservice persistant**
+  (`runtime.BrainService` + `api.py`) — save/reload conserve les compétences,
+  canaux enseignement/évaluation séparés, replay de session Emma.
 - **Ensuite** : ingérer les **classes suivantes** (CE1, CE2…) via
   `official_curriculum.register_class` (volontairement non démarré tant que le CP
   n'est pas durci) ; brancher le lexique sur la **ressource réelle complète**
