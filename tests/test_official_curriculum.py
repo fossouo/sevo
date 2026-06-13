@@ -10,9 +10,11 @@ import pytest
 from sevo.curriculum.ingestion import CurriculumRegistry
 from sevo.curriculum.official_curriculum import (
     CE1_PROGRAM,
+    CE2_PROGRAM,
     CP_PROGRAM,
     RUNNABLE_CP,
     official_ce1_registry,
+    official_ce2_registry,
     official_cp_registry,
     register_class,
     runnable_for,
@@ -80,5 +82,22 @@ def test_ce1_is_extension_not_rewrite():
     assert set(runnable_for("CE1")) == ids
     from sevo.rng import Rng
     for rn in runnable_for("CE1").values():
+        bank = rn.build(Rng(1))
+        assert bank.teaching and bank.heldout
+
+
+def test_ce2_programme_ingests_via_same_contract():
+    reg = official_ce2_registry()
+    assert len(reg.by_class("CE2")) == 3            # add/sub within 1000 + invariable plurals
+    assert len(reg.by_subject("mathématiques")) == 2
+    assert len(reg.by_subject("français")) == 1
+
+
+def test_ce2_is_extension_not_rewrite():
+    ids = {n["id"] for n in CE2_PROGRAM["nodes"]}
+    assert {"math.CE2.add_within_1000", "fr.CE2.pluriel_invariables"} <= ids
+    assert set(runnable_for("CE2")) == ids
+    from sevo.rng import Rng
+    for rn in runnable_for("CE2").values():
         bank = rn.build(Rng(1))
         assert bank.teaching and bank.heldout

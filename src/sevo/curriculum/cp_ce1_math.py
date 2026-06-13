@@ -121,6 +121,24 @@ NODES: dict[str, dict] = {
         "op": "sub",
         "range": (10, 89),
     },
+    "math.CE2.add_within_1000": {
+        "title": "Addition jusqu'à 1000",
+        "prerequisites": ["math.CE1.add_within_100_carry"],
+        "required_skills": {"place_value": 0.3, "add_facts_within_20": 0.3, "carry": 0.4},
+        "mastery_threshold": 0.8,
+        "op": "add",
+        "range": (100, 899),
+        "generated": True,
+    },
+    "math.CE2.sub_within_1000": {
+        "title": "Soustraction jusqu'à 1000",
+        "prerequisites": ["math.CE1.sub_within_100_borrow"],
+        "required_skills": {"place_value": 0.3, "sub_facts_within_20": 0.3, "borrow": 0.4},
+        "mastery_threshold": 0.8,
+        "op": "sub",
+        "range": (100, 999),
+        "generated": True,
+    },
     # Never taught directly — used only to test "knows what it doesn't know".
     "math.CE2.multiply_table": {
         "title": "Tables de multiplication (NON enseigné — sonde métacognitive)",
@@ -193,12 +211,38 @@ class Bank:
     heldout: list[Problem] = field(default_factory=list)
 
 
+def _generated_bank(node_id: str, rng: Rng, n_teach: int, n_heldout: int) -> Bank:
+    """For large-range nodes (within 1000) the full pool is too big to enumerate,
+    so we sample DISJOINT teaching/held-out operand pairs instead."""
+    spec = NODES[node_id]
+    r = rng.fork(node_id)
+    need = n_teach + n_heldout
+    seen, items, guard = set(), [], 0
+    while len(items) < need and guard < need * 50:
+        guard += 1
+        if spec["op"] == "add":
+            a = r.randint(100, 799)
+            b = r.randint(100, 999 - a)
+            p = _make_add(node_id, a, b)
+        else:
+            a = r.randint(200, 999)
+            b = r.randint(100, a - 1)
+            p = _make_sub(node_id, a, b)
+        if (p.a, p.b) in seen:
+            continue
+        seen.add((p.a, p.b))
+        items.append(p)
+    return Bank(teaching=items[:n_teach], heldout=items[n_teach:need])
+
+
 def build_bank(node_id: str, rng: Rng, n_teach: int = 24, n_heldout: int = 24) -> Bank:
     """Split a node's pool into DISJOINT teaching and held-out sets.
 
     The same operand pair never appears in both sets, so improving on the
     held-out set cannot be explained by memorising teaching items.
     """
+    if NODES[node_id].get("generated"):
+        return _generated_bank(node_id, rng, n_teach, n_heldout)
     pool = _pool(node_id)
     rng.shuffle(pool)
     teaching = pool[:n_teach]

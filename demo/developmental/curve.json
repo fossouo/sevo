@@ -1,0 +1,52 @@
+{
+  "research_question": "Does a CE1-appris brain accelerate CE2 more than CP accelerated CE1?",
+  "answer": "yes, on carry-dependent arithmetic — the bottleneck skill (`carry`) learned at CE1 completes the prerequisite chain",
+  "steps": {
+    "CP->CE1": {
+      "prior": [
+        "CP"
+      ],
+      "target": "CE1",
+      "per_node_transfer": {
+        "fr.CE1.pluriel_reguliers": 0.1818,
+        "fr.CE1.pluriel_en_al": -0.25,
+        "fr.CE1.present_verbes_er": 0.0151,
+        "math.CE1.add_within_100_nocarry": 0.75,
+        "math.CE1.add_within_100_carry": 0.0,
+        "math.CE1.sub_within_100_borrow": 0.25
+      },
+      "mean_transfer": 0.1578,
+      "spotlight": {
+        "node": "math.CE1.add_within_100_carry",
+        "transfer": 0.0,
+        "trials_dev": 16,
+        "trials_naive": 24,
+        "dev_pretest": 0.2917,
+        "naive_pretest": 0.2917
+      }
+    },
+    "CE1->CE2": {
+      "prior": [
+        "CP",
+        "CE1"
+      ],
+      "target": "CE2",
+      "per_node_transfer": {
+        "fr.CE2.pluriel_invariables": 0.0,
+        "math.CE2.add_within_1000": 0.875,
+        "math.CE2.sub_within_1000": 0.9167
+      },
+      "mean_transfer": 0.5972,
+      "spotlight": {
+        "node": "math.CE2.add_within_1000",
+        "transfer": 0.875,
+        "trials_dev": 8,
+        "trials_naive": 56,
+        "dev_pretest": 0.875,
+        "naive_pretest": 0.0
+      }
+    }
+  },
+  "bottleneck_unlocked": true,
+  "interpretation": "developmental curve — each class unlocks the next by filling the bottleneck skill; transfer stays localized to shared structure (not a global acceleration)."
+}

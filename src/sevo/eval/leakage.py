@@ -83,7 +83,8 @@ def _transfer_for(node_id: str):
     from ..curriculum import fr_lecture_cp as _lec
     from ..rng import Rng
 
-    if node_id in _math.NODES and node_id != "math.CE2.multiply_table":
+    if (node_id in _math.NODES and node_id != "math.CE2.multiply_table"
+            and not _math.NODES[node_id].get("generated")):
         return _math.transfer_bank(Rng(99), n=20)        # addition within 1000 (out-of-grade)
     if node_id in _num.NODES_NUM:
         return _num.transfer_bank_num(node_id)

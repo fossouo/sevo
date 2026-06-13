@@ -1,0 +1,76 @@
+{
+  "semantic_concepts_added": [
+    "fr.CE2.pluriel_invariables",
+    "math.CE2.add_within_1000",
+    "math.CE2.sub_within_1000"
+  ],
+  "procedural_rules_acquired": [
+    "add_facts_within_20",
+    "borrow",
+    "carry",
+    "grapheme_recognition",
+    "place_value",
+    "plural_invariant",
+    "sub_facts_within_20"
+  ],
+  "mastered_skills": {
+    "add_facts_within_20": {
+      "before": 0.05,
+      "after": 0.934
+    },
+    "borrow": {
+      "before": 0.05,
+      "after": 0.91
+    },
+    "carry": {
+      "before": 0.05,
+      "after": 0.937
+    },
+    "grapheme_recognition": {
+      "before": 0.05,
+      "after": 0.932
+    },
+    "place_value": {
+      "before": 0.05,
+      "after": 0.944
+    },
+    "plural_invariant": {
+      "before": 0.05,
+      "after": 0.932
+    },
+    "sub_facts_within_20": {
+      "before": 0.05,
+      "after": 0.902
+    }
+  },
+  "misconceptions_reduced": {
+    "heldout_error_rate_before": 1.0,
+    "heldout_error_rate_after": 0.083,
+    "reduction": 0.917
+  },
+  "calibration_delta": {
+    "before": 0.1,
+    "after": 0.154,
+    "improvement": -0.054
+  },
+  "retention_traces": {
+    "t2_heldout_accuracy": 0.917,
+    "retention_ratio_t2_over_t1": 1.0,
+    "consolidated_skills": [
+      "add_facts_within_20",
+      "borrow",
+      "carry",
+      "grapheme_recognition",
+      "place_value",
+      "plural_invariant",
+      "sub_facts_within_20"
+    ]
+  },
+  "learning_efficiency": 0.0,
+  "snapshot_ids": {
+    "before": "baseline",
+    "after": "after"
+  },
+  "transfer_after_best": 0.917,
+  "note": "live diff — retention is immediate (no 7-day delay); use run_cp_grade for the full delayed-retention protocol"
+}
