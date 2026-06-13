@@ -374,7 +374,7 @@ Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
 scripts/demo_cp.py · Makefile (make demo-cp)              # preuve fondatrice reproductible
 docs/CP_PROTOCOL.md · demo/artifacts/ · demo/artifacts_ce1/  # protocole gelé + preuves CP & CE1
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 161 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
+tests/         # 165 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
 scripts/developmental.py · reports/DEVELOPMENTAL_REPORT.md · demo/developmental/  # étude CP→CE1
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
@@ -441,6 +441,11 @@ une ressource lexicale réelle, validée de la même façon.
   formes fléchies, niveau, splits **train/held-out/transfer**. Seed amorce
   embarqué ; une vraie ressource (Manulex/Dubois-Buyse) se branche via
   `load_external` sous la même garde (données jamais committées).
+- **Génération live d'exercices par Emma** (`teacher/live_exercises.py`) sous
+  contrat strict, vérifié par code : Emma génère des **items d'entraînement
+  uniquement**, la **vérité terrain vient du curriculum** (jamais du modèle), et
+  un **garde anti-leakage** refuse tout item dont l'identité collisionne avec les
+  probes (held-out/transfert). Inerte par défaut.
 - **Ensuite** : CE2… via le même `register_class` ; brancher le lexique sur la
   **ressource réelle complète** (Manulex / Dubois-Buyse) ; ajouter la **fluence**
   et la compréhension de consignes ; génération live d'exercices (mêmes gardes).
