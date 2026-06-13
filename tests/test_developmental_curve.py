@@ -40,6 +40,16 @@ def test_ce1_to_ce2_arithmetic_is_faster(curve):
     assert ce["trials_dev"] < ce["trials_naive"]    # CE1-appris learns CE2 add faster
 
 
+def test_new_bottleneck_re_blocks_at_cm1(curve):
+    """The pattern recurs: multiplication is new at CM1, so transfer is blocked
+    again — just like `carry` blocked CP→CE1. Bottleneck, not magic."""
+    c, _, _ = curve
+    assert c["new_bottleneck_blocks_again"]
+    cm = c["steps"]["CE2->CM1"]["spotlight"]
+    ce = c["steps"]["CE1->CE2"]["spotlight"]
+    assert cm["transfer"] < 0.2 < ce["transfer"]    # CM1 multiply blocked; CE2 add unlocked
+
+
 def test_curve_artifacts_and_report(curve):
     _, out, rep = curve
     path = os.path.join(out, "curve.json")

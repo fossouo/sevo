@@ -1,0 +1,38 @@
+{
+  "semantic_concepts_added": [
+    "math.CM1.multiply_table"
+  ],
+  "procedural_rules_acquired": [
+    "multiply_facts"
+  ],
+  "mastered_skills": {
+    "multiply_facts": {
+      "before": 0.05,
+      "after": 0.936
+    }
+  },
+  "misconceptions_reduced": {
+    "heldout_error_rate_before": 1.0,
+    "heldout_error_rate_after": 0.069,
+    "reduction": 0.931
+  },
+  "calibration_delta": {
+    "before": 0.1,
+    "after": 0.077,
+    "improvement": 0.023
+  },
+  "retention_traces": {
+    "t2_heldout_accuracy": 0.931,
+    "retention_ratio_t2_over_t1": 1.0,
+    "consolidated_skills": [
+      "multiply_facts"
+    ]
+  },
+  "learning_efficiency": 0.0,
+  "snapshot_ids": {
+    "before": "baseline",
+    "after": "after"
+  },
+  "transfer_after_best": 0.931,
+  "note": "live diff — retention is immediate (no 7-day delay); use run_cp_grade for the full delayed-retention protocol"
+}

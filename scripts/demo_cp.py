@@ -28,7 +28,8 @@ THRESHOLD = 0.8
 MAX_SESSIONS = 8
 REPRESENTATIVE = {"CP": "fr.CP.lecture_mots_reguliers",
                   "CE1": "fr.CE1.present_verbes_er",
-                  "CE2": "math.CE2.add_within_1000"}
+                  "CE2": "math.CE2.add_within_1000",
+                  "CM1": "math.CM1.multiply_table"}
 HERE = os.path.dirname(__file__)
 ARTIFACTS = os.path.join(HERE, "..", "demo", "artifacts")
 

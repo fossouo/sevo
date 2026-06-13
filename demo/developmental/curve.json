@@ -1,6 +1,6 @@
 {
-  "research_question": "Does a CE1-appris brain accelerate CE2 more than CP accelerated CE1?",
-  "answer": "yes, on carry-dependent arithmetic — the bottleneck skill (`carry`) learned at CE1 completes the prerequisite chain",
+  "research_question": "Does a CE1-appris brain accelerate CE2 more than CP accelerated CE1 — and does a new bottleneck (multiplication at CM1) block transfer again?",
+  "answer": "yes — transfer succeeds once the bottleneck skill is known (`carry` by CE2), and is blocked again when a new one appears (`multiply` at CM1). Each class unlocks the next by filling its bottleneck.",
   "steps": {
     "CP->CE1": {
       "prior": [
@@ -45,8 +45,29 @@
         "dev_pretest": 0.875,
         "naive_pretest": 0.0
       }
+    },
+    "CE2->CM1": {
+      "prior": [
+        "CP",
+        "CE1",
+        "CE2"
+      ],
+      "target": "CM1",
+      "per_node_transfer": {
+        "math.CM1.multiply_table": 0.0
+      },
+      "mean_transfer": 0.0,
+      "spotlight": {
+        "node": "math.CM1.multiply_table",
+        "transfer": 0.0,
+        "trials_dev": 16,
+        "trials_naive": 16,
+        "dev_pretest": 0.0,
+        "naive_pretest": 0.0
+      }
     }
   },
   "bottleneck_unlocked": true,
-  "interpretation": "developmental curve — each class unlocks the next by filling the bottleneck skill; transfer stays localized to shared structure (not a global acceleration)."
+  "new_bottleneck_blocks_again": true,
+  "interpretation": "developmental curve — each class unlocks the next by filling the bottleneck skill; a brand-new skill re-blocks transfer; it stays localized to shared structure (not a global acceleration)."
 }

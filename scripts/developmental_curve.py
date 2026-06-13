@@ -35,7 +35,9 @@ developmental = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(developmental)
 SEED = developmental.SEED
 
-SPOTLIGHT = {"CE1": "math.CE1.add_within_100_carry", "CE2": "math.CE2.add_within_1000"}
+SPOTLIGHT = {"CE1": "math.CE1.add_within_100_carry",
+             "CE2": "math.CE2.add_within_1000",
+             "CM1": "math.CM1.multiply_table"}
 
 
 def _step(prior_grades: list, target: str) -> dict:
@@ -66,17 +68,25 @@ def run(out: str = ARTIFACTS, reports: str = REPORTS) -> dict:
 
     cp_ce1 = _step(["CP"], "CE1")
     ce1_ce2 = _step(["CP", "CE1"], "CE2")
+    ce2_cm1 = _step(["CP", "CE1", "CE2"], "CM1")
     unlocked = ce1_ce2["spotlight"]["transfer"] > cp_ce1["spotlight"]["transfer"]
+    # CM1 introduces a brand-new skill (multiply) -> the pattern repeats: the new
+    # bottleneck blocks transfer again, just like `carry` did at CE1.
+    new_bottleneck_blocks = ce2_cm1["spotlight"]["transfer"] < ce1_ce2["spotlight"]["transfer"]
 
     curve = {
-        "research_question": "Does a CE1-appris brain accelerate CE2 more than CP accelerated CE1?",
-        "answer": ("yes, on carry-dependent arithmetic — the bottleneck skill "
-                   "(`carry`) learned at CE1 completes the prerequisite chain"),
-        "steps": {"CP->CE1": cp_ce1, "CE1->CE2": ce1_ce2},
+        "research_question": "Does a CE1-appris brain accelerate CE2 more than CP accelerated CE1 — "
+                             "and does a new bottleneck (multiplication at CM1) block transfer again?",
+        "answer": ("yes — transfer succeeds once the bottleneck skill is known "
+                   "(`carry` by CE2), and is blocked again when a new one appears "
+                   "(`multiply` at CM1). Each class unlocks the next by filling its bottleneck."),
+        "steps": {"CP->CE1": cp_ce1, "CE1->CE2": ce1_ce2, "CE2->CM1": ce2_cm1},
         "bottleneck_unlocked": unlocked,
+        "new_bottleneck_blocks_again": new_bottleneck_blocks,
         "interpretation": "developmental curve — each class unlocks the next by "
-                          "filling the bottleneck skill; transfer stays localized "
-                          "to shared structure (not a global acceleration).",
+                          "filling the bottleneck skill; a brand-new skill re-blocks "
+                          "transfer; it stays localized to shared structure "
+                          "(not a global acceleration).",
     }
     with open(os.path.join(out, "curve.json"), "w", encoding="utf-8") as f:
         json.dump(curve, f, indent=2, ensure_ascii=False)
@@ -85,20 +95,30 @@ def run(out: str = ARTIFACTS, reports: str = REPORTS) -> dict:
 
 
 def _write_report(path: str, curve: dict) -> None:
-    cp, ce = curve["steps"]["CP->CE1"]["spotlight"], curve["steps"]["CE1->CE2"]["spotlight"]
+    cp = curve["steps"]["CP->CE1"]["spotlight"]
+    ce = curve["steps"]["CE1->CE2"]["spotlight"]
+    cm = curve["steps"]["CE2->CM1"]["spotlight"]
     a = []
-    a.append("# Developmental curve — naïf → CP → CE1 → CE2\n")
+    a.append("# Developmental curve — naïf → CP → CE1 → CE2 → CM1\n")
     a.append(f"\n_Reproducible, seed = {SEED}. **{curve['research_question']}**_\n")
-    a.append(f"\n## Réponse : **oui** (sur l'arithmétique dépendante de la retenue)\n")
-    a.append("\nLe transfert arithmétique mesuré à chaque étape, sur le nœud-clé "
-             "(addition avec retenue) :\n")
-    a.append("\n| Étape | Nœud arithmétique | Transfert (Δ pré-test) | Essais (dev vs naïf) |")
-    a.append("\n|---|---|---|---|")
-    a.append(f"\n| **CP → CE1** | `{cp['node']}` | **{cp['transfer']:+.2f}** | "
+    a.append("\n## Réponse : **oui**, et le motif se répète\n")
+    a.append("\nLe transfert sur le nœud-clé de chaque étape (la compétence "
+             "arithmétique nouvelle de la classe cible) :\n")
+    a.append("\n| Étape | Nœud-clé | Compétence-goulot | Transfert (Δ pré-test) | Essais (dev vs naïf) |")
+    a.append("\n|---|---|---|---|---|")
+    a.append(f"\n| **CP → CE1** | `{cp['node']}` | `carry` (nouveau) | **{cp['transfer']:+.2f}** | "
              f"{cp['trials_dev']} vs {cp['trials_naive']} |")
-    a.append(f"\n| **CE1 → CE2** | `{ce['node']}` | **{ce['transfer']:+.2f}** | "
+    a.append(f"\n| **CE1 → CE2** | `{ce['node']}` | `carry` (acquis) | **{ce['transfer']:+.2f}** | "
              f"{ce['trials_dev']} vs {ce['trials_naive']} |")
-    a.append("\n\n## Pourquoi — le goulot se débloque\n")
+    a.append(f"\n| **CE2 → CM1** | `{cm['node']}` | `multiply` (nouveau) | **{cm['transfer']:+.2f}** | "
+             f"{cm['trials_dev']} vs {cm['trials_naive']} |")
+    a.append("\n\n## Le motif : nouveau goulot ⇒ blocage ; goulot acquis ⇒ déblocage\n")
+    a.append(f"\n* **CE2 → CM1** : la multiplication ne transfère **pas** "
+             f"({cm['transfer']:+.2f}) — `multiply` est **nouveau** au CM1, exactement "
+             "comme `carry` l'était au CE1. Le motif est **récurrent** : chaque "
+             "classe rencontre un nouveau goulot qui bloque le transfert jusqu'à "
+             "ce qu'il soit appris.\n")
+    a.append("\n## Pourquoi — le goulot se débloque\n")
     a.append(f"\nÀ **CP → CE1**, l'addition avec retenue ne transfère **pas** "
              f"({cp['transfer']:+.2f}) : `carry` est **nouveau** au CE1, c'est le "
              "goulot, et les acquis CP (valeur de position, faits numériques) ne "
@@ -120,13 +140,12 @@ def _write_report(path: str, curve: dict) -> None:
 
 def main() -> None:
     c = run()
-    cp, ce = c["steps"]["CP->CE1"]["spotlight"], c["steps"]["CE1->CE2"]["spotlight"]
-    print("=== Sèvo — Developmental curve (naïf → CP → CE1 → CE2) ===")
-    print(f"  CP → CE1  {cp['node']:32} transfer {cp['transfer']:+.2f}  "
-          f"({cp['trials_dev']} vs {cp['trials_naive']} trials)")
-    print(f"  CE1 → CE2 {ce['node']:32} transfer {ce['transfer']:+.2f}  "
-          f"({ce['trials_dev']} vs {ce['trials_naive']} trials)")
-    print(f"  bottleneck unlocked: {c['bottleneck_unlocked']}  (carry learned at CE1)")
+    for step in ("CP->CE1", "CE1->CE2", "CE2->CM1"):
+        s = c["steps"][step]["spotlight"]
+        print(f"  {step:10} {s['node']:32} transfer {s['transfer']:+.2f}  "
+              f"({s['trials_dev']} vs {s['trials_naive']} trials)")
+    print(f"  bottleneck unlocked CE1→CE2: {c['bottleneck_unlocked']} | "
+          f"new bottleneck re-blocks at CM1: {c['new_bottleneck_blocks_again']}")
     print("  + reports/DEVELOPMENTAL_CURVE.md, demo/developmental/curve.json")
 
 
