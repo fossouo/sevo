@@ -1,0 +1,56 @@
+"""Runtime HTTP API — exercised end to end with FastAPI's TestClient.
+
+Skipped automatically when the optional 'api' extra (fastapi + httpx) is not
+installed, so the core suite stays dependency-free.
+"""
+import importlib
+
+import pytest
+
+pytest.importorskip("fastapi")
+pytest.importorskip("httpx")
+from fastapi.testclient import TestClient  # noqa: E402
+
+NODE = "fr.CP.lecture_mots_reguliers"
+
+
+def _client():
+    import sevo.api as api
+    importlib.reload(api)          # fresh BrainService per test
+    return TestClient(api.app)
+
+
+def test_full_runtime_round_trip(tmp_path):
+    client = _client()
+    for _ in range(6):
+        assert client.post("/replay", json={"node_id": NODE}).status_code == 200
+    client.post("/consolidate", json={"mode": "sleep", "advance_days": 1})
+
+    # assessment channel (oracle)
+    acc = client.post("/evaluate", json={"node_id": NODE}).json()["accuracy"]
+    assert acc >= 0.7
+
+    # read-only response
+    a = client.post("/act", json={"node_id": NODE, "content": "chat"}).json()
+    assert a["answer"] == "S.a"
+
+    # observable state change + verdict
+    d = client.get("/diff").json()
+    assert NODE in d["diff"]["semantic_concepts_added"]
+    assert d["genuine_learning"]["verdict"] == "GENUINE"
+
+    # persist + restore
+    path = str(tmp_path / "brain.json")
+    assert client.post("/save", json={"path": path}).status_code == 200
+    loaded = client.post("/load", json={"path": path})
+    assert loaded.status_code == 200
+
+    # reloaded service still competent
+    acc2 = client.post("/evaluate", json={"node_id": NODE}).json()["accuracy"]
+    assert acc2 >= 0.7
+
+
+def test_bad_node_returns_400():
+    client = _client()
+    r = client.post("/act", json={"node_id": "fr.CM2.nope", "content": "x"})
+    assert r.status_code == 400
