@@ -59,3 +59,24 @@ def test_ce1_artifacts_are_deterministic(tmp_path):
     demo_cp.run(str(b), grade="CE1")
     for name in ARTIFACTS:
         assert (a / name).read_text(encoding="utf-8") == (b / name).read_text(encoding="utf-8")
+
+
+def test_ce1_naive_vs_after_cp_modes(tmp_path):
+    """Developmental continuity (A): the brain can learn CE1 in isolation OR on
+    top of a CP-appris brain. Both stay GENUINE under the frozen protocol; the
+    full CP→CE1 comparison report is the next PR."""
+    naive = demo_cp.run(str(tmp_path / "naive"), grade="CE1")
+    after_cp = demo_cp.run(str(tmp_path / "after_cp"), grade="CE1", prior_grade="CP")
+    assert naive["mode"] == "naive" and naive["prior_grade"] is None
+    assert after_cp["mode"] == "after_cp" and after_cp["prior_grade"] == "CP"
+    assert naive["verdict"] == "GENUINE" and after_cp["verdict"] == "GENUINE"
+    assert after_cp["audit_clean"] and after_cp["replay_deterministic"]
+
+
+def test_ce1_after_cp_artifacts_are_deterministic(tmp_path):
+    a = tmp_path / "a"
+    b = tmp_path / "b"
+    demo_cp.run(str(a), grade="CE1", prior_grade="CP")
+    demo_cp.run(str(b), grade="CE1", prior_grade="CP")
+    for name in ARTIFACTS:
+        assert (a / name).read_text(encoding="utf-8") == (b / name).read_text(encoding="utf-8")

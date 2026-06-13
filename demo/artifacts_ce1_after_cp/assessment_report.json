@@ -1,0 +1,99 @@
+{
+  "per_node": {
+    "fr.CE1.pluriel_reguliers": {
+      "node_id": "fr.CE1.pluriel_reguliers",
+      "n": 11,
+      "accuracy": 1.0,
+      "calibration_error": 0.0628
+    },
+    "fr.CE1.pluriel_en_al": {
+      "node_id": "fr.CE1.pluriel_en_al",
+      "n": 8,
+      "accuracy": 1.0,
+      "calibration_error": 0.0285
+    },
+    "fr.CE1.present_verbes_er": {
+      "node_id": "fr.CE1.present_verbes_er",
+      "n": 66,
+      "accuracy": 0.8485,
+      "calibration_error": 0.1919
+    },
+    "math.CE1.add_within_100_nocarry": {
+      "node_id": "math.CE1.add_within_100_nocarry",
+      "n": 24,
+      "accuracy": 0.9167,
+      "calibration_error": 0.1074
+    },
+    "math.CE1.add_within_100_carry": {
+      "node_id": "math.CE1.add_within_100_carry",
+      "n": 24,
+      "accuracy": 0.8333,
+      "calibration_error": 0.1787
+    },
+    "math.CE1.sub_within_100_borrow": {
+      "node_id": "math.CE1.sub_within_100_borrow",
+      "n": 24,
+      "accuracy": 0.9583,
+      "calibration_error": 0.1296
+    }
+  },
+  "verdict": {
+    "verdict": "GENUINE",
+    "passed": true,
+    "checks": {
+      "post_test_gain": true,
+      "held_out_gain_substantial": true,
+      "transfer_nonzero": true,
+      "beats_memoriser": true,
+      "retention_measurable": true
+    },
+    "reasons": [],
+    "details": {
+      "heldout_before": 0.0,
+      "heldout_after": 0.9432,
+      "best_transfer_after": 0.9432,
+      "memoriser_heldout": 0.0,
+      "memoriser_transfer": 0.0,
+      "retention_ratio_t2_over_t1": 1.0
+    }
+  },
+  "reload_exact": true,
+  "reassessment_after_reload": {
+    "fr.CE1.pluriel_reguliers": {
+      "node_id": "fr.CE1.pluriel_reguliers",
+      "n": 11,
+      "accuracy": 1.0,
+      "calibration_error": 0.0628
+    },
+    "fr.CE1.pluriel_en_al": {
+      "node_id": "fr.CE1.pluriel_en_al",
+      "n": 8,
+      "accuracy": 0.875,
+      "calibration_error": 0.1464
+    },
+    "fr.CE1.present_verbes_er": {
+      "node_id": "fr.CE1.present_verbes_er",
+      "n": 66,
+      "accuracy": 0.9394,
+      "calibration_error": 0.1115
+    },
+    "math.CE1.add_within_100_nocarry": {
+      "node_id": "math.CE1.add_within_100_nocarry",
+      "n": 24,
+      "accuracy": 0.9583,
+      "calibration_error": 0.0681
+    },
+    "math.CE1.add_within_100_carry": {
+      "node_id": "math.CE1.add_within_100_carry",
+      "n": 24,
+      "accuracy": 0.9583,
+      "calibration_error": 0.0583
+    },
+    "math.CE1.sub_within_100_borrow": {
+      "node_id": "math.CE1.sub_within_100_borrow",
+      "n": 24,
+      "accuracy": 0.9167,
+      "calibration_error": 0.1633
+    }
+  }
+}

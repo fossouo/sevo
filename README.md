@@ -111,13 +111,22 @@ state/session) ; `tests/test_cp_protocol_freeze.py` garde la non-régression
 (GENUINE · save/reload exact · audit clean · replay déterministe · zéro leakage).
 Variante service : `make demo-docker` (conteneur + smoke test HTTP).
 
-**Le même cerveau traverse une 2ᵉ classe — CE1** (`make demo-ce1`, artefacts dans
-`demo/artifacts_ce1/`). CE1 est une **extension** du cœur gelé : il réutilise les
-nœuds existants (pluriel, conjugaison, addition/soustraction < 100) via
-`official_curriculum.register_class("CE1")` — **aucune réécriture**, GENUINE,
-séparation teacher/oracle et anti-leakage **inchangés**. La démo CE1 produit les
-**six mêmes artefacts** que le CP et ressort **GENUINE** (6 nœuds enseignés par
-Emma). Le protocole CP reste la référence (`docs/CP_PROTOCOL.md`).
+**Le même cerveau traverse une 2ᵉ classe — CE1.** CE1 est une **extension** du
+cœur gelé : il réutilise les nœuds existants (pluriel, conjugaison, addition/
+soustraction < 100) via `official_curriculum.register_class("CE1")` — **aucune
+réécriture**, GENUINE, séparation teacher/oracle et anti-leakage **inchangés**
+(c'est un *CE1 seed registry* : aligné sur les attendus, **partiel, amorce,
+vérifié à la main**). Deux modes :
+
+```bash
+make demo-ce1            # naïf : un cerveau frais apprend CE1 isolément
+make demo-ce1-after-cp   # développemental : un cerveau CP-appris apprend ensuite CE1
+```
+
+Chaque mode produit les **six mêmes artefacts** que le CP et ressort **GENUINE**.
+La **comparaison développementale CP→CE1** (un cerveau CP-appris apprend-il CE1
+mieux/plus vite/plus proprement qu'un cerveau naïf ?) fait l'objet de la PR
+suivante. Le protocole CP reste la référence (`docs/CP_PROTOCOL.md`).
 
 **Intelligence_delta (CP) = 0,749** (`reports/CP_GRADE_REPORT.md`) — et ce delta
 n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**

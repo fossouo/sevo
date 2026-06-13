@@ -357,6 +357,10 @@ def runnable_for(grade: str) -> dict:
     return _RUNNABLE[grade]
 
 
+def disclaimer_for(grade: str) -> str:
+    return _PROGRAMS.get(grade, {}).get("disclaimer", "")
+
+
 def register_class(registry: CurriculumRegistry, class_level: str) -> CurriculumRegistry:
     """Ingest one class' official programme into ``registry`` through the
     standard ingestion contract. Raises for a class not yet populated — we

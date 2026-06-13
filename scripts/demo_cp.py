@@ -20,7 +20,7 @@ import json
 import os
 
 from sevo.curriculum.factory import teaching_bank
-from sevo.curriculum.official_curriculum import runnable_for
+from sevo.curriculum.official_curriculum import disclaimer_for, runnable_for
 from sevo.runtime import BrainService
 
 SEED = 7
@@ -32,9 +32,12 @@ HERE = os.path.dirname(__file__)
 ARTIFACTS = os.path.join(HERE, "..", "demo", "artifacts")
 
 
-def _default_out(grade: str) -> str:
+def _default_out(grade: str, prior_grade: str | None = None) -> str:
     base = os.path.join(HERE, "..", "demo")
-    return ARTIFACTS if grade == "CP" else os.path.join(base, f"artifacts_{grade.lower()}")
+    if grade == "CP" and not prior_grade:
+        return ARTIFACTS
+    suffix = grade.lower() + (f"_after_{prior_grade.lower()}" if prior_grade else "")
+    return os.path.join(base, f"artifacts_{suffix}")
 
 
 def _rep_content(task):
@@ -71,14 +74,31 @@ def _teach_to_mastery(svc: BrainService, node: str):
     return journals
 
 
-def run(out: str | None = None, grade: str = "CP") -> dict:
-    out = os.path.abspath(out if out is not None else _default_out(grade))
+def run(out: str | None = None, grade: str = "CP", prior_grade: str | None = None) -> dict:
+    """Run the full demo for one grade.
+
+    ``prior_grade`` (e.g. "CP") switches to the *developmental* mode: the brain
+    first learns the prior grade, the baseline is re-anchored to that CP-appris
+    state, and then it learns ``grade`` — so the diff/verdict measure the
+    *increment* of the new grade on top of the prior one. With ``prior_grade=None``
+    the brain learns ``grade`` from naïve (isolated mode)."""
+    out = os.path.abspath(out if out is not None else _default_out(grade, prior_grade))
     os.makedirs(out, exist_ok=True)
     nodes = list(runnable_for(grade))
     representative = REPRESENTATIVE[grade]
 
-    # 1) Brain naïf ----------------------------------------------------------
     svc = BrainService(seed=SEED)
+    # Developmental mode: learn the prior grade first, then re-anchor the
+    # baseline so what we measure is the NEW grade's increment.
+    if prior_grade:
+        for pn in runnable_for(prior_grade):
+            _teach_to_mastery(svc, pn)
+        svc.consolidate("sleep", advance_days=1)
+        svc.consolidate("error_replay", advance_days=0)
+        svc.set_baseline()              # baseline = Brain prior-grade-appris
+        svc._touched.clear()            # measure the target grade only
+
+    # 1) Brain de départ (naïf, ou prior-grade-appris) -----------------------
     brain_before = svc.brain_before
 
     # 2) Emma teaches every node of the grade (journaled, structured feedback)
@@ -133,6 +153,8 @@ def run(out: str | None = None, grade: str = "CP") -> dict:
 
     result = {
         "grade": grade,
+        "mode": f"after_{prior_grade.lower()}" if prior_grade else "naive",
+        "prior_grade": prior_grade,
         "verdict": verdict["verdict"],
         "genuine": verdict["passed"],
         "reload_exact": reload_exact,
@@ -148,8 +170,12 @@ def run(out: str | None = None, grade: str = "CP") -> dict:
 def main() -> None:
     import sys
     grade = sys.argv[1].upper() if len(sys.argv) > 1 else "CP"
-    r = run(grade=grade)
-    print(f"=== Sèvo — Founder demo ({grade}) ===")
+    prior = sys.argv[2].upper() if len(sys.argv) > 2 else None
+    r = run(grade=grade, prior_grade=prior)
+    print(f"=== Sèvo — Founder demo ({grade}, mode={r['mode']}) ===")
+    disc = disclaimer_for(grade)
+    if disc:
+        print(f"  ⚠️  {disc}")
     print(f"  nodes taught (Emma, journaled) : {r['nodes_taught']}")
     print(f"  independent verdict            : {r['verdict']}")
     print(f"  save/reload exact              : {r['reload_exact']}")
