@@ -346,9 +346,77 @@ RUNNABLE_CE1: dict[str, RunnableNode] = {
 }
 
 
+# ============================================================================
+# CE2 — extension again. The interesting research case: CE2 arithmetic
+# (add/sub within 1000) reuses place value + number facts + **carry/borrow**,
+# all of which CE1 now teaches — so CE1→CE2 transfer should succeed where
+# CP→CE1 was blocked (carry was new at CE1). French (invariable plurals) is
+# mostly new again.
+# ============================================================================
+CE2_DISCLAIMER = (
+    "Registre aligné sur les attendus officiels du CE2 — jeu amorce partiel, "
+    "vérifié à la main (PAS un ingest exhaustif du Bulletin officiel)."
+)
+
+
+def _math_ce2_node(nid: str, attendus, ex, crit) -> dict:
+    spec = MATH_NODES[nid]
+    return {
+        "id": nid, "title": spec["title"], "class_level": "CE2",
+        "subject": "mathématiques", "discipline": "nombres et calculs",
+        "required_skills": spec["required_skills"],
+        "prerequisites": spec.get("prerequisites", []),
+        "mastery_threshold": spec["mastery_threshold"],
+        "end_of_year_expectations": attendus,
+        "exercise_types": ex, "evaluation_criteria": crit,
+    }
+
+
+CE2_MATHS_NODES = [
+    _math_ce2_node("math.CE2.add_within_1000",
+                   ["additionner des nombres < 1000 (avec retenues)"],
+                   ["addition posée < 1000", "problème additif à plusieurs retenues"],
+                   ["résultat exact", "retenues propagées correctement"]),
+    _math_ce2_node("math.CE2.sub_within_1000",
+                   ["soustraire des nombres < 1000 (avec emprunts)"],
+                   ["soustraction posée < 1000", "problème de retrait à emprunts"],
+                   ["résultat exact", "emprunts propagés correctement"]),
+]
+
+CE2_FRANCAIS_NODES = [{
+    "id": "fr.CE2.pluriel_invariables", "title": NODES_FR["fr.CE2.pluriel_invariables"]["title"],
+    "class_level": "CE2", "subject": "français", "discipline": "orthographe grammaticale",
+    "required_skills": NODES_FR["fr.CE2.pluriel_invariables"]["required_skills"],
+    "mastery_threshold": NODES_FR["fr.CE2.pluriel_invariables"]["mastery_threshold"],
+    "end_of_year_expectations": ["reconnaître les noms invariables (-s/-x/-z)"],
+    "exercise_types": ["pluriel des noms invariables"],
+    "evaluation_criteria": ["pas d'ajout de -s à un nom déjà en -s/-x/-z"],
+}]
+
+CE2_PROGRAM = {
+    "class_level": "CE2", "cycle": "cycle 2", "status": "partial-seed",
+    "disclaimer": CE2_DISCLAIMER,
+    "disciplines": {"français": ["orthographe grammaticale"],
+                    "mathématiques": ["nombres et calculs"]},
+    "nodes": CE2_FRANCAIS_NODES + CE2_MATHS_NODES,
+}
+
+RUNNABLE_CE2: dict[str, RunnableNode] = {
+    "fr.CE2.pluriel_invariables": RunnableNode(
+        "fr.CE2.pluriel_invariables", "français", "orthographe grammaticale",
+        build=lambda rng: build_bank_fr("fr.CE2.pluriel_invariables", rng)),
+    "math.CE2.add_within_1000": RunnableNode(
+        "math.CE2.add_within_1000", "mathématiques", "nombres et calculs",
+        build=lambda rng: build_bank_math("math.CE2.add_within_1000", rng)),
+    "math.CE2.sub_within_1000": RunnableNode(
+        "math.CE2.sub_within_1000", "mathématiques", "nombres et calculs",
+        build=lambda rng: build_bank_math("math.CE2.sub_within_1000", rng)),
+}
+
+
 # ---- Public API ------------------------------------------------------------
-_PROGRAMS = {"CP": CP_PROGRAM, "CE1": CE1_PROGRAM}
-_RUNNABLE = {"CP": RUNNABLE_CP, "CE1": RUNNABLE_CE1}
+_PROGRAMS = {"CP": CP_PROGRAM, "CE1": CE1_PROGRAM, "CE2": CE2_PROGRAM}
+_RUNNABLE = {"CP": RUNNABLE_CP, "CE1": RUNNABLE_CE1, "CE2": RUNNABLE_CE2}
 
 
 def runnable_for(grade: str) -> dict:
@@ -387,3 +455,8 @@ def official_cp_registry() -> CurriculumRegistry:
 def official_ce1_registry() -> CurriculumRegistry:
     """A registry pre-loaded with the CE1 seed set (extension of the CP core)."""
     return register_class(CurriculumRegistry(), "CE1")
+
+
+def official_ce2_registry() -> CurriculumRegistry:
+    """A registry pre-loaded with the CE2 seed set (extension of the CE1 core)."""
+    return register_class(CurriculumRegistry(), "CE2")

@@ -68,7 +68,7 @@ def test_ce1_naive_vs_after_cp_modes(tmp_path):
     naive = demo_cp.run(str(tmp_path / "naive"), grade="CE1")
     after_cp = demo_cp.run(str(tmp_path / "after_cp"), grade="CE1", prior_grade="CP")
     assert naive["mode"] == "naive" and naive["prior_grade"] is None
-    assert after_cp["mode"] == "after_cp" and after_cp["prior_grade"] == "CP"
+    assert after_cp["mode"] == "after_cp" and after_cp["prior_grade"] == ["CP"]
     assert naive["verdict"] == "GENUINE" and after_cp["verdict"] == "GENUINE"
     assert after_cp["audit_clean"] and after_cp["replay_deterministic"]
 

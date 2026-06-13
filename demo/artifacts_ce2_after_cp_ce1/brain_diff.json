@@ -1,0 +1,135 @@
+{
+  "semantic_concepts_added": [
+    "fr.CE2.pluriel_invariables",
+    "math.CE2.add_within_1000",
+    "math.CE2.sub_within_1000"
+  ],
+  "procedural_rules_acquired": [
+    "plural_invariant"
+  ],
+  "mastered_skills": {
+    "add_facts_within_20": {
+      "before": 0.954,
+      "after": 0.956
+    },
+    "blending": {
+      "before": 0.911,
+      "after": 0.871
+    },
+    "borrow": {
+      "before": 0.919,
+      "after": 0.952
+    },
+    "carry": {
+      "before": 0.89,
+      "after": 0.948
+    },
+    "grapheme_phoneme": {
+      "before": 0.913,
+      "after": 0.873
+    },
+    "grapheme_recognition": {
+      "before": 0.956,
+      "after": 0.956
+    },
+    "lexical_access": {
+      "before": 0.877,
+      "after": 0.839
+    },
+    "number_comparison": {
+      "before": 0.911,
+      "after": 0.873
+    },
+    "orthographic_encoding": {
+      "before": 0.909,
+      "after": 0.869
+    },
+    "place_value": {
+      "before": 0.956,
+      "after": 0.956
+    },
+    "plural_exception_aux": {
+      "before": 0.938,
+      "after": 0.911
+    },
+    "plural_invariant": {
+      "before": 0.05,
+      "after": 0.938
+    },
+    "plural_rule_s": {
+      "before": 0.945,
+      "after": 0.912
+    },
+    "present_er_endings": {
+      "before": 0.921,
+      "after": 0.909
+    },
+    "sentence_parsing": {
+      "before": 0.88,
+      "after": 0.841
+    },
+    "sight_words": {
+      "before": 0.896,
+      "after": 0.857
+    },
+    "sub_facts_within_20": {
+      "before": 0.955,
+      "after": 0.956
+    },
+    "subject_agreement": {
+      "before": 0.907,
+      "after": 0.907
+    },
+    "syllable_segmentation": {
+      "before": 0.91,
+      "after": 0.87
+    },
+    "verb_stem_recognition": {
+      "before": 0.909,
+      "after": 0.907
+    }
+  },
+  "misconceptions_reduced": {
+    "heldout_error_rate_before": 1.0,
+    "heldout_error_rate_after": 0.083,
+    "reduction": 0.917
+  },
+  "calibration_delta": {
+    "before": 0.1,
+    "after": 0.077,
+    "improvement": 0.023
+  },
+  "retention_traces": {
+    "t2_heldout_accuracy": 0.917,
+    "retention_ratio_t2_over_t1": 1.0,
+    "consolidated_skills": [
+      "add_facts_within_20",
+      "blending",
+      "borrow",
+      "carry",
+      "grapheme_phoneme",
+      "grapheme_recognition",
+      "lexical_access",
+      "number_comparison",
+      "orthographic_encoding",
+      "place_value",
+      "plural_exception_aux",
+      "plural_invariant",
+      "plural_rule_s",
+      "present_er_endings",
+      "sentence_parsing",
+      "sight_words",
+      "sub_facts_within_20",
+      "subject_agreement",
+      "syllable_segmentation",
+      "verb_stem_recognition"
+    ]
+  },
+  "learning_efficiency": 0.0,
+  "snapshot_ids": {
+    "before": "baseline",
+    "after": "after"
+  },
+  "transfer_after_best": 0.917,
+  "note": "live diff — retention is immediate (no 7-day delay); use run_cp_grade for the full delayed-retention protocol"
+}

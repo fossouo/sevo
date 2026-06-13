@@ -27,25 +27,37 @@ SEED = 7
 THRESHOLD = 0.8
 MAX_SESSIONS = 8
 REPRESENTATIVE = {"CP": "fr.CP.lecture_mots_reguliers",
-                  "CE1": "fr.CE1.present_verbes_er"}
+                  "CE1": "fr.CE1.present_verbes_er",
+                  "CE2": "math.CE2.add_within_1000"}
 HERE = os.path.dirname(__file__)
 ARTIFACTS = os.path.join(HERE, "..", "demo", "artifacts")
 
 
-def _default_out(grade: str, prior_grade: str | None = None) -> str:
+def _as_chain(prior_grade) -> list:
+    """Accept None, "CP", "CP,CE1" or a list -> ordered list of prior grades."""
+    if not prior_grade:
+        return []
+    if isinstance(prior_grade, str):
+        return [g.strip().upper() for g in prior_grade.split(",") if g.strip()]
+    return [g.upper() for g in prior_grade]
+
+
+def _default_out(grade: str, prior_grade=None) -> str:
     base = os.path.join(HERE, "..", "demo")
-    if grade == "CP" and not prior_grade:
+    chain = _as_chain(prior_grade)
+    if grade == "CP" and not chain:
         return ARTIFACTS
-    suffix = grade.lower() + (f"_after_{prior_grade.lower()}" if prior_grade else "")
+    suffix = grade.lower() + (("_after_" + "_".join(g.lower() for g in chain)) if chain else "")
     return os.path.join(base, f"artifacts_{suffix}")
 
 
 def _rep_content(task):
-    """Extract the API content for a representative task (reading/plural use the
-    word; conjugation uses verb+pronoun)."""
-    if hasattr(task, "verb"):
+    """Extract the API content for a representative task across domains."""
+    if hasattr(task, "verb"):                       # conjugation
         return {"verb": task.verb, "pronoun": task.pronoun}
-    return task.word
+    if hasattr(task, "a") and hasattr(task, "b"):   # arithmetic
+        return {"a": task.a, "b": task.b}
+    return task.word                                # reading / plural
 
 
 def _w(out: str, name: str, obj) -> None:
@@ -87,15 +99,17 @@ def run(out: str | None = None, grade: str = "CP", prior_grade: str | None = Non
     nodes = list(runnable_for(grade))
     representative = REPRESENTATIVE[grade]
 
+    chain = _as_chain(prior_grade)
     svc = BrainService(seed=SEED)
-    # Developmental mode: learn the prior grade first, then re-anchor the
+    # Developmental mode: learn the prior grade(s) in order, then re-anchor the
     # baseline so what we measure is the NEW grade's increment.
-    if prior_grade:
-        for pn in runnable_for(prior_grade):
-            _teach_to_mastery(svc, pn)
-        svc.consolidate("sleep", advance_days=1)
-        svc.consolidate("error_replay", advance_days=0)
-        svc.set_baseline()              # baseline = Brain prior-grade-appris
+    if chain:
+        for pg in chain:
+            for pn in runnable_for(pg):
+                _teach_to_mastery(svc, pn)
+            svc.consolidate("sleep", advance_days=1)
+            svc.consolidate("error_replay", advance_days=0)
+        svc.set_baseline()              # baseline = Brain prior-grades-appris
         svc._touched.clear()            # measure the target grade only
 
     # 1) Brain de départ (naïf, ou prior-grade-appris) -----------------------
@@ -153,8 +167,8 @@ def run(out: str | None = None, grade: str = "CP", prior_grade: str | None = Non
 
     result = {
         "grade": grade,
-        "mode": f"after_{prior_grade.lower()}" if prior_grade else "naive",
-        "prior_grade": prior_grade,
+        "mode": ("after_" + "_".join(g.lower() for g in chain)) if chain else "naive",
+        "prior_grade": chain or None,
         "verdict": verdict["verdict"],
         "genuine": verdict["passed"],
         "reload_exact": reload_exact,

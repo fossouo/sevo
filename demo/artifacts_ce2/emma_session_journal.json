@@ -1,0 +1,275 @@
+{
+  "representative_node": "math.CE2.add_within_1000",
+  "session": [
+    {
+      "prompt_to_emma": "604 + 307 = ?",
+      "brain_response": null,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "math.CE2.add_within_1000",
+        "task_id": "math.CE2.add_within_1000:(604, 307, 'add')",
+        "observed_answer": null,
+        "correct_answer": 911,
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "declined",
+        "confidence": 0.1,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.05,
+          "add_facts_within_20": 0.05,
+          "carry": 0.05
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.1298,
+          "add_facts_within_20": 0.0739,
+          "carry": 0.0819
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "268 + 443 = ?",
+      "brain_response": null,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "math.CE2.add_within_1000",
+        "task_id": "math.CE2.add_within_1000:(268, 443, 'add')",
+        "observed_answer": null,
+        "correct_answer": 711,
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "declined",
+        "confidence": 0.1,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.1298,
+          "add_facts_within_20": 0.0739,
+          "carry": 0.0819
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.1517,
+          "add_facts_within_20": 0.1517,
+          "carry": 0.1128
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "372 + 339 = ?",
+      "brain_response": 701,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "math.CE2.add_within_1000",
+        "task_id": "math.CE2.add_within_1000:(372, 339, 'add')",
+        "observed_answer": 701,
+        "correct_answer": 711,
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "forgot_carry",
+        "confidence": 0.245,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.1517,
+          "add_facts_within_20": 0.1517,
+          "carry": 0.1128
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.1731,
+          "add_facts_within_20": 0.1731,
+          "carry": 0.2121
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "432 + 536 = ?",
+      "brain_response": 8,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "math.CE2.add_within_1000",
+        "task_id": "math.CE2.add_within_1000:(432, 536, 'add')",
+        "observed_answer": 8,
+        "correct_answer": 968,
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "units_only",
+        "confidence": 0.1715,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.1731,
+          "add_facts_within_20": 0.1731,
+          "carry": 0.2121
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.2426,
+          "add_facts_within_20": 0.1939,
+          "carry": 0.2386
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "584 + 333 = ?",
+      "brain_response": 917,
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "math.CE2.add_within_1000",
+        "task_id": "math.CE2.add_within_1000:(584, 333, 'add')",
+        "observed_answer": 917,
+        "correct_answer": 917,
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.12,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.0,
+        "skill_automaticity": {
+          "place_value": 0.2426,
+          "add_facts_within_20": 0.1939,
+          "carry": 0.2386
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.25,
+        "skill_automaticity": {
+          "place_value": 0.2585,
+          "add_facts_within_20": 0.2109,
+          "carry": 0.2599
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "482 + 152 = ?",
+      "brain_response": 634,
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "math.CE2.add_within_1000",
+        "task_id": "math.CE2.add_within_1000:(482, 152, 'add')",
+        "observed_answer": 634,
+        "correct_answer": 634,
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.384,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.25,
+        "skill_automaticity": {
+          "place_value": 0.2585,
+          "add_facts_within_20": 0.2109,
+          "carry": 0.2599
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.4375,
+        "skill_automaticity": {
+          "place_value": 0.274,
+          "add_facts_within_20": 0.2274,
+          "carry": 0.2807
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "256 + 509 = ?",
+      "brain_response": 765,
+      "raw_emma_feedback": "",
+      "normalized_feedback": {
+        "node_id": "math.CE2.add_within_1000",
+        "task_id": "math.CE2.add_within_1000:(256, 509, 'add')",
+        "observed_answer": 765,
+        "correct_answer": 765,
+        "hint": "",
+        "error_type": null,
+        "confidence": 0.5688,
+        "teach_signal": true
+      },
+      "learning_decision": true,
+      "state_before": {
+        "node_mastery": 0.4375,
+        "skill_automaticity": {
+          "place_value": 0.274,
+          "add_facts_within_20": 0.2274,
+          "carry": 0.2807
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.5781,
+        "skill_automaticity": {
+          "place_value": 0.2893,
+          "add_facts_within_20": 0.2437,
+          "carry": 0.3008
+        }
+      }
+    },
+    {
+      "prompt_to_emma": "473 + 133 = ?",
+      "brain_response": 607,
+      "raw_emma_feedback": "réessaie en expliquant ta démarche",
+      "normalized_feedback": {
+        "node_id": "math.CE2.add_within_1000",
+        "task_id": "math.CE2.add_within_1000:(473, 133, 'add')",
+        "observed_answer": 607,
+        "correct_answer": 606,
+        "hint": "réessaie en expliquant ta démarche",
+        "error_type": "add_fact_off_by_one",
+        "confidence": 0.6982,
+        "teach_signal": false
+      },
+      "learning_decision": false,
+      "state_before": {
+        "node_mastery": 0.5781,
+        "skill_automaticity": {
+          "place_value": 0.2893,
+          "add_facts_within_20": 0.2437,
+          "carry": 0.3008
+        }
+      },
+      "state_after": {
+        "node_mastery": 0.4336,
+        "skill_automaticity": {
+          "place_value": 0.3072,
+          "add_facts_within_20": 0.3072,
+          "carry": 0.3243
+        }
+      }
+    }
+  ],
+  "all_nodes_summary": {
+    "fr.CE2.pluriel_invariables": {
+      "sessions": 4,
+      "final_mastery": 0.8424
+    },
+    "math.CE2.add_within_1000": {
+      "sessions": 7,
+      "final_mastery": 0.9716
+    },
+    "math.CE2.sub_within_1000": {
+      "sessions": 3,
+      "final_mastery": 0.9628
+    }
+  }
+}

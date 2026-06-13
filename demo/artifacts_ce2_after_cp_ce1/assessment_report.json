@@ -1,0 +1,63 @@
+{
+  "per_node": {
+    "fr.CE2.pluriel_invariables": {
+      "node_id": "fr.CE2.pluriel_invariables",
+      "n": 8,
+      "accuracy": 1.0,
+      "calibration_error": 0.0125
+    },
+    "math.CE2.add_within_1000": {
+      "node_id": "math.CE2.add_within_1000",
+      "n": 24,
+      "accuracy": 0.9167,
+      "calibration_error": 0.1074
+    },
+    "math.CE2.sub_within_1000": {
+      "node_id": "math.CE2.sub_within_1000",
+      "n": 24,
+      "accuracy": 1.0,
+      "calibration_error": 0.0288
+    }
+  },
+  "verdict": {
+    "verdict": "GENUINE",
+    "passed": true,
+    "checks": {
+      "post_test_gain": true,
+      "held_out_gain_substantial": true,
+      "transfer_nonzero": true,
+      "beats_memoriser": true,
+      "retention_measurable": true
+    },
+    "reasons": [],
+    "details": {
+      "heldout_before": 0.0,
+      "heldout_after": 0.9167,
+      "best_transfer_after": 0.9167,
+      "memoriser_heldout": 0.0,
+      "memoriser_transfer": 0.0,
+      "retention_ratio_t2_over_t1": 1.0
+    }
+  },
+  "reload_exact": true,
+  "reassessment_after_reload": {
+    "fr.CE2.pluriel_invariables": {
+      "node_id": "fr.CE2.pluriel_invariables",
+      "n": 8,
+      "accuracy": 1.0,
+      "calibration_error": 0.0125
+    },
+    "math.CE2.add_within_1000": {
+      "node_id": "math.CE2.add_within_1000",
+      "n": 24,
+      "accuracy": 0.9583,
+      "calibration_error": 0.0681
+    },
+    "math.CE2.sub_within_1000": {
+      "node_id": "math.CE2.sub_within_1000",
+      "n": 24,
+      "accuracy": 0.9583,
+      "calibration_error": 0.0681
+    }
+  }
+}
