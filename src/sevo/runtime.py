@@ -31,6 +31,7 @@ from .eval import (
     detect_leakage,
 )
 from .persistence import DEFAULT_COUNTERS, make_envelope, migrate_envelope
+from .teacher import StubTeacher, run_journaled_session
 from .teacher.emma_session import EmmaTeacher, run_emma_session
 
 MASTERED_AT = 0.7
@@ -41,6 +42,7 @@ class BrainService:
         self.brain = brain or Brain(seed=seed)
         self.seed = seed
         self.emma = EmmaTeacher()
+        self.adapter = StubTeacher()        # structured-feedback teacher (swappable: Scripted/Live)
         # Baseline captured ONCE (Brain-naïf). /diff always compares to this
         # stored snapshot — never reconstructed per call.
         self.brain_before = self.brain.export_state()
@@ -133,6 +135,19 @@ class BrainService:
         self.counters["feedbacks"] += session_size * sessions
         self._touched.add(node_id)
         return {"node_id": node_id, "sessions": logs,
+                "mastery": round(self.brain.semantic.mastery(node_id), 4)}
+
+    def teach_journaled(self, node_id: str, session_size: int = 8, teacher=None) -> dict:
+        """Teach one session through a TeacherAdapter (default: stub), recording
+        the full journal (prompt / response / raw + normalized feedback / learning
+        decision / state before-after). The brain learns only from teach_signal."""
+        items = teaching_bank(node_id, self.seed)[:session_size]
+        t = teacher or self.adapter
+        journal = run_journaled_session(self.brain, t, node_id, items)
+        self.counters["feedbacks"] += len(items)
+        self._touched.add(node_id)
+        self._log("teach_journaled", node_id=node_id, n=len(items), teacher=t.name)
+        return {"node_id": node_id, "teacher": t.name, "journal": journal,
                 "mastery": round(self.brain.semantic.mastery(node_id), 4)}
 
     # -- assessment channel (oracle; never via Emma, never learns) -----------
