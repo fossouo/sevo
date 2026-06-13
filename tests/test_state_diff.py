@@ -36,6 +36,30 @@ def test_diff_reports_acquired_concepts_and_skills():
     assert d["learning_efficiency"] == 0.12
 
 
+def test_diff_is_purely_descriptive_no_side_effects():
+    """A: brain_state_diff must never mutate the brain or the snapshots — it is
+    an observation tool, not a learning engine."""
+    before, after = _before_after()
+    before_json, after_json = before.to_json(), after.to_json()
+    out1 = brain_state_diff(
+        before, after,
+        heldout_before=0.0, heldout_after=0.95, transfer_after=0.8,
+        calibration_before=0.10, calibration_after=0.05,
+        t2_after=0.6, retention_ratio=0.63, learning_efficiency=0.12,
+    )
+    # snapshots untouched ...
+    assert before.to_json() == before_json
+    assert after.to_json() == after_json
+    # ... and the transform is deterministic (no hidden state)
+    out2 = brain_state_diff(
+        before, after,
+        heldout_before=0.0, heldout_after=0.95, transfer_after=0.8,
+        calibration_before=0.10, calibration_after=0.05,
+        t2_after=0.6, retention_ratio=0.63, learning_efficiency=0.12,
+    )
+    assert out1 == out2
+
+
 def test_diff_is_empty_for_an_untrained_brain():
     brain = Brain(seed=2)
     snap = brain.snapshot()

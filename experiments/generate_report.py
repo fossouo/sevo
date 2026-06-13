@@ -280,6 +280,9 @@ def main_cp_grade() -> None:
     a(f"\n_Enseigné via la **boucle API Emma** ({r['teaching_via']}) : Emma présente "
       "→ le cerveau répond → feedback structuré → le cerveau apprend ; "
       "l'évaluation reste indépendante (oracle)._\n")
+    a("\n> **Portée** : ces facettes décrivent une capacité acquise **sur le "
+      "curriculum CP mesuré** (*genuine learning under the CP protocol*). Ce n'est "
+      "**pas** une intelligence générale au sens psychométrique, ni un QI.\n")
     a(f"\n* **Concepts sémantiques acquis** ({len(bd['semantic_concepts_added'])}) : "
       + ", ".join(f"`{c}`" for c in bd['semantic_concepts_added']) + "\n")
     a(f"* **Règles procédurales acquises** ({len(bd['procedural_rules_acquired'])}) : "

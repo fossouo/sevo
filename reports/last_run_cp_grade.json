@@ -29,9 +29,9 @@
     ]
   },
   "snapshots": {
-    "before": "1ba935dc-7e84-40b2-b059-3aaa11a9f9ca",
-    "learned": "360d5201-076d-446b-b4c8-22d5a8ecb85f",
-    "after_delay": "c6578a28-8629-4a86-a736-06b4a338380a"
+    "before": "faf5d5f0-feaf-4d34-beee-86c611a1140b",
+    "learned": "5ec59e57-3ac2-4e5f-97c0-48d908419d6b",
+    "after_delay": "c17be835-fc19-437d-9d13-87de62391861"
   },
   "facets_aggregate": {
     "connaissance_heldout": {
@@ -940,8 +940,8 @@
     },
     "learning_efficiency": 0.0,
     "snapshot_ids": {
-      "before": "1ba935dc-7e84-40b2-b059-3aaa11a9f9ca",
-      "after": "360d5201-076d-446b-b4c8-22d5a8ecb85f"
+      "before": "faf5d5f0-feaf-4d34-beee-86c611a1140b",
+      "after": "5ec59e57-3ac2-4e5f-97c0-48d908419d6b"
     },
     "transfer_after_best": 1.0
   },

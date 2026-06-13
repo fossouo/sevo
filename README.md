@@ -91,7 +91,9 @@ l'évaluation reste indépendante).
 **Diff d'état observable** (`Brain CP-naïf → Brain CP-appris`) : 9 concepts
 acquis, 12 compétences automatisées (automaticité 0,05 → ~0,94), misconceptions
 held-out 100 % → 6 %, 12 compétences consolidées après 7 jours. Le rapport
-exporte une **matrice de maîtrise par compétence** avant/après.
+exporte une **matrice de maîtrise par compétence** avant/après. Ces facettes
+décrivent une capacité acquise **sur le curriculum CP mesuré** (*genuine learning
+under the CP protocol*) — **pas** une intelligence générale ni un QI.
 
 **Intelligence_delta (CP) = 0,749** (`reports/CP_GRADE_REPORT.md`) — et ce delta
 n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**

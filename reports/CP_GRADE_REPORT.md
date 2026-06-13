@@ -56,6 +56,8 @@ _La transfert mathématique (`add_within_20` → addition < 1000) est volontaire
 
 _Enseigné via la **boucle API Emma** (emma_api_loop) : Emma présente → le cerveau répond → feedback structuré → le cerveau apprend ; l'évaluation reste indépendante (oracle)._
 
+> **Portée** : ces facettes décrivent une capacité acquise **sur le curriculum CP mesuré** (*genuine learning under the CP protocol*). Ce n'est **pas** une intelligence générale au sens psychométrique, ni un QI.
+
 * **Concepts sémantiques acquis** (9) : `fr.CP.comprehension_phrase`, `fr.CP.dictee_simple`, `fr.CP.lecture_mots_irreguliers`, `fr.CP.lecture_mots_reguliers`, `fr.CP.segmentation_syllabes`, `math.CP.add_within_20`, `math.CP.comparaison_nombres`, `math.CP.numeration_dizaines_unites`, `math.CP.sub_within_20`
 * **Règles procédurales acquises** (12) : `add_facts_within_20`, `blending`, `grapheme_phoneme`, `grapheme_recognition`, `lexical_access`, `number_comparison`, `orthographic_encoding`, `place_value`, `sentence_parsing`, `sight_words`, `sub_facts_within_20`, `syllable_segmentation`
 * **Compétences automatisées** (12) : `add_facts_within_20` (0.05→0.936), `blending` (0.05→0.934), `grapheme_phoneme` (0.05→0.951), `grapheme_recognition` (0.05→0.944), `lexical_access` (0.05→0.913), `number_comparison` (0.05→0.943), `orthographic_encoding` (0.05→0.922), `place_value` (0.05→0.951), `sentence_parsing` (0.05→0.913), `sight_words` (0.05→0.94), `sub_facts_within_20` (0.05→0.944), `syllable_segmentation` (0.05→0.922)

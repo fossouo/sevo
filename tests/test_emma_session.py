@@ -44,6 +44,24 @@ def test_feedback_is_structured_and_hints_on_error():
         assert fb.learner_answer != task.answer
 
 
+def test_assessment_channel_is_independent_of_teaching():
+    """B: the held-out / transfer / retention probes go through the oracle
+    (brain.evaluate → read-only act), never through Emma's feedback/hints. So
+    repeated independent evaluation must not change the brain at all — proving
+    the assessment channel is fully separate from the teaching channel."""
+    brain = Brain(seed=7)
+    emma = EmmaTeacher()
+    bank = build_bank_lecture(NODE, Rng(7).fork(NODE))
+    teach_node_via_emma(brain, emma, NODE, bank)
+
+    skills_before = brain.procedural.graph(brain.day)
+    mastery_before = brain.semantic.mastery(NODE)
+    for _ in range(5):
+        brain.evaluate(bank.heldout, "probe")        # the assessment channel
+    assert brain.procedural.graph(brain.day) == skills_before   # taught nothing
+    assert brain.semantic.mastery(NODE) == mastery_before
+
+
 def test_session_accuracy_reported():
     brain = Brain(seed=3)
     emma = EmmaTeacher()
