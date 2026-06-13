@@ -36,6 +36,18 @@ def _w(out: str, name: str, obj) -> None:
         json.dump(obj, f, indent=2, ensure_ascii=False)
 
 
+# The only volatile fields are random UUIDs (brain_id, snapshot ids). They carry
+# no information for the proof, so we normalise them to fixed placeholders to
+# make the committed artifacts byte-stable run-to-run. Everything else
+# (skills, accuracies, mastery, verdict) is deterministic for the fixed seed.
+def _norm_state(state: dict) -> dict:
+    return {**state, "brain_id": "demo-brain"}
+
+
+def _norm_diff(diff: dict) -> dict:
+    return {**diff, "snapshot_ids": {"before": "baseline", "after": "after"}}
+
+
 def _teach_to_mastery(svc: BrainService, node: str):
     journals = []
     for _ in range(MAX_SESSIONS):
@@ -93,9 +105,9 @@ def run(out: str = ARTIFACTS) -> dict:
                             == rsvc.replay_session(sid)["replayed_state"])
 
     # write the six proof artifacts -----------------------------------------
-    _w(out, "brain_before.json", brain_before)
-    _w(out, "brain_after.json", brain_after)
-    _w(out, "brain_diff.json", diff)
+    _w(out, "brain_before.json", _norm_state(brain_before))
+    _w(out, "brain_after.json", _norm_state(brain_after))
+    _w(out, "brain_diff.json", _norm_diff(diff))
     _w(out, "assessment_report.json", {
         "per_node": assessment, "verdict": verdict,
         "reload_exact": reload_exact, "reassessment_after_reload": reassessment})

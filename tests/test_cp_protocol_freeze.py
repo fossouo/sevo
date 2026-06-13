@@ -69,6 +69,19 @@ def test_assessment_report_records_independent_verdict(demo):
     assert report["reload_exact"]
 
 
+def test_artifacts_are_deterministic_between_runs(tmp_path):
+    """A: the six proof artifacts are byte-identical across two runs (volatile
+    UUIDs are normalised), so the committed evidence never churns spuriously."""
+    out1 = tmp_path / "run1"
+    out2 = tmp_path / "run2"
+    demo_cp.run(str(out1))
+    demo_cp.run(str(out2))
+    for name in ARTIFACTS:
+        a = (out1 / name).read_text(encoding="utf-8")
+        b = (out2 / name).read_text(encoding="utf-8")
+        assert a == b, f"artifact {name} is not deterministic between runs"
+
+
 def test_evaluate_still_refuses_taught_items():
     """The anti-leakage guard is part of the frozen protocol."""
     svc = BrainService(seed=0)

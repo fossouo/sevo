@@ -1,8 +1,14 @@
-# CP protocol — frozen contract (v1)
+# CP protocol — frozen contract
 
-This document **freezes** the CP-grade protocol after PRs #1–#5. Everything below
-is now stable: changing it is a breaking change and must bump the relevant
-schema version and update `tests/test_cp_protocol_freeze.py`.
+**Protocol version: `v1`** (frozen after PRs #1–#6). Everything below is now
+stable: changing it is a breaking change and must follow the evolution procedure
+at the end of this document.
+
+> The committed proof artifacts in `demo/artifacts/` are **deterministic** for
+> the fixed demo seed: the only normalised fields are the random UUIDs
+> (`brain_id` → `"demo-brain"`, snapshot ids → `"baseline"`/`"after"`), which
+> carry no information for the proof. Skills, accuracies, mastery and the verdict
+> are byte-stable run-to-run.
 
 Reproduce the whole thing in one command:
 
@@ -100,4 +106,27 @@ has no RNG; the seed is persisted for the stochastic act/eval path).
 5. **no item leakage** — `/evaluate` refuses any taught item.
 
 Any change that breaks one of these fails CI and must be treated as a protocol
-break (bump schema + update this document).
+break (see below).
+
+---
+
+## Faire évoluer le protocole (procédure)
+
+Le protocole est **gelé mais évolutif**. Pour le faire évoluer proprement :
+
+1. **Versionner** — incrémenter la *Protocol version* en tête (`v1` → `v2`) et,
+   si le format change, le `schema_version` cognitif et/ou le
+   `runtime_schema_version` de l'enveloppe.
+2. **Documenter le changement cassant** — décrire dans ce fichier ce qui change
+   et pourquoi (définition de GENUINE, séparation, anti-leakage, formats…), et
+   ajouter une **migration** explicite (`persistence.migrate_envelope`) qui
+   upgrade les anciens états ou les rejette avec une erreur claire.
+3. **Régénérer les artefacts** — `make demo-cp` (réécrit `demo/artifacts/`) et
+   committer la nouvelle preuve.
+4. **Mettre à jour le freeze** — adapter `tests/test_cp_protocol_freeze.py` aux
+   nouveaux invariants (jamais les assouplir en silence) et `make test`.
+5. **Étendre, ne pas réécrire** — une nouvelle classe (CE1, …) est une
+   *extension* (nouveaux nœuds via `official_curriculum.register_class`) qui
+   réutilise le cœur ; elle ne doit modifier ni GENUINE, ni la séparation
+   teacher/oracle, ni l'anti-leakage. Ses artefacts doivent être comparables à
+   ceux du CP (mêmes six fichiers, même format).

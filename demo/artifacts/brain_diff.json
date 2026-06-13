@@ -104,8 +104,8 @@
   },
   "learning_efficiency": 0.0,
   "snapshot_ids": {
-    "before": "93858252-25b0-471c-b592-8b811ff8a510",
-    "after": "45bcebe4-b174-4ca2-956c-5bff85225390"
+    "before": "baseline",
+    "after": "after"
   },
   "transfer_after_best": 0.95,
   "note": "live diff — retention is immediate (no 7-day delay); use run_cp_grade for the full delayed-retention protocol"
