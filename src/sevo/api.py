@@ -32,6 +32,8 @@ from typing import Any, Optional
 
 from .brain import StateSchemaError
 from .curriculum.factory import TaskFactoryError
+from .eval import ItemLeakageError
+from .persistence import EnvelopeSchemaError
 from .runtime import BrainService
 
 app = FastAPI(title="sevo — runtime brain API", version="0.4.0")
@@ -75,11 +77,17 @@ class PathReq(BaseModel):
     path: str
 
 
+class AuditReq(BaseModel):
+    node_id: str
+
+
 def _guard(fn):
     try:
         return fn()
     except TaskFactoryError as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
+    except ItemLeakageError as e:
+        raise HTTPException(status_code=422, detail=str(e)) from e
 
 
 @app.post("/perceive")
@@ -122,6 +130,42 @@ def evaluate(r: EvaluateReq):
     return _guard(lambda: service.evaluate(r.node_id, r.items))
 
 
+@app.get("/health")
+def health():
+    return service.health()
+
+
+@app.get("/metrics")
+def metrics():
+    return service.metrics()
+
+
+@app.post("/audit")
+def audit(r: AuditReq):
+    return _guard(lambda: service.audit(r.node_id))
+
+
+@app.post("/session/start")
+def session_start():
+    return {"session_id": service.start_session()}
+
+
+@app.get("/session/{session_id}")
+def session_get(session_id: str):
+    try:
+        return service.get_session(session_id)
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=f"no session {session_id}") from e
+
+
+@app.post("/session/{session_id}/replay")
+def session_replay(session_id: str):
+    try:
+        return service.replay_session(session_id)
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=f"no session {session_id}") from e
+
+
 @app.post("/save")
 def save(r: PathReq):
     service.save(r.path)
@@ -133,7 +177,7 @@ def load(r: PathReq):
     global service
     try:
         service = BrainService.load(r.path)
-    except StateSchemaError as e:
+    except (StateSchemaError, EnvelopeSchemaError) as e:
         raise HTTPException(status_code=409, detail=str(e)) from e      # incompatible schema
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e)) from e

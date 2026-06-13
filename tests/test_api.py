@@ -54,3 +54,26 @@ def test_bad_node_returns_400():
     client = _client()
     r = client.post("/act", json={"node_id": "fr.CM2.nope", "content": "x"})
     assert r.status_code == 400
+
+
+def test_health_metrics_audit_and_sessions():
+    client = _client()
+    assert client.get("/health").json()["status"] == "ok"
+    for _ in range(6):
+        client.post("/replay", json={"node_id": NODE})
+    client.post("/consolidate", json={"mode": "sleep", "advance_days": 1})
+    assert client.get("/metrics").json()["n_mastered_skills"] >= 1
+    assert client.post("/audit", json={"node_id": NODE}).json()["clean"]
+    sid = client.post("/session/start").json()["session_id"]
+    client.post("/feedback", json={"node_id": NODE, "content": "chat", "correct": True})
+    assert client.get(f"/session/{sid}").status_code == 200
+    assert client.post(f"/session/{sid}/replay").status_code == 200
+    assert client.get("/session/nope").status_code == 404
+
+
+def test_evaluate_leakage_returns_422():
+    client = _client()
+    from sevo.curriculum.factory import teaching_bank
+    seen = teaching_bank(NODE, 0)[0].word
+    r = client.post("/evaluate", json={"node_id": NODE, "items": [seen]})
+    assert r.status_code == 422
