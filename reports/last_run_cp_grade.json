@@ -1,0 +1,589 @@
+{
+  "grade": "CP",
+  "seed": 7,
+  "program": {
+    "disciplines": {
+      "français": [
+        "lecture / décodage",
+        "lecture / mots-outils",
+        "compréhension"
+      ],
+      "mathématiques": [
+        "nombres et calculs"
+      ]
+    },
+    "nodes_ingested": [
+      "fr.CP.comprehension_phrase",
+      "fr.CP.lecture_mots_irreguliers",
+      "fr.CP.lecture_mots_reguliers",
+      "math.CP.add_within_20",
+      "math.CP.sub_within_20"
+    ]
+  },
+  "snapshots": {
+    "before": "4db7dbc0-d6c4-4bae-80e1-f99a574ad514",
+    "after": "328edf0c-7b2f-4cce-b3f2-22cd1d70917e"
+  },
+  "facets_aggregate": {
+    "connaissance_heldout": {
+      "pre": 0.0,
+      "t1": 0.9466
+    },
+    "transfert": {
+      "pre": 0.0,
+      "t1": 0.6119
+    },
+    "retention_t2": 0.6248,
+    "metacognition_calibration_error": {
+      "pre": 0.1,
+      "t1": 0.0703
+    }
+  },
+  "per_node": {
+    "math.CP.add_within_20": {
+      "subject": "mathématiques",
+      "discipline": "nombres et calculs",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 0.917,
+        "t2": 0.583
+      },
+      "transfer_t1": 0.05
+    },
+    "math.CP.sub_within_20": {
+      "subject": "mathématiques",
+      "discipline": "nombres et calculs",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 0.875,
+        "t2": 0.75
+      },
+      "transfer_t1": null
+    },
+    "fr.CP.lecture_mots_reguliers": {
+      "subject": "français",
+      "discipline": "lecture / décodage",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 1.0,
+        "t2": 0.556
+      },
+      "transfer_t1": 0.786
+    },
+    "fr.CP.lecture_mots_irreguliers": {
+      "subject": "français",
+      "discipline": "lecture / mots-outils",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 1.0,
+        "t2": 0.5
+      },
+      "transfer_t1": null
+    },
+    "fr.CP.comprehension_phrase": {
+      "subject": "français",
+      "discipline": "compréhension",
+      "heldout": {
+        "pre": 0.0,
+        "t1": 0.941,
+        "t2": 0.735
+      },
+      "transfer_t1": 1.0
+    }
+  },
+  "procedure_skill_graph": {
+    "place_value": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "add_facts_within_20": {
+      "automaticity": 0.6832,
+      "error_patterns": [
+        {
+          "node": "math.CP.add_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.add_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.add_within_20",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "carry": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "sub_facts_within_20": {
+      "automaticity": 0.689,
+      "error_patterns": [
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        },
+        {
+          "node": "math.CP.sub_within_20",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "borrow": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "grapheme_recognition": {
+      "automaticity": 0.6829,
+      "error_patterns": [
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "plural_rule_s": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "plural_exception_aux": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "plural_invariant": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "verb_stem_recognition": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "present_er_endings": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "subject_agreement": {
+      "automaticity": 0.05,
+      "error_patterns": [],
+      "transfer_score": 0.0,
+      "consolidated": false,
+      "last_practiced_day": null
+    },
+    "grapheme_phoneme": {
+      "automaticity": 0.6927,
+      "error_patterns": [
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "blending": {
+      "automaticity": 0.6776,
+      "error_patterns": [
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_reguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "sight_words": {
+      "automaticity": 0.6862,
+      "error_patterns": [
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.lecture_mots_irreguliers",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "lexical_access": {
+      "automaticity": 0.6666,
+      "error_patterns": [
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    },
+    "sentence_parsing": {
+      "automaticity": 0.6666,
+      "error_patterns": [
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        },
+        {
+          "node": "fr.CP.comprehension_phrase",
+          "day": 0
+        }
+      ],
+      "transfer_score": 0.64,
+      "consolidated": true,
+      "last_practiced_day": 0
+    }
+  },
+  "teaching": [
+    {
+      "node_id": "math.CP.add_within_20",
+      "sessions": 2,
+      "trials": 16,
+      "reached_mastery": true,
+      "final_mastery": 0.9743,
+      "mastery_history": [
+        0.7429,
+        0.9743
+      ]
+    },
+    {
+      "node_id": "math.CP.sub_within_20",
+      "sessions": 2,
+      "trials": 16,
+      "reached_mastery": true,
+      "final_mastery": 0.9206,
+      "mastery_history": [
+        0.5406,
+        0.9206
+      ]
+    },
+    {
+      "node_id": "fr.CP.lecture_mots_reguliers",
+      "sessions": 7,
+      "trials": 56,
+      "reached_mastery": true,
+      "final_mastery": 0.9715,
+      "mastery_history": [
+        0.4336,
+        0.4434,
+        0.5874,
+        0.4292,
+        0.6147,
+        0.7153,
+        0.9715
+      ]
+    },
+    {
+      "node_id": "fr.CP.lecture_mots_irreguliers",
+      "sessions": 3,
+      "trials": 24,
+      "reached_mastery": true,
+      "final_mastery": 0.9653,
+      "mastery_history": [
+        0.3252,
+        0.653,
+        0.9653
+      ]
+    },
+    {
+      "node_id": "fr.CP.comprehension_phrase",
+      "sessions": 3,
+      "trials": 24,
+      "reached_mastery": true,
+      "final_mastery": 0.9781,
+      "mastery_history": [
+        0.1875,
+        0.7815,
+        0.9781
+      ]
+    }
+  ],
+  "consolidation": {
+    "mode": "sleep",
+    "skills_consolidated": [
+      "add_facts_within_20",
+      "blending",
+      "grapheme_phoneme",
+      "grapheme_recognition",
+      "lexical_access",
+      "sentence_parsing",
+      "sight_words",
+      "sub_facts_within_20"
+    ],
+    "nodes": [
+      "math.CP.add_within_20",
+      "math.CP.sub_within_20",
+      "fr.CP.lecture_mots_reguliers",
+      "fr.CP.lecture_mots_irreguliers",
+      "fr.CP.comprehension_phrase"
+    ]
+  },
+  "efficiency_control": {
+    "prereq": "math.CP.add_within_20",
+    "node": "math.CP.sub_within_20",
+    "shared": "place_value / number facts",
+    "n_seeds": 6,
+    "trials_with_prereq": 14.0,
+    "trials_without_prereq": 14.0,
+    "speedup": 1.0
+  },
+  "memorizer_baseline": {
+    "on_teaching": {
+      "label": "mem.teaching",
+      "n": 101,
+      "accuracy": 1.0,
+      "mean_confidence": 0.9,
+      "calibration_error": 0.1,
+      "knows_unknowns": 1.0
+    },
+    "on_heldout": {
+      "label": "mem.heldout",
+      "n": 95,
+      "accuracy": 0.0,
+      "mean_confidence": 0.7,
+      "calibration_error": 0.7,
+      "knows_unknowns": 0.3
+    },
+    "on_transfer": {
+      "label": "mem.transfer",
+      "n": 50,
+      "accuracy": 0.0,
+      "mean_confidence": 0.7,
+      "calibration_error": 0.7,
+      "knows_unknowns": 0.3
+    }
+  },
+  "characteristic_errors": {
+    "lecture_reguliers": {
+      "word_or_item": "chat",
+      "truth": "S.a",
+      "observed_errors": {
+        "k.a.t": "letter_by_letter"
+      }
+    },
+    "lecture_irreguliers": {
+      "word_or_item": "femme",
+      "truth": "f.a.m",
+      "observed_errors": {
+        "f.@.m": "overregularized_reading"
+      }
+    },
+    "comprehension": {
+      "word_or_item": "« le chat mange la pomme ». Qui ?",
+      "truth": "le chat",
+      "observed_errors": {
+        "la pomme": "role_confusion"
+      }
+    },
+    "maths_addition": {
+      "word_or_item": "4 + 9 = ?",
+      "truth": "13",
+      "observed_errors": {
+        "14": "add_fact_off_by_one"
+      }
+    }
+  },
+  "intelligence_delta": {
+    "components": {
+      "knowledge_gain": 0.9466,
+      "transfer_gain": 0.6119,
+      "reasoning_gain": 0.6119,
+      "retention_gain": 0.6248,
+      "metacognition_gain": 0.0297,
+      "learning_efficiency_gain": 0.0
+    },
+    "weights": {
+      "knowledge_gain": 0.3,
+      "transfer_gain": 0.25,
+      "reasoning_gain": 0.2,
+      "retention_gain": 0.1,
+      "metacognition_gain": 0.1,
+      "learning_efficiency_gain": 0.05
+    },
+    "weighted_delta": 0.6248,
+    "retention_ratio_t2_over_t1": 0.6601,
+    "note": "Internal cognitive evolution index — not a human IQ."
+  }
+}

@@ -25,6 +25,12 @@ class CurriculumNode:
     learning_objectives: list = field(default_factory=list)
     observable_behaviors: list = field(default_factory=list)
     mastery_threshold: float = 0.8
+    # Optional richer fields from the official programme (BO / attendus de fin
+    # d'année). They document the node; they don't change how the brain learns.
+    discipline: str = ""                                  # e.g. "lecture", "nombres"
+    end_of_year_expectations: list = field(default_factory=list)
+    exercise_types: list = field(default_factory=list)
+    evaluation_criteria: list = field(default_factory=list)
 
 
 class CurriculumError(ValueError):
@@ -53,6 +59,10 @@ def _validate(node: dict) -> CurriculumNode:
         learning_objectives=list(node.get("learning_objectives", [])),
         observable_behaviors=list(node.get("observable_behaviors", [])),
         mastery_threshold=thr,
+        discipline=node.get("discipline", ""),
+        end_of_year_expectations=list(node.get("end_of_year_expectations", [])),
+        exercise_types=list(node.get("exercise_types", [])),
+        evaluation_criteria=list(node.get("evaluation_criteria", [])),
     )
 
 

@@ -2,8 +2,8 @@
   "seed": 5,
   "domain": "français — pluriel des noms",
   "snapshots": {
-    "before": "5e320f91-2661-4259-8a59-6862cfd4cba2",
-    "after": "4a9083dc-d2a3-4c9c-9459-09fe532d2f77"
+    "before": "2aff6864-2d7b-45ec-8e94-c926d8b36911",
+    "after": "0c4ec0ef-7241-45d7-94e5-8608fcbb24cf"
   },
   "pretest": {
     "heldout": {

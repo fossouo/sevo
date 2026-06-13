@@ -2,8 +2,8 @@
   "seed": 5,
   "domain": "français — présent des verbes en -er",
   "snapshots": {
-    "before": "653e9350-661d-4b3f-b109-5de4032ecc42",
-    "after": "88a01b0e-2e6e-42ec-ace1-7673cfab1258"
+    "before": "3a7c1cd3-7592-4355-afaf-28c50dc76c5e",
+    "after": "0925544e-abe2-4812-b089-29d66549cef8"
   },
   "pretest": {
     "heldout": {

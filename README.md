@@ -60,6 +60,32 @@ ce qui confirme que **le transfert est proportionnel à la structure partagée**
 fort entre `reg`→`-al` (pluriel), faible entre pluriel→conjugaison.
 S'il ne marchait que sur un domaine, ce serait une calculette, pas un cerveau.
 
+### Le cycle CP complet, ingéré depuis le programme officiel
+
+Au-delà des domaines isolés, Sèvo exécute désormais **toute une classe** de bout
+en bout. Le programme **CP** (français + maths) est ingéré via le contrat
+standard (`curriculum/official_curriculum.py` — disciplines, attendus de fin
+d'année, prérequis, types d'exercices, critères d'évaluation), puis le cerveau
+traverse le cycle complet sur les 5 nœuds : pré-test à froid → Emma enseigne →
+consolidation → post-test immédiat → post-test différé (+7 j) → transfert.
+
+| Facette (agrégée) | Pré-test | Post-test |
+|---|---|---|
+| **Connaissance** (held-out) | 0 % | 95 % |
+| **Transfert** (mots/pseudo-mots jamais vus) | 0 % | 61 % |
+| **Rétention** (+7 j) | — | 62 % |
+| **Métacognition** (erreur de calibration ↓) | 0,10 | 0,07 |
+
+**Intelligence_delta (CP) = 0,625** (`reports/CP_GRADE_REPORT.md`). Le nouveau
+domaine **lecture / décodage** (correspondances graphème-phonème, mots réguliers,
+mots irréguliers, compréhension de phrase) y est prouvé comme les autres :
+décodage de **pseudo-mots** 0 → 79 % (le test étalon d'une vraie compétence
+alphabétique — un mémoriseur y est à 0 %), erreurs caractéristiques *« chat »
+→ /kat/* (lettre à lettre) et *« femme » → /fəm/* au lieu de /fam/
+(sur-régularisation). Le
+lexique CP structuré (`curriculum/fr_lexicon.py` : lemmes, formes fléchies,
+fréquence, niveau scolaire, source traçable) garde Emma honnête.
+
 ---
 
 ## Architecture
@@ -146,14 +172,14 @@ français (accord du pluriel) pour prouver que l'architecture n'est pas spécifi
 design/        # contrats v0.3 (spec source de vérité, JSON + SPEC.md)
 src/sevo/      # implémentation de référence
   services/    # les 10 microservices MVP (+ stubs non-MVP)
-  curriculum/  # base.py (tâche agnostique) · cp_ce1_math · fr_cp_ce1 · fr_conjugation · fr_lexicon · ingestion
+  curriculum/  # base · cp_ce1_math · fr_cp_ce1 · fr_conjugation · fr_lecture_cp · fr_lexicon · official_curriculum · ingestion
   teacher/     # emma_stub (déterministe, offline) · emma_litellm (live, INERTE par défaut)
   eval/        # protocole + calcul Intelligence_delta
   brain.py     # orchestrateur + surface API (multi-domaines)
   api.py       # adaptateur HTTP FastAPI (optionnel)
-experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_emma_live · generate_report
-tests/         # 38 tests : invariants design + dynamique maths + français (pluriel + conjugaison) + lexique + intégration
-reports/       # preuve committée (EXPERIMENT_REPORT*.md, last_run*.json)
+experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
+tests/         # 55 tests : invariants design + maths + français (pluriel/conjugaison/lecture) + lexique + curriculum officiel + intégration
+reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 
 ## La vraie Emma a déjà enseigné (run live)
@@ -187,16 +213,16 @@ une ressource lexicale réelle, validée de la même façon.
 
 ## Feuille de route
 
-- **Fait** : MVP **multi-domaines** (maths + pluriel + conjugaison), Emma
-  déterministe hors-ligne **et** Emma live (diffusiongemma/DGX) prouvées ; API
-  d'ingestion conforme au contrat (les 3 domaines y transitent) ; adaptateur
-  LiteLLM **inerte par défaut** avec **double garde** forme + lexique sur les
-  mots proposés.
-- **Ensuite** : ingérer le **programme scolaire français officiel** (sources dans
-  `design/sources.json`) classe par classe — chaque classe = un épisode
-  développemental versionné — en grossissant le lexique depuis une ressource
-  réelle, brancher la génération live d'exercices de conjugaison (mêmes gardes),
-  et ajouter la lecture/décodage.
+- **Fait** : MVP **multi-domaines** (maths, pluriel, conjugaison, **lecture /
+  décodage**) ; **cycle CP complet** ingéré depuis le programme officiel et prouvé
+  de bout en bout (`run_cp_grade`) ; lexique structuré (lemmes, formes, niveau,
+  source) ; Emma déterministe **et** live (diffusiongemma/DGX) prouvées ;
+  adaptateur LiteLLM inerte par défaut avec double garde forme + lexique.
+- **Ensuite** : ingérer les **classes suivantes** (CE1, CE2…) via
+  `official_curriculum.register_class` ; brancher le lexique sur la **ressource
+  réelle complète** (Manulex / Dubois-Buyse) au lieu du sous-ensemble amorce ;
+  ajouter la **fluence** et la segmentation syllabique explicite ; génération live
+  d'exercices de lecture/conjugaison (mêmes gardes).
 
 ## Provenance & licence
 
