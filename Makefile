@@ -21,6 +21,10 @@ demo-ce1-after-cp:              # developmental: a CP-appris brain then learns C
 demo-developmental:
 	$(PYTHON) scripts/developmental.py
 
+# Freeze the CP->CE1 finding as evidence: skill-level transfer matrix + report.
+demo-developmental-evidence:
+	$(PYTHON) scripts/developmental_evidence.py
+
 # Regenerate the reproducible experiment reports (maths / FR / conjugation / CP).
 report:
 	PYTHONPATH=src:experiments $(PYTHON) experiments/generate_report.py

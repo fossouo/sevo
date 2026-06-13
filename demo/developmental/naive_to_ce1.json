@@ -1,0 +1,38 @@
+{
+  "fr.CE1.pluriel_reguliers": {
+    "pretest": 0.0,
+    "trials": 8,
+    "final_mastery": 0.822,
+    "post": 0.8182
+  },
+  "fr.CE1.pluriel_en_al": {
+    "pretest": 0.375,
+    "trials": 24,
+    "final_mastery": 0.9769,
+    "post": 1.0
+  },
+  "fr.CE1.present_verbes_er": {
+    "pretest": 0.0758,
+    "trials": 24,
+    "final_mastery": 0.8293,
+    "post": 0.8636
+  },
+  "math.CE1.add_within_100_nocarry": {
+    "pretest": 0.0,
+    "trials": 32,
+    "final_mastery": 0.9087,
+    "post": 1.0
+  },
+  "math.CE1.add_within_100_carry": {
+    "pretest": 0.2917,
+    "trials": 24,
+    "final_mastery": 0.8578,
+    "post": 1.0
+  },
+  "math.CE1.sub_within_100_borrow": {
+    "pretest": 0.0417,
+    "trials": 16,
+    "final_mastery": 0.8295,
+    "post": 0.9167
+  }
+}

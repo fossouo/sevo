@@ -143,6 +143,16 @@ avec le CP. Pas d'accélération *globale* magique : **le transfert est
 proportionnel à la structure partagée**. Artefacts : `demo/developmental/`
 (`brain_after_cp.json`, `brain_after_ce1.json`, `cp_to_ce1_diff.json`).
 
+Ce résultat est **figé comme preuve scientifique** (`make demo-developmental-evidence`
+→ [`docs/DEVELOPMENTAL_EVIDENCE.md`](docs/DEVELOPMENTAL_EVIDENCE.md) + matrice de
+transfert `transfer_matrix.json`). La matrice (compétence CP → nœud CE1, attendu
+vs observé, verdict `confirmed`/`weak`/`absent`) révèle la découverte clé :
+l'addition CE1 *sans retenue* transfère pleinement du CP (`confirmed`), mais
+l'addition *avec retenue* **non** (`absent`) — car `carry` est **nouveau** au CE1.
+**Le transfert est plafonné par la compétence-goulot manquante.** Des tests de
+non-régression gardent l'invariant : *« toute PR qui améliore tout partout est
+suspecte »* (le transfert doit rester **localisé**, jamais forcé sur le français).
+
 **Intelligence_delta (CP) = 0,749** (`reports/CP_GRADE_REPORT.md`) — et ce delta
 n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**
 (`eval/integrity.py`) : gain post-test **et** held-out substantiel **et**
@@ -342,7 +352,7 @@ Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
 scripts/demo_cp.py · Makefile (make demo-cp)              # preuve fondatrice reproductible
 docs/CP_PROTOCOL.md · demo/artifacts/ · demo/artifacts_ce1/  # protocole gelé + preuves CP & CE1
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 142 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
+tests/         # 148 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
 scripts/developmental.py · reports/DEVELOPMENTAL_REPORT.md · demo/developmental/  # étude CP→CE1
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```

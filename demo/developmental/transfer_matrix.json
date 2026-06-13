@@ -1,0 +1,184 @@
+{
+  "cp_mastered_skills": [
+    "add_facts_within_20",
+    "blending",
+    "grapheme_phoneme",
+    "grapheme_recognition",
+    "lexical_access",
+    "number_comparison",
+    "orthographic_encoding",
+    "place_value",
+    "sentence_parsing",
+    "sight_words",
+    "sub_facts_within_20",
+    "syllable_segmentation"
+  ],
+  "thresholds": {
+    "confirmed>=": 0.3,
+    "weak>=": 0.1
+  },
+  "edges": [
+    {
+      "cp_skill": "grapheme_recognition",
+      "ce1_node": "fr.CE1.pluriel_reguliers",
+      "weight_in_node": 0.3,
+      "expected": "medium",
+      "observed_node_transfer": 0.1818,
+      "verdict": "weak"
+    },
+    {
+      "cp_skill": "grapheme_recognition",
+      "ce1_node": "fr.CE1.pluriel_en_al",
+      "weight_in_node": 0.3,
+      "expected": "medium",
+      "observed_node_transfer": -0.25,
+      "verdict": "absent"
+    },
+    {
+      "cp_skill": "grapheme_recognition",
+      "ce1_node": "fr.CE1.present_verbes_er",
+      "weight_in_node": 0.2,
+      "expected": "weak",
+      "observed_node_transfer": 0.0151,
+      "verdict": "absent"
+    },
+    {
+      "cp_skill": "place_value",
+      "ce1_node": "math.CE1.add_within_100_nocarry",
+      "weight_in_node": 0.5,
+      "expected": "strong",
+      "observed_node_transfer": 0.75,
+      "verdict": "confirmed"
+    },
+    {
+      "cp_skill": "add_facts_within_20",
+      "ce1_node": "math.CE1.add_within_100_nocarry",
+      "weight_in_node": 0.5,
+      "expected": "strong",
+      "observed_node_transfer": 0.75,
+      "verdict": "confirmed"
+    },
+    {
+      "cp_skill": "place_value",
+      "ce1_node": "math.CE1.add_within_100_carry",
+      "weight_in_node": 0.3,
+      "expected": "strong",
+      "observed_node_transfer": 0.0,
+      "verdict": "absent"
+    },
+    {
+      "cp_skill": "add_facts_within_20",
+      "ce1_node": "math.CE1.add_within_100_carry",
+      "weight_in_node": 0.3,
+      "expected": "strong",
+      "observed_node_transfer": 0.0,
+      "verdict": "absent"
+    },
+    {
+      "cp_skill": "place_value",
+      "ce1_node": "math.CE1.sub_within_100_borrow",
+      "weight_in_node": 0.3,
+      "expected": "strong",
+      "observed_node_transfer": 0.25,
+      "verdict": "weak"
+    },
+    {
+      "cp_skill": "sub_facts_within_20",
+      "ce1_node": "math.CE1.sub_within_100_borrow",
+      "weight_in_node": 0.3,
+      "expected": "strong",
+      "observed_node_transfer": 0.25,
+      "verdict": "weak"
+    }
+  ],
+  "by_node": {
+    "fr.CE1.pluriel_reguliers": {
+      "shared_cp_skills": [
+        "grapheme_recognition"
+      ],
+      "shared_weight": 0.3,
+      "new_skills_at_ce1": [
+        "plural_rule_s"
+      ],
+      "expected": "medium",
+      "observed_transfer": 0.1818,
+      "verdict": "weak",
+      "dev_pretest": 0.1818,
+      "iso_pretest": 0.0
+    },
+    "fr.CE1.pluriel_en_al": {
+      "shared_cp_skills": [
+        "grapheme_recognition"
+      ],
+      "shared_weight": 0.3,
+      "new_skills_at_ce1": [
+        "plural_exception_aux"
+      ],
+      "expected": "medium",
+      "observed_transfer": -0.25,
+      "verdict": "absent",
+      "dev_pretest": 0.125,
+      "iso_pretest": 0.375
+    },
+    "fr.CE1.present_verbes_er": {
+      "shared_cp_skills": [
+        "grapheme_recognition"
+      ],
+      "shared_weight": 0.2,
+      "new_skills_at_ce1": [
+        "present_er_endings",
+        "subject_agreement",
+        "verb_stem_recognition"
+      ],
+      "expected": "weak",
+      "observed_transfer": 0.0151,
+      "verdict": "absent",
+      "dev_pretest": 0.0909,
+      "iso_pretest": 0.0758
+    },
+    "math.CE1.add_within_100_nocarry": {
+      "shared_cp_skills": [
+        "add_facts_within_20",
+        "place_value"
+      ],
+      "shared_weight": 1.0,
+      "new_skills_at_ce1": [],
+      "expected": "strong",
+      "observed_transfer": 0.75,
+      "verdict": "confirmed",
+      "dev_pretest": 0.75,
+      "iso_pretest": 0.0
+    },
+    "math.CE1.add_within_100_carry": {
+      "shared_cp_skills": [
+        "add_facts_within_20",
+        "place_value"
+      ],
+      "shared_weight": 0.6,
+      "new_skills_at_ce1": [
+        "carry"
+      ],
+      "expected": "strong",
+      "observed_transfer": 0.0,
+      "verdict": "absent",
+      "dev_pretest": 0.2917,
+      "iso_pretest": 0.2917
+    },
+    "math.CE1.sub_within_100_borrow": {
+      "shared_cp_skills": [
+        "place_value",
+        "sub_facts_within_20"
+      ],
+      "shared_weight": 0.6,
+      "new_skills_at_ce1": [
+        "borrow"
+      ],
+      "expected": "strong",
+      "observed_transfer": 0.25,
+      "verdict": "weak",
+      "dev_pretest": 0.2917,
+      "iso_pretest": 0.0417
+    }
+  },
+  "interpretation": "localized developmental transfer — not global intelligence acceleration — transfer proportional to shared structure, and gated by the new bottleneck skill."
+}
