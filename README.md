@@ -111,6 +111,23 @@ state/session) ; `tests/test_cp_protocol_freeze.py` garde la non-régression
 (GENUINE · save/reload exact · audit clean · replay déterministe · zéro leakage).
 Variante service : `make demo-docker` (conteneur + smoke test HTTP).
 
+**Le même cerveau traverse une 2ᵉ classe — CE1.** CE1 est une **extension** du
+cœur gelé : il réutilise les nœuds existants (pluriel, conjugaison, addition/
+soustraction < 100) via `official_curriculum.register_class("CE1")` — **aucune
+réécriture**, GENUINE, séparation teacher/oracle et anti-leakage **inchangés**
+(c'est un *CE1 seed registry* : aligné sur les attendus, **partiel, amorce,
+vérifié à la main**). Deux modes :
+
+```bash
+make demo-ce1            # naïf : un cerveau frais apprend CE1 isolément
+make demo-ce1-after-cp   # développemental : un cerveau CP-appris apprend ensuite CE1
+```
+
+Chaque mode produit les **six mêmes artefacts** que le CP et ressort **GENUINE**.
+La **comparaison développementale CP→CE1** (un cerveau CP-appris apprend-il CE1
+mieux/plus vite/plus proprement qu'un cerveau naïf ?) fait l'objet de la PR
+suivante. Le protocole CP reste la référence (`docs/CP_PROTOCOL.md`).
+
 **Intelligence_delta (CP) = 0,749** (`reports/CP_GRADE_REPORT.md`) — et ce delta
 n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**
 (`eval/integrity.py`) : gain post-test **et** held-out substantiel **et**
@@ -308,9 +325,9 @@ src/sevo/      # implémentation de référence
   api.py       # adaptateur HTTP FastAPI (optionnel) sur BrainService
 Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
 scripts/demo_cp.py · Makefile (make demo-cp)              # preuve fondatrice reproductible
-docs/CP_PROTOCOL.md · demo/artifacts/                     # protocole CP gelé + artefacts de preuve
+docs/CP_PROTOCOL.md · demo/artifacts/ · demo/artifacts_ce1/  # protocole gelé + preuves CP & CE1
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 127 tests : design + maths + français + lexique + curriculum officiel + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP-protocol-freeze
+tests/         # 135 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 
@@ -362,11 +379,12 @@ une ressource lexicale réelle, validée de la même façon.
 - **Preuve fondatrice** : `make demo-cp` rejoue tout le cycle CP et écrit six
   artefacts ; protocole CP **gelé** (`docs/CP_PROTOCOL.md`) + garde de
   non-régression. C'est le socle scientifique avant toute montée en classe.
-- **Ensuite** : ingérer les **classes suivantes** (CE1, CE2…) via
-  `official_curriculum.register_class` (volontairement non démarré tant que la
-  démo CP n'est pas le socle) ; brancher le lexique sur la **ressource réelle complète**
-  (Manulex / Dubois-Buyse) ; ajouter la **fluence** et la compréhension de
-  consignes ; génération live d'exercices (mêmes gardes).
+- **CE1 (extension)** : `register_class("CE1")` + `make demo-ce1` — le même
+  cerveau traverse une 2ᵉ classe (pluriel, conjugaison, calcul < 100), GENUINE,
+  six artefacts comparables au CP, protocole gelé respecté (aucune réécriture).
+- **Ensuite** : CE2… via le même `register_class` ; brancher le lexique sur la
+  **ressource réelle complète** (Manulex / Dubois-Buyse) ; ajouter la **fluence**
+  et la compréhension de consignes ; génération live d'exercices (mêmes gardes).
 
 ## Provenance & licence
 

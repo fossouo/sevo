@@ -1,0 +1,164 @@
+{
+  "fr.CE1.pluriel_reguliers": {
+    "node_id": "fr.CE1.pluriel_reguliers",
+    "teaching": {
+      "n": 13,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 11,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 6,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "fr.CE1.pluriel_en_al": {
+    "node_id": "fr.CE1.pluriel_en_al",
+    "teaching": {
+      "n": 8,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 8,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 6,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "fr.CE1.present_verbes_er": {
+    "node_id": "fr.CE1.present_verbes_er",
+    "teaching": {
+      "n": 78,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 66,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 48,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "intra-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "math.CE1.add_within_100_nocarry": {
+    "node_id": "math.CE1.add_within_100_nocarry",
+    "teaching": {
+      "n": 24,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 24,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 20,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "out-of-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "math.CE1.add_within_100_carry": {
+    "node_id": "math.CE1.add_within_100_carry",
+    "teaching": {
+      "n": 24,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 24,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 20,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "out-of-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  },
+  "math.CE1.sub_within_100_borrow": {
+    "node_id": "math.CE1.sub_within_100_borrow",
+    "teaching": {
+      "n": 24,
+      "role": "reference (seen in training)"
+    },
+    "heldout": {
+      "clean": true,
+      "n_eval": 24,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "vs": "teaching"
+    },
+    "retention": {
+      "reuses": "heldout",
+      "note": "retention (t2) is measured on the held-out bank after a delay — same items, so its leakage status is the held-out one above"
+    },
+    "transfer": {
+      "clean": true,
+      "n_eval": 20,
+      "n_contaminated": 0,
+      "contaminated_items": [],
+      "kind": "out-of-grade",
+      "vs": "teaching"
+    },
+    "clean": true
+  }
+}

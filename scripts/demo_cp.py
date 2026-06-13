@@ -20,15 +20,32 @@ import json
 import os
 
 from sevo.curriculum.factory import teaching_bank
-from sevo.curriculum.official_curriculum import RUNNABLE_CP
+from sevo.curriculum.official_curriculum import disclaimer_for, runnable_for
 from sevo.runtime import BrainService
 
 SEED = 7
 THRESHOLD = 0.8
 MAX_SESSIONS = 8
-REPRESENTATIVE = "fr.CP.lecture_mots_reguliers"
+REPRESENTATIVE = {"CP": "fr.CP.lecture_mots_reguliers",
+                  "CE1": "fr.CE1.present_verbes_er"}
 HERE = os.path.dirname(__file__)
 ARTIFACTS = os.path.join(HERE, "..", "demo", "artifacts")
+
+
+def _default_out(grade: str, prior_grade: str | None = None) -> str:
+    base = os.path.join(HERE, "..", "demo")
+    if grade == "CP" and not prior_grade:
+        return ARTIFACTS
+    suffix = grade.lower() + (f"_after_{prior_grade.lower()}" if prior_grade else "")
+    return os.path.join(base, f"artifacts_{suffix}")
+
+
+def _rep_content(task):
+    """Extract the API content for a representative task (reading/plural use the
+    word; conjugation uses verb+pronoun)."""
+    if hasattr(task, "verb"):
+        return {"verb": task.verb, "pronoun": task.pronoun}
+    return task.word
 
 
 def _w(out: str, name: str, obj) -> None:
@@ -57,22 +74,40 @@ def _teach_to_mastery(svc: BrainService, node: str):
     return journals
 
 
-def run(out: str = ARTIFACTS) -> dict:
-    out = os.path.abspath(out)
-    os.makedirs(out, exist_ok=True)
-    nodes = list(RUNNABLE_CP)
+def run(out: str | None = None, grade: str = "CP", prior_grade: str | None = None) -> dict:
+    """Run the full demo for one grade.
 
-    # 1) Brain CP-naïf -------------------------------------------------------
+    ``prior_grade`` (e.g. "CP") switches to the *developmental* mode: the brain
+    first learns the prior grade, the baseline is re-anchored to that CP-appris
+    state, and then it learns ``grade`` — so the diff/verdict measure the
+    *increment* of the new grade on top of the prior one. With ``prior_grade=None``
+    the brain learns ``grade`` from naïve (isolated mode)."""
+    out = os.path.abspath(out if out is not None else _default_out(grade, prior_grade))
+    os.makedirs(out, exist_ok=True)
+    nodes = list(runnable_for(grade))
+    representative = REPRESENTATIVE[grade]
+
     svc = BrainService(seed=SEED)
+    # Developmental mode: learn the prior grade first, then re-anchor the
+    # baseline so what we measure is the NEW grade's increment.
+    if prior_grade:
+        for pn in runnable_for(prior_grade):
+            _teach_to_mastery(svc, pn)
+        svc.consolidate("sleep", advance_days=1)
+        svc.consolidate("error_replay", advance_days=0)
+        svc.set_baseline()              # baseline = Brain prior-grade-appris
+        svc._touched.clear()            # measure the target grade only
+
+    # 1) Brain de départ (naïf, ou prior-grade-appris) -----------------------
     brain_before = svc.brain_before
 
-    # 2) Emma teaches every CP node (journaled, structured feedback) ---------
+    # 2) Emma teaches every node of the grade (journaled, structured feedback)
     rep_journal, summary = None, {}
     for n in nodes:
         js = _teach_to_mastery(svc, n)
         summary[n] = {"sessions": len(js),
                       "final_mastery": round(svc.brain.semantic.mastery(n), 4)}
-        if n == REPRESENTATIVE:
+        if n == representative:
             rep_journal = js[0]["journal"]            # one full session, for the format
 
     # 3) consolidation -> Brain CP-appris ------------------------------------
@@ -99,8 +134,8 @@ def run(out: str = ARTIFACTS) -> dict:
     leakage_clean = audit_clean
     rsvc = BrainService(seed=SEED)
     sid = rsvc.start_session()
-    for w in [t.word for t in teaching_bank(REPRESENTATIVE, SEED)[:6]]:
-        rsvc.feedback(REPRESENTATIVE, w, correct=True)
+    for task in teaching_bank(representative, SEED)[:6]:
+        rsvc.feedback(representative, _rep_content(task), correct=True)
     replay_deterministic = (rsvc.replay_session(sid)["replayed_state"]
                             == rsvc.replay_session(sid)["replayed_state"])
 
@@ -112,11 +147,14 @@ def run(out: str = ARTIFACTS) -> dict:
         "per_node": assessment, "verdict": verdict,
         "reload_exact": reload_exact, "reassessment_after_reload": reassessment})
     _w(out, "emma_session_journal.json", {
-        "representative_node": REPRESENTATIVE, "session": rep_journal,
+        "representative_node": representative, "session": rep_journal,
         "all_nodes_summary": summary})
     _w(out, "audit_report.json", audit)
 
     result = {
+        "grade": grade,
+        "mode": f"after_{prior_grade.lower()}" if prior_grade else "naive",
+        "prior_grade": prior_grade,
         "verdict": verdict["verdict"],
         "genuine": verdict["passed"],
         "reload_exact": reload_exact,
@@ -130,8 +168,14 @@ def run(out: str = ARTIFACTS) -> dict:
 
 
 def main() -> None:
-    r = run()
-    print("=== Sèvo — Founder CP demo ===")
+    import sys
+    grade = sys.argv[1].upper() if len(sys.argv) > 1 else "CP"
+    prior = sys.argv[2].upper() if len(sys.argv) > 2 else None
+    r = run(grade=grade, prior_grade=prior)
+    print(f"=== Sèvo — Founder demo ({grade}, mode={r['mode']}) ===")
+    disc = disclaimer_for(grade)
+    if disc:
+        print(f"  ⚠️  {disc}")
     print(f"  nodes taught (Emma, journaled) : {r['nodes_taught']}")
     print(f"  independent verdict            : {r['verdict']}")
     print(f"  save/reload exact              : {r['reload_exact']}")

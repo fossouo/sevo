@@ -34,9 +34,13 @@ def detect_leakage(eval_items, teaching_items) -> dict:
     }
 
 
-# Maths CP nodes whose transfer probe is deliberately *out-of-grade* (addition
+# Maths nodes whose transfer probe is deliberately *out-of-grade* (addition
 # within 1000). Everything else transfers within grade (unseen words / numbers).
-_OUT_OF_GRADE_TRANSFER = {"math.CP.add_within_20", "math.CP.sub_within_20"}
+_OUT_OF_GRADE_TRANSFER = {
+    "math.CP.add_within_20", "math.CP.sub_within_20",
+    "math.CE1.add_within_100_nocarry", "math.CE1.add_within_100_carry",
+    "math.CE1.sub_within_100_borrow",
+}
 
 
 def transfer_kind(node_id: str) -> str:
