@@ -82,6 +82,11 @@ class AuditReq(BaseModel):
     node_id: str
 
 
+class TeachReq(BaseModel):
+    node_id: str
+    session_size: int = 8
+
+
 def _state_path(path: Optional[str]) -> str:
     """The single recommended state location is the mounted volume
     $SEVO_STATE_DIR (/data in Docker); used when no explicit path is given."""
@@ -120,6 +125,12 @@ def consolidate(r: ConsolidateReq):
 @app.post("/replay")
 def replay(r: ReplayReq):
     return _guard(lambda: service.replay_emma_session(r.node_id, r.session_size, r.sessions))
+
+
+@app.post("/teach/session")
+def teach_session(r: TeachReq):
+    """Journaled teaching session (structured feedback; default stub teacher)."""
+    return _guard(lambda: service.teach_journaled(r.node_id, r.session_size))
 
 
 @app.get("/state")

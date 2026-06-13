@@ -79,6 +79,15 @@ def test_evaluate_leakage_returns_422():
     assert r.status_code == 422
 
 
+def test_teach_session_returns_journal():
+    client = _client()
+    r = client.post("/teach/session", json={"node_id": NODE, "session_size": 6})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["teacher"] == "stub" and len(body["journal"]) == 6
+    assert "normalized_feedback" in body["journal"][0]
+
+
 def test_save_load_default_to_state_volume(tmp_path, monkeypatch):
     """D: /save and /load with no path default to $SEVO_STATE_DIR (the volume)."""
     monkeypatch.setenv("SEVO_STATE_DIR", str(tmp_path))

@@ -173,6 +173,7 @@ uvicorn sevo.api:app --reload
 | `POST /feedback` | feedback structuré d'Emma → le cerveau apprend | enseignement |
 | `POST /consolidate` | replay / « sommeil » | enseignement |
 | `POST /replay` | rejouer une session Emma sur un nœud | enseignement |
+| `POST /teach/session` | session **journalisée** (feedback structuré) | enseignement |
 | `GET /state` | exporter l'état appris (brain_after) | — |
 | `GET /diff` | diff `Brain-naïf → Brain-appris` + verdict GENUINE | observation |
 | `POST /evaluate` | oracle sur la banque held-out d'un nœud | **assessment** |
@@ -204,6 +205,31 @@ testable sans serveur.
   leakage*).
 - **Docker** : `Dockerfile` + `docker-compose.yml` (volume `/data` pour l'état),
   `scripts/smoke_test.sh` (`docker compose up --build` puis le smoke test).
+
+#### Emma comme enseignante réelle (sans casser l'indépendance de l'évaluation)
+
+Un **`TeacherAdapter`** (interface stable) sépare Emma du cerveau. Chaque
+feedback est un objet **contrôlé** `StructuredFeedback` — jamais du texte libre
+injecté en mémoire :
+
+```
+node_id · task_id · observed_answer · correct_answer · hint · error_type · confidence · teach_signal
+```
+
+Garanties : (1) `teach_signal` et `correct_answer` viennent de la **vérité
+terrain** (`task.grade`), **pas du modèle** — Emma peut formuler un *indice*,
+jamais décider du juste/faux, donc elle ne peut ni mal-enseigner ni contaminer ;
+(2) le cerveau n'apprend **que** de `teach_signal`, l'indice est journalisé pour
+l'humain ; (3) **anti-contamination** — l'évaluation (oracle) ne passe jamais par
+un teacher, donc Emma ne voit jamais held-out / transfert / rétention.
+
+Trois modes derrière la même interface : **`StubTeacher`** (déterministe,
+hors-ligne, utilisé par tous les tests) · **`LiveTeacher`** (indice via LLM,
+**inerte** sans transport injecté, aucune dépendance live dans les tests) ·
+**`ScriptedTeacher`** (rejoue une session live **figée en fixture** —
+déterministe, comparable au stub). Une session live se journalise intégralement
+(prompt → réponse → feedback brut → feedback normalisé → décision → état
+avant/après) et se **gèle** (`freeze_session`) pour un replay reproductible.
 
 **État persistant — chemin unique recommandé** : `$SEVO_STATE_DIR` (= `/data`
 dans le conteneur, monté sur le volume `sevo-state`). `POST /save` et `/load`
@@ -257,7 +283,7 @@ design/        # contrats v0.3 (spec source de vérité, JSON + SPEC.md)
 src/sevo/      # implémentation de référence
   services/    # les 10 microservices MVP (+ stubs non-MVP)
   curriculum/  # base · cp_ce1_math · cp_maths_numeration · fr_cp_ce1 · fr_conjugation · fr_lecture_cp · fr_lexicon · official_curriculum · ingestion
-  teacher/     # emma_stub (offline) · emma_session (boucle API Emma) · emma_litellm (live, INERTE par défaut)
+  teacher/     # adapter (TeacherAdapter/Structured/Stub/Scripted/Live) · journal · emma_session · emma_stub · emma_litellm
   eval/        # protocole + Intelligence_delta + integrity + state_diff + leakage (item-leakage)
   persistence.py # enveloppe runtime versionnée + migrations (0.4 → 0.5)
   brain.py     # orchestrateur + surface API + export_state/from_state (persistance)
@@ -266,7 +292,7 @@ src/sevo/      # implémentation de référence
   api.py       # adaptateur HTTP FastAPI (optionnel) sur BrainService
 Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 109 tests : design + maths + français + lexique + curriculum officiel + intégrité + state-diff + boucle Emma + persistance + runtime + migrations + sessions + observabilité/leakage + API HTTP
+tests/         # 120 tests : design + maths + français + lexique + curriculum officiel + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 
@@ -311,6 +337,10 @@ une ressource lexicale réelle, validée de la même façon.
   state schema versionné + migrations, sessions persistantes à replay
   déterministe, observabilité (`/health`, `/metrics`), détection d'item-leakage
   (`/audit`, `/evaluate` refuse les items vus), prêt Docker.
+- **Emma réelle** : `TeacherAdapter` stable (stub / live LLM inerte / scripted),
+  feedback **structuré** (jamais de texte libre en mémoire), session journalisée
+  et **gelable** en fixture reproductible, garde anti-contamination (Emma ne voit
+  jamais les probes d'évaluation).
 - **Ensuite** : ingérer les **classes suivantes** (CE1, CE2…) via
   `official_curriculum.register_class` (volontairement non démarré tant que le CP
   n'est pas durci) ; brancher le lexique sur la **ressource réelle complète**
