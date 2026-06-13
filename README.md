@@ -374,7 +374,7 @@ Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
 scripts/demo_cp.py · Makefile (make demo-cp)              # preuve fondatrice reproductible
 docs/CP_PROTOCOL.md · demo/artifacts/ · demo/artifacts_ce1/  # protocole gelé + preuves CP & CE1
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 157 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
+tests/         # 161 tests : design + maths + français + lexique + curriculum officiel (CP+CE1) + intégrité + state-diff + persistance + runtime + migrations + sessions + observabilité/leakage + teacher-adapter + API HTTP + CP/CE1-protocol-freeze + développemental
 scripts/developmental.py · reports/DEVELOPMENTAL_REPORT.md · demo/developmental/  # étude CP→CE1
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
@@ -433,6 +433,14 @@ une ressource lexicale réelle, validée de la même façon.
 - **Trajectoire développementale** : `make demo-developmental` mesure si un
   cerveau CP-appris apprend CE1 mieux/plus vite qu'un naïf — transfert réel et
   localisé (fort sur l'arithmétique partagée, nul sur le français).
+- **CE2 + courbe** : `register_class("CE2")` (add/sub < 1000) ; la courbe
+  naïf→CP→CE1→CE2 montre que chaque classe **débloque la suivante en comblant la
+  compétence-goulot** (`make demo-developmental-curve`).
+- **Lexique** : ressource lexicale **sous garde provenance/licence**
+  (`docs/LEXICON.md`) — refuse tout dump opaque/non licencié ; lemmes, fréquence,
+  formes fléchies, niveau, splits **train/held-out/transfer**. Seed amorce
+  embarqué ; une vraie ressource (Manulex/Dubois-Buyse) se branche via
+  `load_external` sous la même garde (données jamais committées).
 - **Ensuite** : CE2… via le même `register_class` ; brancher le lexique sur la
   **ressource réelle complète** (Manulex / Dubois-Buyse) ; ajouter la **fluence**
   et la compréhension de consignes ; génération live d'exercices (mêmes gardes).

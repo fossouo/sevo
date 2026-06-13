@@ -128,7 +128,8 @@ class EmmaLiteLLM:
         return self._transport
 
     def generate_french_tasks(self, node_id: str, n: int, oversample: int = 3,
-                              require_lexicon: bool = True) -> list:
+                              require_lexicon: bool = True,
+                              allowed_words: set | None = None) -> list:
         """Ask the model for curriculum-aligned French nouns, vet them, and turn
         the safe ones into gradable tasks. Answers are computed deterministically
         by the curriculum, never by the model. A proposed word becomes a task
@@ -164,6 +165,11 @@ class EmmaLiteLLM:
             if wl in seen or not vet_word(category, wl):
                 continue
             if require_lexicon and not in_lexicon(wl):
+                continue
+            # Anti-leakage for live generation: when a train word-set is given
+            # (e.g. the lexicon's train split), never propose a held-out/transfer
+            # word as a teaching item.
+            if allowed_words is not None and wl not in allowed_words:
                 continue
             seen.add(wl)
             vetted.append(_make(node_id, wl))
