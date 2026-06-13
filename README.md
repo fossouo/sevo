@@ -185,6 +185,43 @@ conserve exactement ses compétences** (état procédural/sémantique identique 
 bit près — testé). L'API HTTP est un mince adaptateur sur `BrainService`, lui-même
 testable sans serveur.
 
+#### Durci pour tourner comme un vrai service
+
+- **State schema + migrations** (`persistence.py`) : l'export runtime est
+  versionné (`runtime_schema_version`) ; un état d'une version antérieure est
+  **migré explicitement** (0.4 → 0.5) ou **rejeté** avec une erreur claire —
+  jamais relu silencieusement.
+- **Sessions persistantes** : `POST /session/start` ouvre une session
+  (`session_id`) qui trace perceptions/feedbacks ; `POST /session/{id}/replay`
+  rejoue la session **de façon déterministe** (l'apprentissage par feedback est
+  reproductible au bit près) et reconstitue l'état final.
+- **Observabilité** : `GET /health`, `GET /metrics` (compteurs perceptions /
+  actions / feedbacks / consolidations, compétences maîtrisées, verdict
+  GENUINE / NOT_PROVEN).
+- **Sécurité méthodologique** : `POST /audit` prouve que les banques held-out /
+  transfert d'un nœud sont **disjointes de l'enseignement** ; `POST /evaluate`
+  **refuse** (HTTP 422) tout item déjà vu en entraînement (détection d'*item
+  leakage*).
+- **Docker** : `Dockerfile` + `docker-compose.yml` (volume `/data` pour l'état),
+  `scripts/smoke_test.sh` (`docker compose up --build` puis le smoke test).
+
+**État persistant — chemin unique recommandé** : `$SEVO_STATE_DIR` (= `/data`
+dans le conteneur, monté sur le volume `sevo-state`). `POST /save` et `/load`
+**sans `path`** y écrivent/lisent `brain.json` par défaut. Sauvegarder /
+restaurer le volume :
+
+```bash
+# enregistrer l'état appris dans le volume
+curl -X POST localhost:8000/save -H 'content-type: application/json' -d '{}'
+# sauvegarde du volume hors conteneur
+docker run --rm -v sevo-state:/data -v "$PWD":/backup busybox \
+  tar czf /backup/sevo-state.tgz -C /data .
+# restauration
+docker run --rm -v sevo-state:/data -v "$PWD":/backup busybox \
+  tar xzf /backup/sevo-state.tgz -C /data
+curl -X POST localhost:8000/load -H 'content-type: application/json' -d '{}'
+```
+
 ---
 
 ## La formule Intelligence_delta
@@ -221,13 +258,15 @@ src/sevo/      # implémentation de référence
   services/    # les 10 microservices MVP (+ stubs non-MVP)
   curriculum/  # base · cp_ce1_math · cp_maths_numeration · fr_cp_ce1 · fr_conjugation · fr_lecture_cp · fr_lexicon · official_curriculum · ingestion
   teacher/     # emma_stub (offline) · emma_session (boucle API Emma) · emma_litellm (live, INERTE par défaut)
-  eval/        # protocole + Intelligence_delta + integrity (anti-illusion) + state_diff (Brain-before/after)
+  eval/        # protocole + Intelligence_delta + integrity + state_diff + leakage (item-leakage)
+  persistence.py # enveloppe runtime versionnée + migrations (0.4 → 0.5)
   brain.py     # orchestrateur + surface API + export_state/from_state (persistance)
-  runtime.py   # BrainService : cerveau persistant (perceive/act/feedback/consolidate/state/diff/evaluate/save/load/replay)
+  runtime.py   # BrainService : cerveau persistant (sessions, compteurs, audit, save/load)
   curriculum/factory.py  # build_task(node_id, content) — pont JSON → Task
   api.py       # adaptateur HTTP FastAPI (optionnel) sur BrainService
+Dockerfile · docker-compose.yml · scripts/smoke_test.sh   # service durable
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 91 tests : design + maths + français (toutes notions) + lexique + curriculum officiel + intégrité + state-diff + boucle Emma + persistance + runtime + API HTTP + intégration
+tests/         # 109 tests : design + maths + français + lexique + curriculum officiel + intégrité + state-diff + boucle Emma + persistance + runtime + migrations + sessions + observabilité/leakage + API HTTP
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 
@@ -268,9 +307,10 @@ une ressource lexicale réelle, validée de la même façon.
   `Brain CP-naïf → Brain CP-appris` (concepts/règles/compétences/misconceptions/
   rétention) + matrice de maîtrise par compétence ; **garde-fou anti-illusion**
   sur chaque delta ; lexique structuré ; Emma déterministe **et** live prouvées.
-- **Runtime** : le cerveau CP-appris est un **microservice persistant**
-  (`runtime.BrainService` + `api.py`) — save/reload conserve les compétences,
-  canaux enseignement/évaluation séparés, replay de session Emma.
+- **Runtime durci** : le cerveau CP-appris est un **microservice durable** —
+  state schema versionné + migrations, sessions persistantes à replay
+  déterministe, observabilité (`/health`, `/metrics`), détection d'item-leakage
+  (`/audit`, `/evaluate` refuse les items vus), prêt Docker.
 - **Ensuite** : ingérer les **classes suivantes** (CE1, CE2…) via
   `official_curriculum.register_class` (volontairement non démarré tant que le CP
   n'est pas durci) ; brancher le lexique sur la **ressource réelle complète**
