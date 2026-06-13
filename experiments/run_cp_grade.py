@@ -24,10 +24,10 @@ from sevo.baselines import MemorizerBrain
 from sevo.brain import Brain
 from sevo.curriculum.cp_ce1_math import build_bank as build_bank_math
 from sevo.curriculum.official_curriculum import CP_PROGRAM, RUNNABLE_CP, official_cp_registry
-from sevo.eval import assess_genuine_learning, compute_delta
+from sevo.eval import assess_genuine_learning, brain_state_diff, compute_delta
 from sevo.rng import Rng
 from sevo.services import AssessmentOracle
-from sevo.teacher import teach_to_mastery
+from sevo.teacher import EmmaTeacher, teach_node_via_emma, teach_to_mastery
 
 SEED = 7
 
@@ -44,7 +44,7 @@ def run() -> dict:
     banks = {rn.node_id: rn.build(rng.fork(rn.node_id)) for rn in nodes}
 
     brain = Brain(seed=SEED)
-    snap_before = brain.snapshot()
+    snap_before = brain.snapshot()              # Brain CP-naïf
 
     # --- pretest (cold) ---
     pre = {}
@@ -53,12 +53,16 @@ def run() -> dict:
         tr = brain.evaluate(rn.transfer(), f"pre.transfer.{rn.node_id}") if rn.transfer else None
         pre[rn.node_id] = {"heldout": held, "transfer": tr}
 
-    # --- teaching (Emma) ---
-    teaching = [teach_to_mastery(brain, rn.node_id, banks[rn.node_id]) for rn in nodes]
+    # --- teaching: Emma drives the brain through its API (perceive → respond →
+    #     structured feedback → learn); evaluation stays independent of Emma. ---
+    emma = EmmaTeacher()
+    teaching = [teach_node_via_emma(brain, emma, rn.node_id, banks[rn.node_id],
+                                    subject=rn.subject) for rn in nodes]
 
     # --- consolidation ---
     consolidation = brain.consolidate("sleep", advance_days=1)
     brain.consolidate("error_replay", advance_days=0)
+    snap_learned = brain.snapshot(parent=snap_before.snapshot_id)   # Brain CP-appris (peak)
 
     # --- immediate posttest ---
     t1 = {}
@@ -112,12 +116,31 @@ def run() -> dict:
         t1_after=held_t1, t2_after=held_t2,
     )
 
+    # Observable internal state change: Brain CP-naïf → Brain CP-appris.
+    ratio = (held_t2 / held_t1) if held_t1 else 0.0
+    diff = brain_state_diff(
+        snap_before, snap_learned,
+        heldout_before=held_pre, heldout_after=held_t1, transfer_after=best_tr_after,
+        calibration_before=cal_pre, calibration_after=cal_t1,
+        t2_after=held_t2, retention_ratio=ratio,
+        learning_efficiency=delta["components"]["learning_efficiency_gain"],
+    )
+    before_sk = snap_before.cognitive_state["procedural_skill_graph"]
+    after_sk = snap_learned.cognitive_state["procedural_skill_graph"]
+    competence_matrix = {
+        s: {"before": round(before_sk.get(s, {}).get("automaticity", 0.0), 3),
+            "after": round(after_sk.get(s, {}).get("automaticity", 0.0), 3)}
+        for s in sorted(after_sk)
+    }
+
     return {
         "grade": "CP", "seed": SEED,
         "program": {"status": CP_PROGRAM["status"], "disclaimer": CP_PROGRAM["disclaimer"],
                     "disciplines": CP_PROGRAM["disciplines"],
                     "nodes_ingested": sorted(registry.nodes)},
-        "snapshots": {"before": snap_before.snapshot_id, "after": snap_after.snapshot_id},
+        "snapshots": {"before": snap_before.snapshot_id,
+                      "learned": snap_learned.snapshot_id,
+                      "after_delay": snap_after.snapshot_id},
         "facets_aggregate": {
             "connaissance_heldout": {"pre": round(held_pre, 4), "t1": round(held_t1, 4)},
             "transfert": {"pre": round(tr_pre, 4), "t1": round(tr_t1, 4)},
@@ -142,6 +165,9 @@ def run() -> dict:
         "characteristic_errors": errors,
         "intelligence_delta": delta,
         "genuine_learning": genuine,
+        "brain_diff": diff,
+        "competence_matrix": competence_matrix,
+        "teaching_via": "emma_api_loop",
     }
 
 

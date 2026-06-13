@@ -75,14 +75,27 @@ consolidation → post-test immédiat → post-test différé (+7 j) → transfe
 > BO CP) sont une **provenance méthodologique**, pas des jeux de données
 > embarqués.
 
+Le CP couvre **9 nœuds** (français : décodage, mots-outils, compréhension,
+**syllabes**, **dictée** ; maths : addition, soustraction, **numération
+dizaines/unités**, **comparaison**), enseignés via la **boucle API Emma** (Emma
+présente → le cerveau répond → feedback structuré → le cerveau apprend ;
+l'évaluation reste indépendante).
+
 | Facette (agrégée) | Pré-test | Post-test |
 |---|---|---|
-| **Connaissance** (held-out) | 0 % | 95 % |
-| **Transfert** (mots/pseudo-mots jamais vus) | 0 % | 61 % |
-| **Rétention** (+7 j) | — | 62 % |
-| **Métacognition** (erreur de calibration ↓) | 0,10 | 0,07 |
+| **Connaissance** (held-out) | 0 % | 94 % |
+| **Transfert** (mots/pseudo-mots jamais vus) | 0 % | 88 % |
+| **Rétention** (+7 j) | — | 70 % |
+| **Métacognition** (erreur de calibration) | 0,10 | 0,10 |
 
-**Intelligence_delta (CP) = 0,625** (`reports/CP_GRADE_REPORT.md`) — et ce delta
+**Diff d'état observable** (`Brain CP-naïf → Brain CP-appris`) : 9 concepts
+acquis, 12 compétences automatisées (automaticité 0,05 → ~0,94), misconceptions
+held-out 100 % → 6 %, 12 compétences consolidées après 7 jours. Le rapport
+exporte une **matrice de maîtrise par compétence** avant/après. Ces facettes
+décrivent une capacité acquise **sur le curriculum CP mesuré** (*genuine learning
+under the CP protocol*) — **pas** une intelligence générale ni un QI.
+
+**Intelligence_delta (CP) = 0,749** (`reports/CP_GRADE_REPORT.md`) — et ce delta
 n'est déclaré que parce qu'il **passe le garde-fou anti-illusion**
 (`eval/integrity.py`) : gain post-test **et** held-out substantiel **et**
 transfert non nul dans ≥ 1 domaine **et** mémoriseur battu **et** rétention
@@ -182,13 +195,13 @@ français (accord du pluriel) pour prouver que l'architecture n'est pas spécifi
 design/        # contrats v0.3 (spec source de vérité, JSON + SPEC.md)
 src/sevo/      # implémentation de référence
   services/    # les 10 microservices MVP (+ stubs non-MVP)
-  curriculum/  # base · cp_ce1_math · fr_cp_ce1 · fr_conjugation · fr_lecture_cp · fr_lexicon · official_curriculum · ingestion
-  teacher/     # emma_stub (déterministe, offline) · emma_litellm (live, INERTE par défaut)
-  eval/        # protocole + Intelligence_delta + integrity (garde-fou anti-illusion)
-  brain.py     # orchestrateur + surface API (multi-domaines)
+  curriculum/  # base · cp_ce1_math · cp_maths_numeration · fr_cp_ce1 · fr_conjugation · fr_lecture_cp · fr_lexicon · official_curriculum · ingestion
+  teacher/     # emma_stub (offline) · emma_session (boucle API Emma) · emma_litellm (live, INERTE par défaut)
+  eval/        # protocole + Intelligence_delta + integrity (anti-illusion) + state_diff (Brain-before/after)
+  brain.py     # orchestrateur + surface API (multi-domaines, /learn/feedback)
   api.py       # adaptateur HTTP FastAPI (optionnel)
 experiments/   # run_cp_ce1_math · run_fr_cp_ce1 · run_fr_conjugation · run_cp_grade · run_emma_live · generate_report
-tests/         # 60 tests : invariants design + maths + français (pluriel/conjugaison/lecture) + lexique + curriculum officiel + intégrité + intégration
+tests/         # 77 tests : design + maths (calcul/numération) + français (pluriel/conjugaison/lecture/syllabes/dictée) + lexique + curriculum officiel + intégrité + state-diff + boucle Emma + intégration
 reports/       # preuve committée (EXPERIMENT_REPORT*.md, CP_GRADE_REPORT.md, last_run*.json)
 ```
 
@@ -223,16 +236,17 @@ une ressource lexicale réelle, validée de la même façon.
 
 ## Feuille de route
 
-- **Fait** : MVP **multi-domaines** (maths, pluriel, conjugaison, **lecture /
-  décodage**) ; **cycle CP complet** ingéré depuis le programme officiel et prouvé
-  de bout en bout (`run_cp_grade`) ; lexique structuré (lemmes, formes, niveau,
-  source) ; Emma déterministe **et** live (diffusiongemma/DGX) prouvées ;
-  adaptateur LiteLLM inerte par défaut avec double garde forme + lexique.
+- **Fait** : MVP **multi-domaines** (maths calcul + numération, pluriel,
+  conjugaison, **lecture/décodage, syllabes, dictée**) ; **CP durci** — 9 nœuds
+  enseignés via la **boucle API Emma**, **diff d'état observable**
+  `Brain CP-naïf → Brain CP-appris` (concepts/règles/compétences/misconceptions/
+  rétention) + matrice de maîtrise par compétence ; **garde-fou anti-illusion**
+  sur chaque delta ; lexique structuré ; Emma déterministe **et** live prouvées.
 - **Ensuite** : ingérer les **classes suivantes** (CE1, CE2…) via
-  `official_curriculum.register_class` ; brancher le lexique sur la **ressource
-  réelle complète** (Manulex / Dubois-Buyse) au lieu du sous-ensemble amorce ;
-  ajouter la **fluence** et la segmentation syllabique explicite ; génération live
-  d'exercices de lecture/conjugaison (mêmes gardes).
+  `official_curriculum.register_class` (volontairement non démarré tant que le CP
+  n'est pas durci) ; brancher le lexique sur la **ressource réelle complète**
+  (Manulex / Dubois-Buyse) ; ajouter la **fluence** et la compréhension de
+  consignes ; génération live d'exercices (mêmes gardes).
 
 ## Provenance & licence
 

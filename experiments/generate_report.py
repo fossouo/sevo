@@ -274,7 +274,43 @@ def main_cp_grade() -> None:
     for k, w in d["weights"].items():
         a(f"\n| {k} | {w:.2f} | {comp[k]:+.3f} |")
 
-    a("\n\n## Contrôles (le gain n'est pas de la mémorisation)\n")
+    # ---- Brain state diff: Brain CP-naïf -> Brain CP-appris ----------------
+    bd = r["brain_diff"]
+    a("\n## Diff d'état du cerveau — Brain CP-naïf → Brain CP-appris\n")
+    a(f"\n_Enseigné via la **boucle API Emma** ({r['teaching_via']}) : Emma présente "
+      "→ le cerveau répond → feedback structuré → le cerveau apprend ; "
+      "l'évaluation reste indépendante (oracle)._\n")
+    a("\n> **Portée** : ces facettes décrivent une capacité acquise **sur le "
+      "curriculum CP mesuré** (*genuine learning under the CP protocol*). Ce n'est "
+      "**pas** une intelligence générale au sens psychométrique, ni un QI.\n")
+    a(f"\n* **Concepts sémantiques acquis** ({len(bd['semantic_concepts_added'])}) : "
+      + ", ".join(f"`{c}`" for c in bd['semantic_concepts_added']) + "\n")
+    a(f"* **Règles procédurales acquises** ({len(bd['procedural_rules_acquired'])}) : "
+      + ", ".join(f"`{s}`" for s in bd['procedural_rules_acquired']) + "\n")
+    a(f"* **Compétences automatisées** ({len(bd['mastered_skills'])}) : "
+      + (", ".join(f"`{s}` ({v['before']}→{v['after']})"
+                   for s, v in bd['mastered_skills'].items()) or "—") + "\n")
+    a(f"* **Misconceptions réduites** : taux d'erreur held-out "
+      f"{bd['misconceptions_reduced']['heldout_error_rate_before']} → "
+      f"{bd['misconceptions_reduced']['heldout_error_rate_after']} "
+      f"(−{bd['misconceptions_reduced']['reduction']})\n")
+    a(f"* **Calibration** : {bd['calibration_delta']['before']} → "
+      f"{bd['calibration_delta']['after']} "
+      f"(amélioration {bd['calibration_delta']['improvement']:+.3f})\n")
+    a(f"* **Traces de rétention (+7 j)** : held-out {bd['retention_traces']['t2_heldout_accuracy']}, "
+      f"ratio t2/t1 {bd['retention_traces']['retention_ratio_t2_over_t1']}, "
+      f"{len(bd['retention_traces']['consolidated_skills'])} compétences consolidées\n")
+    a(f"* **Efficacité d'apprentissage** : {bd['learning_efficiency']:+.3f}\n")
+
+    a("\n### Matrice de maîtrise par compétence (automaticité avant → après)\n")
+    a("\n| Compétence | Avant | Après |")
+    a("\n|---|---|---|")
+    for s, v in r["competence_matrix"].items():
+        if v["after"] > v["before"] + 1e-9:          # only skills that actually moved
+            a(f"\n| {s} | {v['before']} | {v['after']} |")
+    a("\n")
+
+    a("\n## Contrôles (le gain n'est pas de la mémorisation)\n")
     a(f"\n* **Mémoriseur anti-fuite** — {_fmt_pct(mem['on_teaching']['accuracy'])} "
       f"sur les items enseignés, mais {_fmt_pct(mem['on_heldout']['accuracy'])} "
       f"held-out et {_fmt_pct(mem['on_transfer']['accuracy'])} en transfert. Les "

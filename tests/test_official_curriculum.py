@@ -18,10 +18,11 @@ from sevo.curriculum.official_curriculum import (
 
 def test_cp_programme_ingests_via_contract():
     reg = official_cp_registry()
-    # CP français (3 lecture/compréhension) + CP maths (2 nombres et calculs)
-    assert len(reg.by_class("CP")) == 5
-    assert len(reg.by_subject("français")) == 3
-    assert len(reg.by_subject("mathématiques")) == 2
+    # CP français (décodage, mots-outils, compréhension, syllabes, dictée) +
+    # CP maths (add, sub, numération, comparaison)
+    assert len(reg.by_class("CP")) == 9
+    assert len(reg.by_subject("français")) == 5
+    assert len(reg.by_subject("mathématiques")) == 4
 
 
 def test_official_nodes_carry_rich_fields():

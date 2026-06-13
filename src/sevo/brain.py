@@ -17,6 +17,7 @@ import uuid
 from .bus import Event, EventBus
 from .curriculum.base import Task
 from .curriculum.cp_ce1_math import SKILLS
+from .curriculum.cp_maths_numeration import SKILLS_NUM
 from .curriculum.fr_conjugation import SKILLS_CONJ
 from .curriculum.fr_cp_ce1 import SKILLS_FR
 from .curriculum.fr_lecture_cp import SKILLS_LECTURE
@@ -40,7 +41,7 @@ from .state import CognitiveState, DevelopmentStage, Snapshot, take_snapshot
 # all known procedural skills (unused skills stay inert at baseline
 # automaticity). ``grapheme_recognition`` is shared between French domains, so
 # we de-duplicate while preserving order.
-ALL_SKILLS = list(dict.fromkeys(SKILLS + SKILLS_FR + SKILLS_CONJ + SKILLS_LECTURE))
+ALL_SKILLS = list(dict.fromkeys(SKILLS + SKILLS_FR + SKILLS_CONJ + SKILLS_LECTURE + SKILLS_NUM))
 
 
 class Brain:
@@ -106,23 +107,36 @@ class Brain:
 
         if learn:
             correct = bool(res["correct"]) and decision != "ask_help"
-            eid = self.episodic.encode(
-                "attempt",
-                {"node_id": problem.node_id, "required_skills": problem.required_skills,
-                 "correct": correct, "error_type": res.get("error_type")},
-                self.day,
-            )
-            self._emit("memory.episodic.encoded", {"episode_id": eid})
-            # Emma's feedback = the brain learns from the corrected outcome.
-            self.procedural.practice(problem, correct, self.day)
-            self.semantic.observe_attempt(problem.node_id, correct, self.day)
-            self.metacog.observe(problem.node_id, correct)
-            self._emit("skill.procedure.updated", {"node_id": problem.node_id, "correct": correct})
+            self._record(problem, correct, res.get("error_type"))
         return res
+
+    def _record(self, problem: Task, correct: bool, error_type=None) -> None:
+        """Write one corrected attempt into the learning memories. Shared by the
+        bundled ``attempt`` path and the explicit Emma feedback path."""
+        eid = self.episodic.encode(
+            "attempt",
+            {"node_id": problem.node_id, "required_skills": problem.required_skills,
+             "correct": correct, "error_type": error_type},
+            self.day,
+        )
+        self._emit("memory.episodic.encoded", {"episode_id": eid})
+        # Emma's feedback = the brain learns from the corrected outcome.
+        self.procedural.practice(problem, correct, self.day)
+        self.semantic.observe_attempt(problem.node_id, correct, self.day)
+        self.metacog.observe(problem.node_id, correct)
+        self._emit("skill.procedure.updated", {"node_id": problem.node_id, "correct": correct})
 
     # == API: /act ============================================================
     def act(self, problem: Task) -> dict:
         return self.attempt(problem, learn=False)
+
+    # == API: /learn/feedback =================================================
+    def learn_from_feedback(self, problem: Task, correct: bool, error_type=None) -> None:
+        """Apply Emma's structured feedback for one item. The brain learns from
+        the *corrected outcome* — this is the write half of the teaching loop,
+        decoupled from solving so an external teacher (Emma) can drive it via the
+        API. Independent evaluation (the oracle) never goes through here."""
+        self._record(problem, bool(correct), error_type)
 
     # == API: /learn/session + /learn/feedback ================================
     def learn_session(self, class_level: str, subject: str, problems: list[Task]) -> dict:
