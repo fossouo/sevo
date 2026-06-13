@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import math
 
-from ..curriculum.cp_ce1_math import Problem
+from ..curriculum.base import Task
 
 EPS = 1e-3
 LR_ERROR = 0.28   # learning rate when a corrected error is replayed
@@ -58,15 +58,15 @@ class ProceduralMemory:
         k = DECAY_CONSOLIDATED if s["consolidated"] else DECAY_UNCONSOLIDATED
         return _clamp(a * math.exp(-k * (day - last)), lo=0.0)
 
-    def reliability(self, problem: Problem, day: int) -> float:
+    def reliability(self, task: Task, day: int) -> float:
         acc = 0.0
-        for skill, w in problem.required_skills.items():
+        for skill, w in task.required_skills.items():
             if skill not in self.skills:
                 return 0.0  # the brain has no procedure for this at all
             acc += w * math.log(_clamp(self.effective(skill, day)))
         return math.exp(acc)
 
-    def has_method(self, problem: Problem, day: int, threshold: float = 0.15) -> bool:
+    def has_method(self, task: Task, day: int, threshold: float = 0.15) -> bool:
         """Does the brain have *any* usable procedure for this problem?
 
         This gates the decision to attempt vs. to say "I don't know". It is based
@@ -76,47 +76,33 @@ class ProceduralMemory:
         "I don't know". Decoupling the two avoids a learned-helplessness spiral
         where early failures would permanently suppress attempts.
         """
-        present = [s for s in problem.required_skills if s in self.skills]
+        present = [s for s in task.required_skills if s in self.skills]
         return bool(present) and max(self.effective(s, day) for s in present) >= threshold
 
-    def bottleneck(self, problem: Problem, day: int) -> str:
+    def bottleneck(self, task: Task, day: int) -> str:
         return min(
-            (s for s in problem.required_skills if s in self.skills),
+            (s for s in task.required_skills if s in self.skills),
             key=lambda s: self.effective(s, day),
-            default=next(iter(problem.required_skills)),
+            default=next(iter(task.required_skills)),
         )
 
     # -- solving --------------------------------------------------------------
-    def solve(self, problem: Problem, day: int, rng) -> dict:
+    def solve(self, task, day: int, rng) -> dict:
         """Produce an answer. Correct with prob = reliability; otherwise a
-        characteristic mistake driven by the weakest skill."""
-        r = self.reliability(problem, day)
+        characteristic mistake driven by the weakest skill. Domain-agnostic:
+        the *kind* of mistake is provided by ``task.mistake`` (see
+        ``curriculum/base.py``)."""
+        r = self.reliability(task, day)
         if rng.chance(r):
-            return {"answer": problem.answer, "correct": True, "reliability": r, "error_type": None}
-        answer, etype = self._mistake(problem, day)
-        return {"answer": answer, "correct": (answer == problem.answer), "reliability": r, "error_type": etype}
-
-    def _mistake(self, problem: Problem, day: int) -> tuple[int | None, str]:
-        weak = self.bottleneck(problem, day)
-        a, b = problem.a, problem.b
-        if problem.op == "add":
-            if weak == "carry" and problem.needs_carry:
-                return a + b - 10, "forgot_carry"        # classic CP error
-            if weak == "place_value":
-                return (a % 10) + (b % 10), "units_only"  # ignored the tens column
-            return a + b + 1, "add_fact_off_by_one"
-        # subtraction
-        if weak == "borrow" and problem.needs_borrow:
-            # "smaller-from-larger" bug, per column
-            return abs(a // 10 - b // 10) * 10 + abs(a % 10 - b % 10), "smaller_from_larger"
-        if weak == "place_value":
-            return (a % 10) - (b % 10), "units_only"
-        return a - b - 1, "sub_fact_off_by_one"
+            return {"answer": task.answer, "correct": True, "reliability": r, "error_type": None}
+        weak = self.bottleneck(task, day)
+        answer, etype = task.mistake(weak)
+        return {"answer": answer, "correct": task.grade(answer), "reliability": r, "error_type": etype}
 
     # -- learning -------------------------------------------------------------
-    def practice(self, problem: Problem, correct: bool, day: int) -> None:
-        weak = self.bottleneck(problem, day)
-        for skill, w in problem.required_skills.items():
+    def practice(self, task: Task, correct: bool, day: int) -> None:
+        weak = self.bottleneck(task, day)
+        for skill, w in task.required_skills.items():
             if skill not in self.skills:
                 continue
             s = self.skills[skill]
@@ -129,7 +115,7 @@ class ProceduralMemory:
             s["automaticity"] = _clamp(s["automaticity"] + gain)
             s["last_practiced_day"] = day
         if not correct:
-            self.skills[weak]["error_patterns"].append({"node": problem.node_id, "day": day})
+            self.skills[weak]["error_patterns"].append({"node": task.node_id, "day": day})
 
     def consolidate(self, practiced_skills: set[str], mode: str, day: int) -> None:
         """Slow, durable update (replay during 'sleep'). Generalises recent

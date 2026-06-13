@@ -1,0 +1,196 @@
+{
+  "seed": 5,
+  "domain": "français — pluriel des noms",
+  "snapshots": {
+    "before": "d79c6f59-be6d-40ec-95d3-342fb358e137",
+    "after": "56541966-8547-43e5-9333-e792d23b6f7d"
+  },
+  "pretest": {
+    "heldout": {
+      "label": "pretest.heldout",
+      "n": 27,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    },
+    "transfer_regular": {
+      "label": "pretest.transfer_regular",
+      "n": 6,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    },
+    "transfer_al_rule": {
+      "label": "pretest.transfer_al_rule",
+      "n": 6,
+      "accuracy": 0.0,
+      "mean_confidence": 0.1,
+      "calibration_error": 0.1,
+      "knows_unknowns": 0.9
+    }
+  },
+  "teaching": [
+    {
+      "node_id": "fr.CE1.pluriel_reguliers",
+      "sessions": 1,
+      "trials": 8,
+      "reached_mastery": true,
+      "final_mastery": 0.822,
+      "mastery_history": [
+        0.822
+      ]
+    },
+    {
+      "node_id": "fr.CE1.pluriel_en_al",
+      "sessions": 5,
+      "trials": 40,
+      "reached_mastery": true,
+      "final_mastery": 0.8532,
+      "mastery_history": [
+        0.6115,
+        0.5551,
+        0.7815,
+        0.5712,
+        0.8532
+      ]
+    },
+    {
+      "node_id": "fr.CE2.pluriel_invariables",
+      "sessions": 4,
+      "trials": 32,
+      "reached_mastery": true,
+      "final_mastery": 0.8325,
+      "mastery_history": [
+        0.5554,
+        0.6,
+        0.71,
+        0.8325
+      ]
+    }
+  ],
+  "consolidation": {
+    "mode": "sleep",
+    "skills_consolidated": [
+      "grapheme_recognition",
+      "plural_exception_aux",
+      "plural_invariant",
+      "plural_rule_s"
+    ],
+    "nodes": [
+      "fr.CE1.pluriel_reguliers",
+      "fr.CE1.pluriel_en_al",
+      "fr.CE2.pluriel_invariables"
+    ]
+  },
+  "posttest_immediate": {
+    "heldout": {
+      "label": "posttest.t1.heldout",
+      "n": 27,
+      "accuracy": 0.8519,
+      "mean_confidence": 0.889,
+      "calibration_error": 0.2251,
+      "knows_unknowns": 0.115
+    },
+    "transfer_regular": {
+      "label": "posttest.t1.transfer_regular",
+      "n": 6,
+      "accuracy": 0.8333,
+      "mean_confidence": 0.5,
+      "calibration_error": 0.5,
+      "knows_unknowns": 0.5
+    },
+    "transfer_al_rule": {
+      "label": "posttest.t1.transfer_al_rule",
+      "n": 6,
+      "accuracy": 0.8333,
+      "mean_confidence": 0.5,
+      "calibration_error": 0.5,
+      "knows_unknowns": 0.5
+    }
+  },
+  "posttest_delayed_t2": {
+    "heldout": {
+      "label": "posttest.t2.delayed.heldout",
+      "n": 27,
+      "accuracy": 0.6296,
+      "mean_confidence": 0.889,
+      "calibration_error": 0.4006,
+      "knows_unknowns": 0.109
+    }
+  },
+  "transfer_efficiency_control": {
+    "node": "fr.CE1.pluriel_en_al",
+    "shared_skill": "grapheme_recognition",
+    "n_seeds": 6,
+    "trials_with_prereq": 20.0,
+    "trials_without_prereq": 26.0,
+    "speedup": 1.3,
+    "per_seed": {
+      "with_prereq": [
+        24,
+        24,
+        16,
+        16,
+        20,
+        20
+      ],
+      "without_prereq": [
+        32,
+        20,
+        24,
+        24,
+        28,
+        28
+      ]
+    }
+  },
+  "memorizer_baseline": {
+    "on_teaching": {
+      "label": "memorizer.teaching",
+      "n": 29,
+      "accuracy": 1.0,
+      "mean_confidence": 0.9,
+      "calibration_error": 0.1,
+      "knows_unknowns": 1.0
+    },
+    "on_heldout": {
+      "label": "memorizer.heldout",
+      "n": 27,
+      "accuracy": 0.0,
+      "mean_confidence": 0.7,
+      "calibration_error": 0.7,
+      "knows_unknowns": 0.3
+    },
+    "on_transfer": {
+      "label": "memorizer.transfer",
+      "n": 12,
+      "accuracy": 0.0,
+      "mean_confidence": 0.7,
+      "calibration_error": 0.7,
+      "knows_unknowns": 0.3
+    }
+  },
+  "intelligence_delta": {
+    "components": {
+      "knowledge_gain": 0.8519,
+      "transfer_gain": 0.8333,
+      "reasoning_gain": 0.8333,
+      "retention_gain": 0.6296,
+      "metacognition_gain": -0.1251,
+      "learning_efficiency_gain": 0.2308
+    },
+    "weights": {
+      "knowledge_gain": 0.3,
+      "transfer_gain": 0.25,
+      "reasoning_gain": 0.2,
+      "retention_gain": 0.1,
+      "metacognition_gain": 0.1,
+      "learning_efficiency_gain": 0.05
+    },
+    "weighted_delta": 0.6925,
+    "retention_ratio_t2_over_t1": 0.7391,
+    "note": "Internal cognitive evolution index — not a human IQ."
+  }
+}

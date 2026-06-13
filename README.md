@@ -42,6 +42,16 @@ par l'expérience livrée** (`reports/EXPERIMENT_REPORT.md`) :
 seed 7). Ce n'est **pas un QI** :
 c'est un indice interne d'évolution cognitive (formule pondérée ci-dessous).
 
+### Le cœur cognitif généralise au-delà des maths
+
+Le même cerveau (mêmes microservices, même machinerie d'évaluation) apprend aussi
+un domaine **français CP/CE1** — l'accord du pluriel des noms — avec les mêmes
+garanties : held-out 0 → 85 %, **transfert de règle** (-s et -al→-aux) sur des
+mots jamais vus 0 → 83 %, mémoriseur 0 %, et l'**erreur caractéristique
+« chevals »** (sur-régularisation) émerge à faible maîtrise.
+**Intelligence_delta français = 0,693** (`reports/EXPERIMENT_REPORT_FR.md`).
+S'il ne marchait que sur l'arithmétique, ce serait une calculette, pas un cerveau.
+
 ---
 
 ## Architecture
@@ -79,9 +89,10 @@ cd sevo
 # Tests (aucune dépendance externe requise)
 PYTHONPATH=src python3 -m pytest -q
 
-# Expérience complète CP/CE1 + rapport reproductible
+# Expériences complètes (maths + français) + rapports reproductibles
 PYTHONPATH=src:experiments python3 experiments/generate_report.py
-#   -> reports/EXPERIMENT_REPORT.md  +  reports/last_run.json
+#   -> reports/EXPERIMENT_REPORT.md     (maths)   + reports/last_run.json
+#   -> reports/EXPERIMENT_REPORT_FR.md  (français) + reports/last_run_fr.json
 
 # API HTTP optionnelle (mappe design/api_surface.json)
 pip install -e ".[api]"
@@ -112,12 +123,14 @@ Chaque composante est mesurée par l'oracle sur des banques **held-out / transfe
 
 ---
 
-## MVP : CP/CE1 français + maths d'abord
+## MVP : CP/CE1 maths + français
 
-Conformément au design, le MVP commence par les maths CP/CE1, car c'est là qu'on
-peut vérifier ce qui compte vraiment : symboles, numération, procédures,
-correction d'erreurs, transfert simple et rétention différée. Le français
-suivra le même contrat d'ingestion (`design/curriculum_ingestion_contract.json`).
+Conformément au design, le MVP couvre les maths CP/CE1 (symboles, numération,
+procédures, correction d'erreurs, transfert, rétention) **et** un premier domaine
+français (accord du pluriel) pour prouver que l'architecture n'est pas spécifique
+à l'arithmétique. Les deux passent par le même contrat d'ingestion
+(`design/curriculum_ingestion_contract.json`, implémenté dans
+`curriculum/ingestion.py`).
 
 ## Structure
 
@@ -125,24 +138,27 @@ suivra le même contrat d'ingestion (`design/curriculum_ingestion_contract.json`
 design/        # contrats v0.3 (spec source de vérité, JSON + SPEC.md)
 src/sevo/      # implémentation de référence
   services/    # les 10 microservices MVP (+ stubs non-MVP)
-  curriculum/  # CP/CE1 maths : compétences, nœuds, banques disjointes
-  teacher/     # Emma déterministe (offline, 0 coût LLM, reproductible)
+  curriculum/  # base.py (tâche agnostique) · cp_ce1_math · fr_cp_ce1 · ingestion
+  teacher/     # emma_stub (déterministe, offline) · emma_litellm (live, INERTE par défaut)
   eval/        # protocole + calcul Intelligence_delta
-  brain.py     # orchestrateur + surface API
+  brain.py     # orchestrateur + surface API (multi-domaines)
   api.py       # adaptateur HTTP FastAPI (optionnel)
-experiments/   # run_cp_ce1_math.py + generate_report.py
-tests/         # 14 tests : invariants de design + dynamique d'apprentissage
-reports/       # preuve committée (EXPERIMENT_REPORT.md, last_run.json)
+experiments/   # run_cp_ce1_math.py · run_fr_cp_ce1.py · generate_report.py
+tests/         # 26 tests : invariants design + dynamique maths + français + intégration
+reports/       # preuve committée (EXPERIMENT_REPORT*.md, last_run*.json)
 ```
 
 ## Feuille de route
 
-- **Maintenant (ce dépôt)** : MVP exécutable, appris hors-ligne par une Emma
-  déterministe, prouvé sur CP/CE1 maths.
-- **Ensuite** : brancher la **vraie Emma** (adaptateur professeur via LiteLLM,
-  modèles locaux) sur la même API `learn/session`, et ingérer le **programme
-  scolaire français officiel** (sources dans `design/sources.json`) classe par
-  classe, chaque classe étant un épisode développemental versionné.
+- **Fait (ce dépôt)** : MVP exécutable multi-domaines, appris hors-ligne par une
+  Emma déterministe, prouvé sur CP/CE1 maths **et** français ; adaptateur **Emma
+  LiteLLM** écrit et testé hors-ligne mais **inerte par défaut** ; API d'ingestion
+  de curriculum conforme au contrat.
+- **Ensuite (gardé pour un GO explicite)** : activer la **vraie Emma** sur une
+  fenêtre GPU dédiée (`SEVO_EMMA_LIVE=1` + `LITELLM_URL`, voir l'en-tête de
+  `teacher/emma_litellm.py`), puis ingérer le **programme scolaire français
+  officiel** (sources dans `design/sources.json`) classe par classe — chaque
+  classe étant un épisode développemental versionné.
 
 ## Provenance & licence
 

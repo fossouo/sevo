@@ -23,6 +23,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from ..rng import Rng
+from .base import Task
 
 # ---- Base skills (procedural primitives shared across nodes) ----------------
 SKILLS = [
@@ -35,7 +36,7 @@ SKILLS = [
 
 
 @dataclass
-class Problem:
+class Problem(Task):
     node_id: str
     op: str               # "add" | "sub"
     a: int
@@ -49,6 +50,31 @@ class Problem:
     def text(self) -> str:
         sign = "+" if self.op == "add" else "-"
         return f"{self.a} {sign} {self.b} = ?"
+
+    @property
+    def prompt(self) -> str:
+        return self.text
+
+    @property
+    def working_set(self) -> list:
+        return [self.a, self.b, self.op]
+
+    def mistake(self, weak_skill: str) -> tuple[int, str]:
+        """Characteristic arithmetic error driven by the weakest skill."""
+        a, b = self.a, self.b
+        if self.op == "add":
+            if weak_skill == "carry" and self.needs_carry:
+                return a + b - 10, "forgot_carry"        # classic CP error
+            if weak_skill == "place_value":
+                return (a % 10) + (b % 10), "units_only"  # ignored the tens column
+            return a + b + 1, "add_fact_off_by_one"
+        # subtraction
+        if weak_skill == "borrow" and self.needs_borrow:
+            # "smaller-from-larger" bug, per column
+            return abs(a // 10 - b // 10) * 10 + abs(a % 10 - b % 10), "smaller_from_larger"
+        if weak_skill == "place_value":
+            return (a % 10) - (b % 10), "units_only"
+        return a - b - 1, "sub_fact_off_by_one"
 
 
 # ---- Curriculum nodes -------------------------------------------------------

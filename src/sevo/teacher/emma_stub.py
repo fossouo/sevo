@@ -16,22 +16,22 @@ The real-curriculum training with the live Emma (LiteLLM) plugs into the same
 """
 from __future__ import annotations
 
-from ..curriculum.cp_ce1_math import Bank, NODES, build_bank
+from ..curriculum.cp_ce1_math import build_bank
 from ..rng import Rng
 
 
 def teach_to_mastery(
     brain,
     node_id: str,
-    bank: Bank,
-    threshold: float | None = None,
+    bank,
+    threshold: float = 0.8,
     max_sessions: int = 30,
     session_size: int = 8,
 ) -> dict:
-    """Teach one node until mastery. Returns trials-to-mastery (the headline
+    """Teach one node until mastery. Domain-agnostic: ``bank`` only needs a
+    ``.teaching`` list of tasks. Returns trials-to-mastery (the headline
     learning-efficiency metric) so two brains can be compared on how *fast* they
     acquire the same node."""
-    threshold = threshold if threshold is not None else NODES[node_id]["mastery_threshold"]
     teaching = bank.teaching
     trials = 0
     sessions = 0

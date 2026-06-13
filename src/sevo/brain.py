@@ -15,7 +15,9 @@ import time
 import uuid
 
 from .bus import Event, EventBus
-from .curriculum.cp_ce1_math import SKILLS, Problem
+from .curriculum.base import Task
+from .curriculum.cp_ce1_math import SKILLS
+from .curriculum.fr_cp_ce1 import SKILLS_FR
 from .services import (
     AssessmentOracle,
     AttentionSalience,
@@ -31,6 +33,10 @@ from .services import (
 )
 from .rng import Rng
 from .state import CognitiveState, DevelopmentStage, Snapshot, take_snapshot
+
+# A brain may traverse several domains, so by default it carries the union of
+# all known procedural skills (unused skills stay inert at baseline automaticity).
+ALL_SKILLS = SKILLS + SKILLS_FR
 
 
 class Brain:
@@ -48,7 +54,7 @@ class Brain:
         self.executive = ExecutiveControl()
         self.episodic = EpisodicMemory()
         self.semantic = SemanticMemory()
-        self.procedural = ProceduralMemory(skills or SKILLS)
+        self.procedural = ProceduralMemory(skills or ALL_SKILLS)
         self.metacog = Metacognition()
         self.consolidation = ConsolidationSleep()
         self.oracle = AssessmentOracle()
@@ -72,7 +78,7 @@ class Brain:
         return percept
 
     # == core attempt (shared by /act, learning and the oracle) ===============
-    def attempt(self, problem: Problem, learn: bool = True) -> dict:
+    def attempt(self, problem: Task, learn: bool = True) -> dict:
         """Solve one problem.
 
         ``learn=False`` is the read-only path used by the assessment oracle: it
@@ -81,7 +87,7 @@ class Brain:
         confidence = self.metacog.estimate_confidence(problem, self.procedural, self.day)
         has_method = self.procedural.has_method(problem, self.day)
         decision = self.executive.decide(has_method, confidence)
-        self.wm.load([problem.a, problem.b, problem.op])
+        self.wm.load(problem.working_set)
 
         if decision == "ask_help":
             res = {"answer": None, "correct": False, "reliability": 0.0,
@@ -111,11 +117,11 @@ class Brain:
         return res
 
     # == API: /act ============================================================
-    def act(self, problem: Problem) -> dict:
+    def act(self, problem: Task) -> dict:
         return self.attempt(problem, learn=False)
 
     # == API: /learn/session + /learn/feedback ================================
-    def learn_session(self, class_level: str, subject: str, problems: list[Problem]) -> dict:
+    def learn_session(self, class_level: str, subject: str, problems: list[Task]) -> dict:
         """One Emma teaching session: a batch of exercises with feedback."""
         self.stage.school_class = class_level
         results = [self.attempt(p, learn=True) for p in problems]
@@ -134,7 +140,7 @@ class Brain:
         self.day += days
 
     # == API: /evaluate/pretest + /posttest ===================================
-    def evaluate(self, problems: list[Problem], label: str) -> dict:
+    def evaluate(self, problems: list[Task], label: str) -> dict:
         # Oracle uses the read-only path; cannot teach.
         return self.oracle.assess(self, problems, label=label)
 
