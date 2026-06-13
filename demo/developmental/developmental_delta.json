@@ -1,0 +1,24 @@
+{
+  "per_node_transfer": {
+    "fr.CE1.pluriel_reguliers": 0.1818,
+    "fr.CE1.pluriel_en_al": -0.25,
+    "fr.CE1.present_verbes_er": 0.0151,
+    "math.CE1.add_within_100_nocarry": 0.75,
+    "math.CE1.add_within_100_carry": 0.0,
+    "math.CE1.sub_within_100_borrow": 0.25
+  },
+  "aggregate": {
+    "transfer_pretest": {
+      "developmental": 0.2885,
+      "isolated": 0.1307
+    },
+    "trials_to_mastery": {
+      "developmental": 120,
+      "isolated": 128
+    },
+    "post_heldout": {
+      "developmental": 0.9028,
+      "isolated": 0.9331
+    }
+  }
+}
